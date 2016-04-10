@@ -3,7 +3,7 @@
 
 Spacevim provides leader bindings to match most of [Spacemacs](https://github.com/syl20bnr/spacemacs) behaviour.
 
-#  Installation
+##  Installation
 This plugin follows the standard runtime path structure, and as such it can be installed with a variety of plugin managers:
 
 *  [Pathogen](https://github.com/tpope/vim-pathogen)
@@ -18,7 +18,7 @@ This plugin follows the standard runtime path structure, and as such it can be i
 *  manual
   *  copy all of the files into your `~/.vim` directory
 
-# Requirements
+## Requirements
 Spacevim relay on several other vim plugins for the bindings implementations.
 - [hecal3/vim-leader-guide](https://github.com/hecal3/vim-leader-guide)
 - [Shougo/unite](https://github.com/Shougo/unite)
