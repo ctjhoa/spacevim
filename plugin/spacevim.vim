@@ -21,7 +21,7 @@ let g:lmap.7 = ['8wincmd w', 'window 7']
 let g:lmap.8 = ['9wincmd w', 'window 8']
 let g:lmap.9 = ['10wincmd w', 'window 9']
 let g:lmap[':'] = ['Unite command', 'M-x']
-let g:lmap[';'] = ['Commentary', 'vim-commentary-operator']
+let g:lmap[';'] = ['''<,''>Commentary', 'vim-commentary-operator']
 
 
 " applications {{{
