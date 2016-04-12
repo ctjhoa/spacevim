@@ -1,4 +1,4 @@
-" vim:fdm=marker
+" ---vim:fdm=marker
 
 let g:leaderGuide_vertical = 1
 
@@ -20,7 +20,7 @@ let g:lmap.6 = ['7wincmd w', 'window 6']
 let g:lmap.7 = ['8wincmd w', 'window 7']
 let g:lmap.8 = ['9wincmd w', 'window 8']
 let g:lmap.9 = ['10wincmd w', 'window 9']
-let g:lmap[':'] = ['Unite command', 'M-x']
+let g:lmap[':'] = ['Commands', 'M-x']
 let g:lmap[';'] = ['''<,''>Commentary', 'vim-commentary-operator']
 
 
@@ -54,10 +54,11 @@ let g:lmap.f.C = { 'name' : 'files/convert' }
 
 let g:lmap.f.D = ['Remove', 'delete-current-buffer-file']
 let g:lmap.f.E = ['SudoEdit', 'sudo-edit']
+let g:lmap.f.f = ['Files', 'fzf-find-files']
 
 " files/vim {{{
 let g:lmap.f.e = { 'name' : 'vim' }
-let g:lmap.f.e.d = ['edit $MYVIMRC', 'sudo-edit']
+let g:lmap.f.e.d = ['edit $MYVIMRC', 'find-dotfile']
 " }}}
 
 " }}}
@@ -66,8 +67,8 @@ let g:lmap.f.e.d = ['edit $MYVIMRC', 'sudo-edit']
 let g:lmap.g = { 'name' : 'git/versions-control' }
 " }}}
 
-" unite/help/highlight {{{
-let g:lmap.h = { 'name' : 'unite/help/highlight' }
+" help/highlight {{{
+let g:lmap.h = { 'name' : 'help/highlight' }
 " }}}
 
 " insertion {{{
@@ -88,7 +89,7 @@ let g:lmap.n = { 'name' : 'narrow/numbers' }
 
 " projects {{{
 let g:lmap.p = { 'name' : 'projects' }
-let g:lmap.p.f = ['Unite file_rec/async', 'unit-find-file']
+let g:lmap.p.f = ['GitFiles', 'fzf-project-find-file']
 " }}}
 
 " quit {{{

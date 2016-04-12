@@ -21,7 +21,8 @@ This plugin follows the standard runtime path structure, and as such it can be i
 ## Requirements
 Spacevim relay on several other vim plugins for the bindings implementations.
 - [hecal3/vim-leader-guide](https://github.com/hecal3/vim-leader-guide)
-- [Shougo/unite](https://github.com/Shougo/unite)
+- [junegunn/fzf](https://github.com/junegunn/fzf)
+- [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
 - [tpope/vim-commentary](https://github.com/tpope/vim-commentary)
 - [tpope/vim-eunuch](https://github.com/tpope/vim-eunuch)
 - [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
