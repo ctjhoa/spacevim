@@ -1,5 +1,25 @@
 " ---vim:fdm=marker
 
+" Commands wrapper
+
+" TODO: Find a way to avoid naming conflict between fzf and vim-eunuch
+function! LocateWrapper()
+    let buf = input("Locate: ")
+    execute "Locate" buf
+endfunction
+
+function! RenameWrapper()
+    let buf = input("Rename Current Buffer File: ")
+    execute "Rename" buf
+endfunction
+
+function! SudoEditWrapper()
+    let buf = input("Sudo Edit: ")
+    execute "SudoEdit" buf
+endfunction
+
+" Leader guide
+
 let g:leaderGuide_vertical = 1
 
 " Define prefix dictionary
@@ -53,10 +73,10 @@ let g:lmap.f.C = { 'name' : 'files/convert' }
 " }}}
 
 let g:lmap.f.D = ['Remove', 'delete-current-buffer-file']
-let g:lmap.f.E = ['SudoEdit', 'sudo-edit']
+let g:lmap.f.E = ['silent call SudoEditWrapper()', 'sudo-edit']
 let g:lmap.f.f = ['Files', 'fzf-find-files']
-let g:lmap.f.L = ['Locate', 'fzf-locate']
-let g:lmap.f.R = ['Rename', 'rename-current-buffer-file']
+let g:lmap.f.L = ['silent call LocateWrapper()', 'fzf-locate']
+let g:lmap.f.R = ['silent call RenameWrapper()', 'rename-current-buffer-file']
 let g:lmap.f.s = ['write', 'save-buffer']
 
 " files/vim {{{
@@ -132,4 +152,5 @@ let g:lmap.x = { 'name' : 'text' }
 " zoom {{{
 let g:lmap.z = { 'name' : 'zoom' }
 " }}}
+
 
