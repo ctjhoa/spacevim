@@ -11,7 +11,10 @@ call leaderGuide#register_prefix_descriptions("<Space>", "g:lmap")
 nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
 vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
 
+
+let g:lmap['!'] = ['call feedkeys(":! ")', 'smart search']
 let g:lmap['/'] = ['Ag', 'smart search']
+
 let g:lmap.0 = ['1wincmd w', 'window 0']
 let g:lmap.1 = ['2wincmd w', 'window 1']
 let g:lmap.2 = ['3wincmd w', 'window 2']
@@ -22,6 +25,7 @@ let g:lmap.6 = ['7wincmd w', 'window 6']
 let g:lmap.7 = ['8wincmd w', 'window 7']
 let g:lmap.8 = ['9wincmd w', 'window 8']
 let g:lmap.9 = ['10wincmd w', 'window 9']
+
 let g:lmap[':'] = ['Commands', 'M-x'] " Keep behavior from Unite command
 let g:lmap[';'] = ['''<,''>Commentary', 'vim-commentary-operator']
 
@@ -99,6 +103,10 @@ let g:lmap.p.f = ['GitFiles', 'fzf-project-find-file']
 
 " quit {{{
 let g:lmap.q = { 'name' : 'quit' }
+let g:lmap.q.q = ['quit', 'prompt-kill-vim']
+let g:lmap.q.Q = ['!quit', 'kill-vim']
+let g:lmap.r = ['source $MYVIMRC', 'reload-vimrc']
+let g:lmap.s = ['xa', 'save-buffers-kill-vim']
 " }}}
 
 " registers/rings {{{
