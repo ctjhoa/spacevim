@@ -74,6 +74,14 @@ let g:lmap.f.e.d = ['edit $MYVIMRC', 'find-dotfile']
 
 " git/versions-control {{{
 let g:lmap.g = { 'name' : 'git/versions-control' }
+let g:lmap.g.b = ['Gblame', 'fugitive-blame']
+let g:lmap.g.i = ['Git init', 'fugitive-init']
+let g:lmap.g.l = ['Glog', 'fugitive-log']
+let g:lmap.g.r = ['Gread', 'fugitive-checkout-current-file']
+let g:lmap.g.r = ['Gremove', 'fugitive-remove-current-file']
+let g:lmap.g.s = ['Gstatus', 'fugitive-status']
+let g:lmap.g.S = ['call feedkeys(":Git add -- ")', 'fugitive-stage-file']
+let g:lmap.g.w = ['Gwrite', 'fugitive-stage-current-file']
 " }}}
 
 " help/highlight {{{
