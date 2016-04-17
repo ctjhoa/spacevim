@@ -12,6 +12,7 @@ nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
 vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
 
 
+let g:lmap['<C-I>'] = ['b#', 'last buffer']
 let g:lmap['!'] = ['call feedkeys(":! ")', 'smart search']
 let g:lmap['/'] = ['Ag', 'smart search']
 
@@ -36,6 +37,17 @@ let g:lmap.a = { 'name' : 'applications' }
 
 " buffers {{{
 let g:lmap.b = { 'name' : 'buffers' }
+let g:lmap.b.b = ['Buffers', 'fzf-buffers']
+let g:lmap.b.d = ['bd', 'kill-this-buffer']
+let g:lmap.b.n = ['bnext', 'next-useful-buffer']
+let g:lmap.b.p = ['bprevious', 'previous-useful-buffer']
+
+" buffers/move {{{
+let g:lmap.b.m = { 'name' : 'move' }
+let g:lmap.b.m.r = ['wincmd r', 'buf-rotate-down-right']
+let g:lmap.b.m.R = ['wincmd R', 'buf-rotate-up-left']
+" }}}
+
 " }}}
 
 " comile/comments {{{
@@ -113,8 +125,8 @@ let g:lmap.p.f = ['GitFiles', 'fzf-project-find-file']
 let g:lmap.q = { 'name' : 'quit' }
 let g:lmap.q.q = ['quit', 'prompt-kill-vim']
 let g:lmap.q.Q = ['!quit', 'kill-vim']
-let g:lmap.r = ['source $MYVIMRC', 'reload-vimrc']
-let g:lmap.s = ['xa', 'save-buffers-kill-vim']
+let g:lmap.q.r = ['source $MYVIMRC', 'reload-vimrc']
+let g:lmap.q.s = ['xa', 'save-buffers-kill-vim']
 " }}}
 
 " registers/rings {{{
