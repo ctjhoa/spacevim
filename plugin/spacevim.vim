@@ -150,9 +150,13 @@ let g:lmap.w = { 'name' : 'windows' }
 let g:lmap.w['-'] = ['split', 'split-window-below']
 let g:lmap.w['/'] = ['vsplit', 'split-window-right']
 let g:lmap.w.h = ['wincmd h', 'window-left']
+let g:lmap.w.H = ['wincmd H', 'window-move-far-left']
 let g:lmap.w.j = ['wincmd j', 'window-down']
+let g:lmap.w.J = ['wincmd J', 'window-move-far-down']
 let g:lmap.w.k = ['wincmd k', 'window-up']
+let g:lmap.w.K = ['wincmd K', 'window-move-far-up']
 let g:lmap.w.l = ['wincmd l', 'window-right']
+let g:lmap.w.L = ['wincmd L', 'window-move-far-right']
 " }}}
 
 " text {{{
