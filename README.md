@@ -1,5 +1,5 @@
 # Spacevim
-*Spacemacs bindings for vim*
+*Spacemacs key bindings for vim*
 
 Spacevim provides leader bindings to match most of [Spacemacs](https://github.com/syl20bnr/spacemacs) behaviour.
 
