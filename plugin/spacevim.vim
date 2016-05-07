@@ -102,10 +102,15 @@ let g:lmap.h = { 'name' : 'help/highlight' }
 
 " insertion {{{
 let g:lmap.i = { 'name' : 'insertion' }
+let g:lmap.i.j = ['call feedkeys("o")', 'vim-insert-line-below']
+let g:lmap.i.k = ['call feedkeys("O")', 'vim-insert-line-above']
 " }}}
 
 " join/split {{{
 let g:lmap.j = { 'name' : 'join/split' }
+let g:lmap.j.j = ['call feedkeys("i\<CR>\<Esc>")', 'sp-newline']
+let g:lmap.j.J = ['call feedkeys("i\<CR>\<Esc>")', 'split-and-newline'] " same as j.j ?
+let g:lmap.j.o = ['call feedkeys("i\<CR>\<Esc>k$")', 'open-line']
 " }}}
 
 " lisp {{{
