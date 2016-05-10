@@ -86,6 +86,7 @@ let g:lmap.f.s = ['write', 'save-buffer']
 " files/vim {{{
 let g:lmap.f.e = { 'name' : 'vim' }
 let g:lmap.f.e.d = ['edit $MYVIMRC', 'find-dotfile']
+let g:lmap.f.e.v = ['version', 'display-vim-version']
 " }}}
 
 " }}}
