@@ -115,10 +115,10 @@ let g:lmap.i.k = ['call feedkeys("O")', 'vim-insert-line-above']
 
 " join/split {{{
 let g:lmap.j = { 'name' : 'join/split' }
-nnoremap <silent> <SID>reindent-buffer mzgg=G`z
-vnoremap <silent> <SID>reindent-buffer ==
-nmap <leader>j= <SID>reindent-buffer
-vmap <leader>j= <SID>reindent-buffer
+nnoremap <silent> <SID>indent-region-or-buffer mzgg=G`z
+vnoremap <silent> <SID>indent-region-or-buffer ==
+nmap <leader>j= <SID>indent-region-or-buffer
+vmap <leader>j= <SID>indent-region-or-buffer
 let g:lmap.j.j = ['call feedkeys("i\<CR>\<Esc>")', 'sp-newline']
 let g:lmap.j.J = ['call feedkeys("i\<CR>\<Esc>")', 'split-and-newline'] " same as j.j ?
 let g:lmap.j.o = ['call feedkeys("i\<CR>\<Esc>k$")', 'open-line']
