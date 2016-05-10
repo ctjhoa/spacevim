@@ -11,6 +11,12 @@ call leaderGuide#register_prefix_descriptions("<Space>", "g:lmap")
 nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
 vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
 
+function! s:my_displayfunc()
+	let g:leaderGuide#displayname = substitute(g:leaderGuide#displayname, '\c<cr>$', '', '')
+	let g:leaderGuide#displayname = substitute(g:leaderGuide#displayname, '^<SID>', '', '')
+endfunction
+let g:leaderGuide_displayfunc = [function("s:my_displayfunc")]
+
 
 let g:lmap['<C-I>'] = ['b#', 'last buffer']
 let g:lmap['!'] = ['call feedkeys(":! ")', 'smart search']
@@ -108,6 +114,10 @@ let g:lmap.i.k = ['call feedkeys("O")', 'vim-insert-line-above']
 
 " join/split {{{
 let g:lmap.j = { 'name' : 'join/split' }
+nnoremap <silent> <SID>reindent-buffer mzgg=G`z
+vnoremap <silent> <SID>reindent-buffer ==
+nmap <leader>j= <SID>reindent-buffer
+vmap <leader>j= <SID>reindent-buffer
 let g:lmap.j.j = ['call feedkeys("i\<CR>\<Esc>")', 'sp-newline']
 let g:lmap.j.J = ['call feedkeys("i\<CR>\<Esc>")', 'split-and-newline'] " same as j.j ?
 let g:lmap.j.o = ['call feedkeys("i\<CR>\<Esc>k$")', 'open-line']
