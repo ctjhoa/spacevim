@@ -3,6 +3,8 @@
 
 Spacevim provides leader bindings to match most of [Spacemacs](https://github.com/syl20bnr/spacemacs) behaviour.
 
+![screenshot](screenshot.png)
+
 ##  Installation
 This plugin follows the standard runtime path structure, and as such it can be installed with a variety of plugin managers:
 
