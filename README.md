@@ -21,7 +21,7 @@ This plugin follows the standard runtime path structure, and as such it can be i
   *  copy all of the files into your `~/.vim` directory
 
 ## Requirements
-Spacevim relay on several other vim plugins for the key bindings implementations.
+Spacevim relies on several other vim plugins for the key bindings implementations.
 - [hecal3/vim-leader-guide](https://github.com/hecal3/vim-leader-guide)
 - [junegunn/fzf](https://github.com/junegunn/fzf)
 - [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
