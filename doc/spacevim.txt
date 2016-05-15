@@ -1,0 +1,141 @@
+*spacevim.txt*  Spacemacs key bindings for vim
+
+Author:  Camille Tjhoa <http://github.com/ctjhoa/>
+License: MIT
+
+INTRODUCTION
+
+Spacemacs key bindings for vim. Use <Space> as leader to provide a set of
+key bindings to match the same workflow as spacemacs.
+
+REQUIREMENTS
+
+    hecal3/vim-leader-guide
+    junegunn/fzf
+    junegunn/fzf.vim
+    tpope/vim-commentary
+    tpope/vim-eunuch
+    tpope/vim-fugitive
+
+<Space>			Default leader which display the leader guide.
+			Subset of key bindings:
+
+			TAB 	last buffer
+			! 	shell cmd
+			/ 	smart-search
+			[0-9] 	window N
+			: 	M-x (command search)
+			; 	vim-commentary-operator
+
+			a 	application subset
+				TODO
+
+			b	buffers subset
+				b	fzf-buffers
+				d	kill-this-buffer
+				m	move
+				n	next-useful-buffer
+				p	previous-useful-buffer
+
+			C	capture/colors subset
+				TODO
+
+			c	compile/comments subset
+				TODO
+
+			e	errors subset
+				TODO
+
+			f	files subset
+				c	copy-file
+				C	files/convert subset
+					TODO
+
+				D	delete-current-buffer-file
+				E	sudo-edit
+				e	vim subset
+					d	find-dotfile
+					v	display-vim-version
+
+				f	fzf-find-files
+				L	fzf-locate
+				R	rename-current-buffer-file
+				s	save-buffer
+
+			g	git/versions-control subset
+				b	fugitive-blame
+				i	fugitive-init
+				l	fugitive-log
+				r	fugitive-remove-current-file
+				s	fugitive-status
+				S	fugitive-stage-file
+				W	fugitive-stage-current-file
+
+			h	help/highlight subset
+				TODO
+
+			i	insertion subset
+				j	vim-insert-line-below
+				k	vim-insert-line-above
+
+			j	join/split subset
+				=	indent-region-or-buffer
+				j	sp-newline
+				J	split-and-newline
+				o	open-line
+
+			k	lisp subset
+				TODO
+
+			n	narrow/numbers subset
+				TODO
+
+			p	projects subset
+				f	fzf-project-find-file
+
+			q	quit subset
+				q	prompt-kill-vim
+				Q	kill-vim
+				r	reload-vimrc
+				s	save-buffers-kill-vim
+
+			r	registers/rings subset
+				TODO
+
+			s	search/symbol subset
+				TODO
+
+			T	UI toggles/themes subset
+				TODO
+
+			t	toggles subset
+				TODO
+
+			w	windows subset
+				-	split-window-below
+				/	split-window-right
+				H	window-move-far-left
+				h	window-left
+				J	window-move-far-down
+				j	window-down
+				K	window-move-far-up
+				k	window-up
+				L	window-move-far-right
+				l	window-right
+				m	maximize-buffer
+				S	split-window-below-and-focus
+				s	split-window-below
+				V	split-window-right-and-focus
+				v	split-window-right
+
+			x	text subset
+				TODO
+
+			z	zoom subset
+				TODO
+
+
+http://github.com/ctjhoa/spacevim
+
+ vim:tw=78:et:ft=help:norl:
+
