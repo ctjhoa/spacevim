@@ -19,7 +19,7 @@ let g:leaderGuide_displayfunc = [function("s:my_displayfunc")]
 
 
 let g:lmap['<C-I>'] = ['b#', 'last buffer']
-let g:lmap['!'] = ['call feedkeys(":! ")', 'smart search']
+let g:lmap['!'] = ['call feedkeys(":! ")', 'shell cmd']
 let g:lmap['/'] = ['Ag', 'smart search']
 
 let g:lmap.0 = ['1wincmd w', 'window 0']
@@ -33,7 +33,7 @@ let g:lmap.7 = ['8wincmd w', 'window 7']
 let g:lmap.8 = ['9wincmd w', 'window 8']
 let g:lmap.9 = ['10wincmd w', 'window 9']
 
-let g:lmap[':'] = ['Commands', 'M-x'] " Keep behavior from Unite command
+let g:lmap[':'] = ['Commands', 'M-x'] " TODO: Keep behavior from Unite command
 let g:lmap[';'] = ['''<,''>Commentary', 'vim-commentary-operator']
 
 
