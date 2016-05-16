@@ -131,6 +131,7 @@ REQUIREMENTS
 				s	split-window-below
 				V	split-window-right-and-focus
 				v	split-window-right
+                                w       other-window
 
 			x	text subset
 				TODO

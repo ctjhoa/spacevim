@@ -182,6 +182,7 @@ let g:lmap.w.s = ['split', 'split-window-below']
 let g:lmap.w.S = ['split | wincmd w', 'split-window-below-and-focus']
 let g:lmap.w.v = ['vsplit', 'split-window-right']
 let g:lmap.w.V = ['vsplit | wincmd w', 'split-window-right-and-focus']
+let g:lmap.w.w = ['wincmd w', 'other-window']
 " }}}
 
 " text {{{
