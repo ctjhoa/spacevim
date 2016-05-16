@@ -80,6 +80,7 @@ let g:lmap.f.D = ['Remove', 'delete-current-buffer-file']
 let g:lmap.f.E = ['call feedkeys(":SudoEdit ")', 'sudo-edit']
 let g:lmap.f.f = ['Files', 'fzf-find-files']
 let g:lmap.f.L = ['call feedkeys(":Locate ")', 'fzf-locate']
+let g:lmap.f.r = ['History', 'fzf-recentf']
 let g:lmap.f.R = ['call feedkeys(":Rename ")', 'rename-current-buffer-file']
 let g:lmap.f.s = ['write', 'save-buffer']
 

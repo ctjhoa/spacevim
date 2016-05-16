@@ -59,6 +59,7 @@ REQUIREMENTS
 
 				f	fzf-find-files
 				L	fzf-locate
+				r	fzf-recentf
 				R	rename-current-buffer-file
 				s	save-buffer
 
