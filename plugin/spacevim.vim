@@ -83,6 +83,7 @@ let g:lmap.f.L = ['call feedkeys(":Locate ")', 'fzf-locate']
 let g:lmap.f.r = ['History', 'fzf-recentf']
 let g:lmap.f.R = ['call feedkeys(":Rename ")', 'rename-current-buffer-file']
 let g:lmap.f.s = ['write', 'save-buffer']
+let g:lmap.f.S = ['wa', 'write-all']
 
 " files/vim {{{
 let g:lmap.f.e = { 'name' : 'vim' }
