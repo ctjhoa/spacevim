@@ -36,6 +36,7 @@ REQUIREMENTS
 				m	move
 				n	next-useful-buffer
 				p	previous-useful-buffer
+				R	safe-revert-buffer
 
 			C	capture/colors subset
 				TODO

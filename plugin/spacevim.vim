@@ -47,6 +47,7 @@ let g:lmap.b.b = ['Buffers', 'fzf-buffers']
 let g:lmap.b.d = ['bd', 'kill-this-buffer']
 let g:lmap.b.n = ['bnext', 'next-useful-buffer']
 let g:lmap.b.p = ['bprevious', 'previous-useful-buffer']
+let g:lmap.b.R = ['e', 'safe-revert-buffer']
 
 " buffers/move {{{
 let g:lmap.b.m = { 'name' : 'move' }
