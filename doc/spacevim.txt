@@ -112,7 +112,7 @@ REQUIREMENTS
 				TODO
 
 			t	toggles subset
-				TODO
+				n       line-numbers
 
 			w	windows subset
 				-	split-window-below

@@ -158,6 +158,7 @@ let g:lmap.s = { 'name' : 'search/symbol' }
 
 " toggles {{{
 let g:lmap.t = { 'name' : 'toggles' }
+let g:lmap.t.n = ['set number!', 'line-numbers']
 " }}}
 
 " UI toggles/themes {{{
