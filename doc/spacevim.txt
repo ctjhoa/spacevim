@@ -117,6 +117,7 @@ REQUIREMENTS
 			w	windows subset
 				-	split-window-below
 				/	split-window-right
+                                =       balance-windows
 				H	window-move-far-left
 				h	window-left
 				J	window-move-far-down

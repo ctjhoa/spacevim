@@ -168,6 +168,7 @@ let g:lmap.T = { 'name' : 'UI toggles/themes' }
 let g:lmap.w = { 'name' : 'windows' }
 let g:lmap.w['-'] = ['split', 'split-window-below']
 let g:lmap.w['/'] = ['vsplit', 'split-window-right']
+let g:lmap.w['='] = ['wincmd =', 'balance-windows']
 let g:lmap.w.h = ['wincmd h', 'window-left']
 let g:lmap.w.H = ['wincmd H', 'window-move-far-left']
 let g:lmap.w.j = ['wincmd j', 'window-down']
