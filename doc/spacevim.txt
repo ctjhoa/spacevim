@@ -118,6 +118,7 @@ REQUIREMENTS
 				-	split-window-below
 				/	split-window-right
                                 =       balance-windows
+				c	delete-window
 				H	window-move-far-left
 				h	window-left
 				J	window-move-far-down
