@@ -85,6 +85,7 @@ let g:lmap.f.r = ['History', 'fzf-recentf']
 let g:lmap.f.R = ['call feedkeys(":Rename ")', 'rename-current-buffer-file']
 let g:lmap.f.s = ['write', 'save-buffer']
 let g:lmap.f.S = ['wa', 'write-all']
+let g:lmap.f.t = ['Lexplore', 'netrw-toggle']
 
 " files/vim {{{
 let g:lmap.f.e = { 'name' : 'vim' }

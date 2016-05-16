@@ -64,6 +64,7 @@ REQUIREMENTS
 				R	rename-current-buffer-file
 				s	save-buffer
 				S	write-all
+                                t       netrw-toggle
 
 			g	git/versions-control subset
 				b	fugitive-blame
