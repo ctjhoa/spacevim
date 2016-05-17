@@ -17,132 +17,129 @@ REQUIREMENTS
     tpope/vim-eunuch
     tpope/vim-fugitive
 
-<Space>			Default leader which display the leader guide.
-			Subset of key bindings:
+<Space>      Default leader which display the leader guide.
+      Subset of key bindings:
 
-			TAB 	last buffer
-			! 	shell cmd
-			/ 	smart-search
-			[0-9] 	window N
-			: 	M-x (command search)
-			; 	vim-commentary-operator
+      TAB  last buffer
+      !  shell cmd
+      /  smart-search
+      [0-9]  window N
+      :  M-x (command search)
+      ;  vim-commentary-operator
 
-			a 	application subset
-				TODO
+      a  +application
+             TODO
 
-			b	buffers subset
-				b	fzf-buffers
-				d	kill-this-buffer
-				m	move
-				n	next-useful-buffer
-				p	previous-useful-buffer
-				R	safe-revert-buffer
+      b  +buffers
+        b  fzf-buffers
+        d  kill-this-buffer
+        m  move
+        n  next-useful-buffer
+        p  previous-useful-buffer
+        R  safe-revert-buffer
 
-			C	capture/colors subset
-				TODO
+      C  +capture/colors
+        TODO
 
-			c	compile/comments subset
-				TODO
+      c  +compile/comments
+        TODO
 
-			e	errors subset
-				TODO
+      e  +errors
+        TODO
 
-			f	files subset
-				c	copy-file
-				C	files/convert subset
-					TODO
+      f  +files
+        c  copy-file
+        C  +files/convert
+          TODO
 
-				D	delete-current-buffer-file
-				E	sudo-edit
-				e	vim subset
-					d	find-dotfile
-					v	display-vim-version
+        D  delete-current-buffer-file
+        E  sudo-edit
+        e  +vim
+          d  find-dotfile
+          v  display-vim-version
 
-				f	fzf-find-files
-				L	fzf-locate
-				r	fzf-recentf
-				R	rename-current-buffer-file
-				s	save-buffer
-				S	write-all
-                                t       netrw-toggle
+        f  fzf-find-files
+        L  fzf-locate
+        r  fzf-recentf
+        R  rename-current-buffer-file
+        s  save-buffer
+        S  write-all
+        t  netrw-toggle
 
-			g	git/versions-control subset
-				b	fugitive-blame
-				i	fugitive-init
-				l	fugitive-log
-				r	fugitive-remove-current-file
-				s	fugitive-status
-				S	fugitive-stage-file
-				W	fugitive-stage-current-file
+      g  +git/versions-control
+        b  fugitive-blame
+        i  fugitive-init
+        l  fugitive-log
+        r  fugitive-remove-current-file
+        s  fugitive-status
+        S  fugitive-stage-file
+        W  fugitive-stage-current-file
 
-			h	help/highlight subset
-				TODO
+      h  +help/highlight
+        TODO
 
-			i	insertion subset
-				j	vim-insert-line-below
-				k	vim-insert-line-above
+      i  +insertion
+        j  vim-insert-line-below
+        k  vim-insert-line-above
 
-			j	join/split subset
-				=	indent-region-or-buffer
-				j	sp-newline
-				J	split-and-newline
-				o	open-line
+      j  +join/split
+        =  indent-region-or-buffer
+        j  sp-newline
+        J  split-and-newline
+        o  open-line
 
-			k	lisp subset
-				TODO
+      k  +lisp
+        TODO
 
-			n	narrow/numbers subset
-				TODO
+      n  +narrow/numbers
+        TODO
 
-			p	projects subset
-				f	fzf-project-find-file
+      p  +projects
+        f  fzf-project-find-file
 
-			q	quit subset
-				q	prompt-kill-vim
-				Q	kill-vim
-				r	reload-vimrc
-				s	save-buffers-kill-vim
+      q  +quit
+        q  prompt-kill-vim
+        Q  kill-vim
+        r  reload-vimrc
+        s  save-buffers-kill-vim
 
-			r	registers/rings subset
-				TODO
+      r  +registers/rings
+        TODO
 
-			s	search/symbol subset
-				TODO
+      s  +search/symbol
+        TODO
 
-			T	UI toggles/themes subset
-				TODO
+      T  +UI toggles/themes
+        TODO
 
-			t	toggles subset
-				n       line-numbers
+      t  +toggles
+        n line-numbers
 
-			w	windows subset
-				-	split-window-below
-				/	split-window-right
-                                =       balance-windows
-				c	delete-window
-				H	window-move-far-left
-				h	window-left
-				J	window-move-far-down
-				j	window-down
-				K	window-move-far-up
-				k	window-up
-				L	window-move-far-right
-				l	window-right
-				m	maximize-buffer
-				S	split-window-below-and-focus
-				s	split-window-below
-				V	split-window-right-and-focus
-				v	split-window-right
-                                w       other-window
+      w  +windows
+        -  split-window-below
+        /  split-window-right
+        =  balance-windows
+        c  delete-window
+        H  window-move-far-left
+        h  window-left
+        J  window-move-far-down
+        j  window-down
+        K  window-move-far-up
+        k  window-up
+        L  window-move-far-right
+        l  window-right
+        m  maximize-buffer
+        S  split-window-below-and-focus
+        s  split-window-below
+        V  split-window-right-and-focus
+        v  split-window-right
+        w  other-window
 
-			x	text subset
-				TODO
+      x  +text
+        TODO
 
-			z	zoom subset
-				TODO
+      z  +zoom
+        TODO
 
 
 http://github.com/ctjhoa/spacevim
-
- vim:tw=78:et:ft=help:norl:
-
