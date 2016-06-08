@@ -169,6 +169,13 @@ let g:lmap.k = { 'name' : '+lisp' }
 
 " narrow/numbers {{{
 let g:lmap.n = { 'name' : '+narrow/numbers' }
+call s:spacevim_bind('map', 'n=', 'numbers-increase', '<C-a>', 0)
+call s:spacevim_bind('map', 'n+', 'numbers-increase', '<C-a>', 0)
+call s:spacevim_bind('map', 'n-', 'numbers-decrease', '<C-x>', 0)
+call s:spacevim_bind('map', 'n,', 'page-up', '<PageUp>', 0)
+call s:spacevim_bind('map', 'n.', 'page-down', '<PageDown>', 0)
+call s:spacevim_bind('map', 'n<lt>', 'half-page-up', '<C-u>', 0)
+call s:spacevim_bind('map', 'n>', 'half-page-down', '<C-d>', 0)
 " }}}
 
 " projects {{{
