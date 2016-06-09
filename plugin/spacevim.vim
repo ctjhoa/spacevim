@@ -191,6 +191,7 @@ let g:lmap.r = { 'name' : '+registers/rings' }
 
 " search/symbol
 let g:lmap.s = { 'name' : '+search/symbol' }
+call s:spacevim_bind('map', 'sc', 'highlight-persist-remove-all', 'noh', 1)
 
 " toggles
 let g:lmap.t = { 'name' : '+toggles' }
