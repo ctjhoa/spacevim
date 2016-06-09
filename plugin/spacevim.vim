@@ -74,8 +74,9 @@ call s:spacevim_bind('map', '8', 'window-8', '9wincmd w', 1)
 call s:spacevim_bind('map', '9', 'window-9', '10wincmd w', 1)
 
 call s:spacevim_bind('map', ':', 'M-x', 'Commands', 1)
-call s:spacevim_bind('nmap', ';', 'vim-commentary-operator', 'Commentary', 1)
-call s:spacevim_bind('vmap', ';', 'vim-commentary-operator', '''<,''>Commentary', 1)
+call s:spacevim_bind('nmap', ';', 'vim-commentary-operator', '<Plug>Commentary', 0, 1)
+call s:spacevim_bind('nmap', ';;', 'vim-commentary-line', '<Plug>CommentaryLine', 0, 1)
+call s:spacevim_bind('vmap', ';', 'vim-commentary-visual', '<Plug>Commentary', 0, 1)
 
 " applications
 let g:lmap.a = { 'name' : '+applications' }
