@@ -36,4 +36,5 @@ And some optional plugins:
 - [Raimondi/delimitMate](https://github.com/tpope/vim-surround)
 - [mbbill/undotree](https://github.com/mbbill/undotree)
 - [scrooloose/syntastic](https://github.com/scrooloose/syntastic)
+- [easymotion/vim-easymotion](https://github.com/easymotion/vim-easymotion)
 

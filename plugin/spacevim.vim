@@ -33,18 +33,22 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Helpers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! s:spacevim_bind(map, binding, name, value, isCmd)
+function! s:spacevim_bind(map, binding, name, value, isCmd, ...)
   if a:isCmd
     let l:value = ':' . a:value . '<cr>'
   else
     let l:value = a:value
   endif
-  if a:map == "map"
-    let l:noremap = 'noremap'
-  elseif a:map == "nmap"
-    let l:noremap = 'nnoremap'
-  elseif a:map == "vmap"
-    let l:noremap = 'vnoremap'
+  if a:0
+    let l:noremap = a:map
+  else
+    if a:map == "map"
+      let l:noremap = 'noremap'
+    elseif a:map == "nmap"
+      let l:noremap = 'nnoremap'
+    elseif a:map == "vmap"
+      let l:noremap = 'vnoremap'
+    endif
   endif
   execute l:noremap . " <silent> <SID>" . a:name . " " . l:value
   execute a:map . " <leader>" . a:binding . " <SID>" . a:name
@@ -224,6 +228,11 @@ call s:spacevim_bind('map', 'ww', 'other-window', 'wincmd w', 1)
 
 " text
 let g:lmap.x = { 'name' : '+text' }
+
+" easymotion (instead of avy)
+if exists('g:EasyMotion_loaded')
+  call s:spacevim_bind('map', 'y', 'easymotion-line', '<Plug>(easymotion-bd-jk)', 0, 1)
+endif
 
 " zoom
 let g:lmap.z = { 'name' : '+zoom' }
