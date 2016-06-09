@@ -37,4 +37,5 @@ And some optional plugins:
 - [mbbill/undotree](https://github.com/mbbill/undotree)
 - [scrooloose/syntastic](https://github.com/scrooloose/syntastic)
 - [easymotion/vim-easymotion](https://github.com/easymotion/vim-easymotion)
+- [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)
 

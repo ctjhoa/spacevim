@@ -204,6 +204,9 @@ call s:spacevim_bind('nmap', 'thl', 'highlight-current-line-globaly', 'set invcu
 
 " UI toggles/themes
 let g:lmap.T = { 'name' : '+UI toggles/themes' }
+if exists('g:loaded_gitgutter')
+  call s:spacevim_bind('map', 'Td', 'version-control-margin', 'GitGutterToggle', 1)
+endif
 
 " windows
 let g:lmap.w = { 'name' : '+windows' }
