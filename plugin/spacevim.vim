@@ -71,6 +71,7 @@ call s:spacevim_bind('map', '9', 'window-9', '10wincmd w', 1)
 
 call s:spacevim_bind('map', ':', 'M-x', 'call SpacevimCommands()', 1)
 call s:spacevim_bind('nmap', ';', 'vim-commentary-operator', 'Commentary', 1)
+nmap <Leader>;; <Plug>CommentaryLine
 call s:spacevim_bind('vmap', ';', 'vim-commentary-operator', '''<,''>Commentary', 1)
 
 " applications {{{
