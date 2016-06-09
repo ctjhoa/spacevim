@@ -75,7 +75,9 @@ call s:spacevim_bind('vmap', ';', 'vim-commentary-operator', '''<,''>Commentary'
 
 " applications
 let g:lmap.a = { 'name' : '+applications' }
-call s:spacevim_bind('map', 'au', 'undo-tree-visualize', 'UndotreeToggle', 1)
+if exists('g:loaded_undotree')
+  call s:spacevim_bind('map', 'au', 'undo-tree-visualize', 'UndotreeToggle', 1)
+endif
 
 " buffers
 let g:lmap.b = { 'name' : '+buffers' }
@@ -98,10 +100,12 @@ let g:lmap.C = { 'name' : '+capture/colors' }
 
 " errors
 let g:lmap.e = { 'name' : '+errors' }
-call s:spacevim_bind('map', 'el', 'error-list', 'call ToggleErrors()', 1)
-call s:spacevim_bind('map', 'en', 'next-error', 'lnext', 1)
-call s:spacevim_bind('map', 'eN', 'previous-error', 'lprev', 1)
-call s:spacevim_bind('map', 'ep', 'previous-error', 'lprev', 1)
+if exists('g:loaded_syntastic_plugin')
+  call s:spacevim_bind('map', 'el', 'error-list', 'call ToggleErrors()', 1)
+  call s:spacevim_bind('map', 'en', 'next-error', 'lnext', 1)
+  call s:spacevim_bind('map', 'eN', 'previous-error', 'lprev', 1)
+  call s:spacevim_bind('map', 'ep', 'previous-error', 'lprev', 1)
+endif
 
 " files
 let g:lmap.f = { 'name' : '+files' }
