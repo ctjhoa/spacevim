@@ -10,7 +10,7 @@ let g:loaded_spacevim = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Optionally integrate with vim-leader-guide
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if exists('loaded_leaderGuide_vim') 
+if exists('loaded_leaderGuide_vim')
   if !exists('g:lmap')
     let g:lmap = {}
   endif
@@ -271,4 +271,4 @@ function! MaximizeToggle()
 endfunction
 
 " vim:set ft=vim sw=2 sts=2 et:
-" vim:fdm=marker 
+" vim:fdm=marker
