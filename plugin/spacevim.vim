@@ -69,7 +69,7 @@ call s:spacevim_bind('map', '7', 'window-7', '8wincmd w', 1)
 call s:spacevim_bind('map', '8', 'window-8', '9wincmd w', 1)
 call s:spacevim_bind('map', '9', 'window-9', '10wincmd w', 1)
 
-call s:spacevim_bind('map', ':', 'M-x', 'Commands', 1)
+call s:spacevim_bind('map', ':', 'M-x', 'call SpacevimCommands()', 1)
 call s:spacevim_bind('nmap', ';', 'vim-commentary-operator', 'Commentary', 1)
 call s:spacevim_bind('vmap', ';', 'vim-commentary-operator', '''<,''>Commentary', 1)
 
@@ -79,7 +79,7 @@ let g:lmap.a = { 'name' : '+applications' }
 
 " buffers {{{
 let g:lmap.b = { 'name' : '+buffers' }
-call s:spacevim_bind('map', 'bb', 'fzf-buffers', 'Buffers', 1)
+call s:spacevim_bind('map', 'bb', 'buffers', 'call SpacevimBuffers()', 1)
 call s:spacevim_bind('map', 'bd', 'kill-this-buffer', 'bd', 1)
 call s:spacevim_bind('map', 'bn', 'next-useful-buffer', 'bnext', 1)
 call s:spacevim_bind('map', 'bp', 'previous-useful-buffer', 'bprevious', 1)
@@ -115,9 +115,9 @@ let g:lmap.f.C = { 'name' : '+files/convert' }
 
 call s:spacevim_bind('map', 'fD', 'delete-current-buffer-file', 'Remove', 1)
 call s:spacevim_bind('map', 'fE', 'sudo-edit', 'call feedkeys(":SudoEdit ")', 1)
-call s:spacevim_bind('map', 'ff', 'fzf-find-files', 'Files', 1)
-call s:spacevim_bind('map', 'fL', 'fzf-locate', 'call feedkeys(":Locate ")', 1)
-call s:spacevim_bind('map', 'fr', 'fzf-recentf', 'History', 1)
+call s:spacevim_bind('map', 'ff', 'find-files', 'call SpacevimFindFiles()', 1)
+call s:spacevim_bind('map', 'fL', 'locate', 'call feedkeys(":Locate ")', 1)
+call s:spacevim_bind('map', 'fr', 'recentf', 'call SpacevimRecentf()', 1)
 call s:spacevim_bind('map', 'fR', 'rename-current-buffer-file', 'call feedkeys(":Rename ")', 1)
 call s:spacevim_bind('map', 'fs', 'save-buffer', 'write', 1)
 call s:spacevim_bind('map', 'fS', 'write-all', 'wa', 1)
@@ -180,7 +180,7 @@ call s:spacevim_bind('map', 'n>', 'half-page-down', '<C-d>', 0)
 
 " projects {{{
 let g:lmap.p = { 'name' : '+projects' }
-call s:spacevim_bind('map', 'pf', 'fzf-project-find-file', 'GitFiles', 1)
+call s:spacevim_bind('map', 'pf', 'project-find-file', 'call SpacevimProjectFindFile()', 1)
 " }}}
 
 " quit {{{
@@ -231,7 +231,7 @@ call s:spacevim_bind('map', 'wk', 'window-up', 'wincmd k', 1)
 call s:spacevim_bind('map', 'wK', 'window-move-far-up', 'wincmd K', 1)
 call s:spacevim_bind('map', 'wl', 'window-right', 'wincmd l', 1)
 call s:spacevim_bind('map', 'wL', 'window-move-far-right', 'wincmd L', 1)
-call s:spacevim_bind('map', 'wm', 'maximize-buffer', 'call MaximizeToggle()', 1)
+call s:spacevim_bind('map', 'wm', 'maximize-buffer', 'call SpacevimMaximizeBuffer()', 1)
 call s:spacevim_bind('map', 'ws', 'split-window-below', 'split', 1)
 call s:spacevim_bind('map', 'wS', 'split-window-below-and-focus', 'split\|wincmd w', 1)
 call s:spacevim_bind('map', 'wv', 'split-window-right', 'vsplit', 1)
@@ -254,7 +254,41 @@ let g:lmap.z = { 'name' : '+zoom' }
 " Helper functions
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-function! MaximizeToggle()
+function! SpacevimBuffers()
+  if exists(':Buffers')
+    execute "Buffers"
+  elseif exists('g:loaded_unite')
+    execute "Unite -start-insert buffer"
+  elseif exists('g:loaded_ctrlp')
+    execute "CtrlPBuffer"
+  else
+    execute "buffers"
+  endif
+endfunction
+
+function! SpacevimCommands()
+  if exists(':Commands')
+    execute "Commands"
+  elseif exists('g:loaded_unite')
+    execute "Unite -start-insert command"
+  elseif exists('g:loaded_ctrlp')
+    execute "CtrlPBuffer"
+  else
+    execute "buffers"
+  endif
+endfunction
+
+function! SpacevimFindFiles()
+  if exists(':Files')
+    execute "Files"
+  elseif exists('g:loaded_unite')
+    execute "Unite -start-insert file"
+  elseif exists('g:loaded_ctrlp')
+    execute "CtrlPCurFile"
+  endif
+endfunction
+
+function! SpacevimMaximizeBuffer()
   if exists("s:maximize_session")
     exec "source " . s:maximize_session
     call delete(s:maximize_session)
@@ -267,6 +301,28 @@ function! MaximizeToggle()
     set hidden
     exec "mksession! " . s:maximize_session
     only
+  endif
+endfunction
+
+function! SpacevimProjectFindFile()
+  if exists(':GitFiles')
+    execute "GitFiles"
+  elseif exists('g:loaded_unite')
+    execute "UniteWithProjectDir -start-insert file_rec/async"
+  elseif exists('g:loaded_ctrlp')
+    execute "CtrlPRoot"
+  endif
+endfunction
+
+function! SpacevimRecentf()
+  if exists(':History')
+    execute "History"
+  elseif exists('g:loaded_unite')
+    execute "Unite -start-insert file_mru"
+  elseif exists('g:loaded_ctrlp')
+    execute "CtrlPMRU"
+  else
+    execute "oldfiles"
   endif
 endfunction
 
