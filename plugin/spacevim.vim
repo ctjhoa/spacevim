@@ -54,7 +54,7 @@ endfunction
 " Bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-call s:spacevim_bind('map', '<C-I>', 'last-buffer', 'b#', 1)
+call s:spacevim_bind('map', '<Tab>', 'last-buffer', 'b#', 1)
 call s:spacevim_bind('map', '!', 'shell-cmd', 'call feedkeys(":! ")', 1)
 call s:spacevim_bind('map', '/', 'smart-search', 'Ag', 1)
 
