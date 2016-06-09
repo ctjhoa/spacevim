@@ -29,6 +29,7 @@ Spacevim relies on several other vim plugins for the key bindings implementation
 - [tpope/vim-eunuch](https://github.com/tpope/vim-eunuch)
 - [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
 - [rking/ag.vim](https://github.com/rking/ag.vim)
+- [mbbill/undotree](https://github.com/mbbill/undotree)
 
 And some optional plugins:
 - [hecal3/vim-leader-guide](https://github.com/hecal3/vim-leader-guide)
