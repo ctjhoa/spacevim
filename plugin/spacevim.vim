@@ -187,7 +187,7 @@ call s:spacevim_bind('map', 'pf', 'project-find-file', 'call SpacevimProjectFind
 " quit {{{
 let g:lmap.q = { 'name' : '+quit' }
 call s:spacevim_bind('map', 'qq', 'prompt-kill-vim', 'quit', 1)
-call s:spacevim_bind('map', 'qQ', 'kill-vim', '!quit', 1)
+call s:spacevim_bind('map', 'qQ', 'kill-vim', 'quit!', 1)
 call s:spacevim_bind('map', 'qr', 'reload-vimrc', 'source $MYVIMRC', 1)
 call s:spacevim_bind('map', 'qs', 'save-buffers-kill-vim', 'xa', 1)
 " }}}
