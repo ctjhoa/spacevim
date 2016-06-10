@@ -183,7 +183,7 @@ call s:spacevim_bind('map', 'pf', 'fzf-project-find-file', 'GitFiles', 1)
 " quit
 let g:lmap.q = { 'name' : '+quit' }
 call s:spacevim_bind('map', 'qq', 'prompt-kill-vim', 'quit', 1)
-call s:spacevim_bind('map', 'qQ', 'kill-vim', '!quit', 1)
+call s:spacevim_bind('map', 'qQ', 'kill-vim', 'quit!', 1)
 call s:spacevim_bind('map', 'qs', 'save-buffers-kill-vim', 'xa', 1)
 
 " registers/rings
