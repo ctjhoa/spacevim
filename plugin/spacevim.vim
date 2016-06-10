@@ -128,6 +128,7 @@ call s:spacevim_bind('map', 'ft', 'netrw-toggle', 'Lexplore', 1)
 let g:lmap.f.e = { 'name' : '+vim' }
 call s:spacevim_bind('map', 'fed', 'find-dotfile', 'edit $MYVIMRC', 1)
 call s:spacevim_bind('map', 'fev', 'display-vim-version', 'version', 1)
+call s:spacevim_bind('map', 'feR', 'sync-configuration', 'source $MYVIMRC', 1)
 " }}}
 
 " }}}
@@ -188,7 +189,6 @@ call s:spacevim_bind('map', 'pf', 'project-find-file', 'call SpacevimProjectFind
 let g:lmap.q = { 'name' : '+quit' }
 call s:spacevim_bind('map', 'qq', 'prompt-kill-vim', 'quit', 1)
 call s:spacevim_bind('map', 'qQ', 'kill-vim', 'quit!', 1)
-call s:spacevim_bind('map', 'qr', 'reload-vimrc', 'source $MYVIMRC', 1)
 call s:spacevim_bind('map', 'qs', 'save-buffers-kill-vim', 'xa', 1)
 " }}}
 
