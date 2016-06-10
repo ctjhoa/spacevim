@@ -76,6 +76,7 @@ call s:spacevim_bind('vmap', ';', 'vim-commentary-operator', '''<,''>Commentary'
 
 " applications {{{
 let g:lmap.a = { 'name' : '+applications' }
+call s:spacevim_bind('map', 'au', 'undo-tree-visualize', 'UndotreeToggle', 1)
 " }}}
 
 " buffers {{{
