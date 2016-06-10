@@ -23,9 +23,19 @@ This plugin follows the standard runtime path structure, and as such it can be i
 
 ## Requirements
 Spacevim relies on several other vim plugins for the key bindings implementations.
-- [hecal3/vim-leader-guide](https://github.com/hecal3/vim-leader-guide) (Optional)
 - [junegunn/fzf](https://github.com/junegunn/fzf)
 - [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
 - [tpope/vim-commentary](https://github.com/tpope/vim-commentary)
 - [tpope/vim-eunuch](https://github.com/tpope/vim-eunuch)
 - [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
+- [rking/ag.vim](https://github.com/rking/ag.vim)
+
+And some optional plugins:
+- [hecal3/vim-leader-guide](https://github.com/hecal3/vim-leader-guide)
+- [tpope/vim-surround](https://github.com/tpope/vim-surround)
+- [Raimondi/delimitMate](https://github.com/tpope/vim-surround)
+- [mbbill/undotree](https://github.com/mbbill/undotree)
+- [scrooloose/syntastic](https://github.com/scrooloose/syntastic)
+- [easymotion/vim-easymotion](https://github.com/easymotion/vim-easymotion)
+- [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)
+
