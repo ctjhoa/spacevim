@@ -21,20 +21,27 @@ This plugin follows the standard runtime path structure, and as such it can be i
 *  manual
   *  copy all of the files into your `~/.vim` directory
 
-## Optimal spacemacs config
-Spacevim relies on several other vim plugins for the key bindings implementations.
-So every plugin is only needed to execute mapped action but to get the best experience recommended plugins are:
+## Requirements
+Spacevim relies on several other vim plugins for the key bindings implementations and spacemacs behavior.
 
-- [hecal3/vim-leader-guide](https://github.com/hecal3/vim-leader-guide)
+### Mapping plugins
+So every plugin in this list is only needed to execute mapped action but to get the best experience recommended plugins are:
+
 - [junegunn/fzf](https://github.com/junegunn/fzf)
 - [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
 - [tpope/vim-commentary](https://github.com/tpope/vim-commentary)
 - [tpope/vim-eunuch](https://github.com/tpope/vim-eunuch)
 - [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
 
-## Also supported plugins
 Some of the recommended plugins could be replaced by alternatives.
 
 Alternative to [junegunn/fzf](https://github.com/junegunn/fzf) & [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
 - [Shougo/unite.vim](https://github.com/Shougo/unite.vim)
 - [ctrlpvim/ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
+
+### Behavior plugins
+To be the closest to the spacemacs behavior the folowing plugins are recommended:
+
+- [hecal3/vim-leader-guide](https://github.com/hecal3/vim-leader-guide)
+- [tpope/vim-surround](https://github.com/tpope/vim-surround)
+- [Raimondi/delimitMate](https://github.com/Raimondi/delimitMate)
