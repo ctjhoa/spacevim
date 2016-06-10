@@ -150,8 +150,8 @@ let g:lmap.h = { 'name' : '+help/highlight' }
 
 " insertion {{{
 let g:lmap.i = { 'name' : '+insertion' }
-call s:spacevim_bind('nmap', 'ij', 'vim-insert-line-below', 'o', 0)
-call s:spacevim_bind('nmap', 'ik', 'vim-insert-line-above', 'O', 0)
+call s:spacevim_bind('nmap', 'ij', 'vim-insert-line-below', 'mao<Esc>`a', 0)
+call s:spacevim_bind('nmap', 'ik', 'vim-insert-line-above', 'maO<Esc>`a', 0)
 " }}}
 
 " join/split {{{
