@@ -188,6 +188,7 @@ call s:spacevim_bind('map', 'n>', 'half-page-down', '<C-d>', 0)
 " projects {{{
 let g:lmap.p = { 'name' : '+projects' }
 call s:spacevim_bind('map', 'pf', 'project-find-file', 'call SpacevimProjectFindFile()', 1)
+call s:spacevim_bind('map', 'pD', 'project-directory', 'call SpacevimProjectDirectory()', 1)
 call s:spacevim_bind('map', 'pI', 'project-invalidate-cache', 'call SpacevimProjectInvalidateCache()', 1)
 " }}}
 
@@ -315,6 +316,26 @@ function! SpacevimMaximizeBuffer()
     set hidden
     exec "mksession! " . s:maximize_session
     only
+  endif
+endfunction
+
+function! SpacevimProjectDirectory()
+  if exists(':ProjectRootExe')
+    if exists(':NERDTreeToggle')
+      execute "ProjectRootExe NERDTreeToggle"
+    elseif exists('g:loaded_dirvish')
+      execute "ProjectRootExe Dirvish"
+    else
+      execute "ProjectRootExe Lexplore"
+    endif
+  else
+    if exists(':NERDTreeToggle')
+      execute "NERDTreeToggle"
+    elseif exists('g:loaded_dirvish')
+      execute "Dirvish"
+    else
+      execute "Lexplore"
+    endif
   endif
 endfunction
 

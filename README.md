@@ -28,6 +28,7 @@ Spacevim relies on several other vim plugins for the key bindings implementation
 So every plugin in this list is only needed to execute mapped action but to get the best experience recommended plugins are:
 
 - [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)
+- [dbakker/vim-projectroot](https://github.com/dbakker/vim-projectroot)
 - [easymotion/vim-easymotion](https://github.com/easymotion/vim-easymotion)
 - [junegunn/fzf](https://github.com/junegunn/fzf)
 - [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
@@ -41,6 +42,10 @@ Some of the recommended plugins could be replaced by alternatives.
 Alternative to [junegunn/fzf](https://github.com/junegunn/fzf) & [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
 - [Shougo/unite.vim](https://github.com/Shougo/unite.vim)
 - [ctrlpvim/ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
+
+`netrw` is recommended as it's the built-in vim explorer but the following plugins are supported to:
+- [justinmk/vim-dirvish](https://github.com/justinmk/vim-dirvish)
+- [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
 
 ### Behavior plugins
 To be the closest to the spacemacs behavior the folowing plugins are recommended:
