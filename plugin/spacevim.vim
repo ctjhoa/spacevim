@@ -71,8 +71,12 @@ call s:spacevim_bind('map', '9', 'window-9', '10wincmd w', 1)
 
 call s:spacevim_bind('map', ':', 'M-x', 'call SpacevimCommands()', 1)
 call s:spacevim_bind('nmap', ';', 'vim-commentary-operator', 'Commentary', 1)
-nmap <Leader>;; <Plug>CommentaryLine
+nmap <silent> <SID>vim-commentary-line <Plug>(CommentaryLine)
+nmap <Leader>;; <SID>vim-commentary-line
 call s:spacevim_bind('vmap', ';', 'vim-commentary-operator', '''<,''>Commentary', 1)
+
+nmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
+nmap <Leader>y <SID>easymotion-line
 
 " applications {{{
 let g:lmap.a = { 'name' : '+applications' }

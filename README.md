@@ -28,6 +28,7 @@ Spacevim relies on several other vim plugins for the key bindings implementation
 So every plugin in this list is only needed to execute mapped action but to get the best experience recommended plugins are:
 
 - [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)
+- [easymotion/vim-easymotion](https://github.com/easymotion/vim-easymotion)
 - [junegunn/fzf](https://github.com/junegunn/fzf)
 - [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
 - [mbbill/undotree](https://github.com/mbbill/undotree)
