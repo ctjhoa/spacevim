@@ -127,7 +127,7 @@ call s:spacevim_bind('map', 'fr', 'recentf', 'call SpacevimRecentf()', 1)
 call s:spacevim_bind('map', 'fR', 'rename-current-buffer-file', 'call feedkeys(":Rename ")', 1)
 call s:spacevim_bind('map', 'fs', 'save-buffer', 'write', 1)
 call s:spacevim_bind('map', 'fS', 'write-all', 'wa', 1)
-call s:spacevim_bind('map', 'ft', 'netrw-toggle', 'Lexplore', 1)
+call s:spacevim_bind('map', 'ft', 'explorer-toggle', 'call SpacevimExplorerToggle()', 1)
 
 " files/vim {{{
 let g:lmap.f.e = { 'name' : '+vim' }
@@ -275,14 +275,6 @@ function! SpacevimBuffers()
   endif
 endfunction
 
-function! SpacevimProjectInvalidateCache()
-  if exists('g:loaded_unite')
-    execute "call feedkeys(\":UniteWithProjectDir\<CR>\<C-l>\<Esc>\")"
-  elseif exists('g:loaded_ctrlp')
-    execute "CtrlPClearCache"
-  endif
-endfunction
-
 function! SpacevimCommands()
   if exists(':Commands')
     execute "Commands"
@@ -290,6 +282,16 @@ function! SpacevimCommands()
     execute "Unite -start-insert command"
   else
     execute "call feedkeys(\":\<Tab>\")"
+  endif
+endfunction
+
+function! SpacevimExplorerToggle()
+  if exists(':NERDTreeToggle')
+    execute "NERDTreeToggle"
+  elseif exists('g:loaded_dirvish')
+    execute "Dirvish"
+  else
+    execute "Lexplore"
   endif
 endfunction
 
@@ -329,13 +331,7 @@ function! SpacevimProjectDirectory()
       execute "ProjectRootExe Lexplore"
     endif
   else
-    if exists(':NERDTreeToggle')
-      execute "NERDTreeToggle"
-    elseif exists('g:loaded_dirvish')
-      execute "Dirvish"
-    else
-      execute "Lexplore"
-    endif
+    call SpacevimExplorerToggle()
   endif
 endfunction
 
@@ -346,6 +342,14 @@ function! SpacevimProjectFindFile()
     execute "UniteWithProjectDir -start-insert file_rec/async"
   elseif exists('g:loaded_ctrlp')
     execute "CtrlPRoot"
+  endif
+endfunction
+
+function! SpacevimProjectInvalidateCache()
+  if exists('g:loaded_unite')
+    execute "call feedkeys(\":UniteWithProjectDir\<CR>\<C-l>\<Esc>\")"
+  elseif exists('g:loaded_ctrlp')
+    execute "CtrlPClearCache"
   endif
 endfunction
 
