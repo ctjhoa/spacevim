@@ -287,10 +287,8 @@ function! SpacevimCommands()
     execute "Commands"
   elseif exists('g:loaded_unite')
     execute "Unite -start-insert command"
-  elseif exists('g:loaded_ctrlp')
-    execute "CtrlPBuffer"
   else
-    execute "buffers"
+    execute "call feedkeys(\":\<Tab>\")"
   endif
 endfunction
 
