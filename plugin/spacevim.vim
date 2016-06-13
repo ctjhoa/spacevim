@@ -217,6 +217,7 @@ call s:spacevim_bind('nmap', 'thl', 'highlight-current-line-globaly', 'set invcu
 
 " UI toggles/themes {{{
 let g:lmap.T = { 'name' : '+UI toggles/themes' }
+call s:spacevim_bind('map', 'Td', 'version-control-margin', 'GitGutterToggle', 1)
 " }}}
 
 " windows {{{
