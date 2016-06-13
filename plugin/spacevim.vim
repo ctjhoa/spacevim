@@ -188,6 +188,7 @@ call s:spacevim_bind('map', 'n>', 'half-page-down', '<C-d>', 0)
 " projects {{{
 let g:lmap.p = { 'name' : '+projects' }
 call s:spacevim_bind('map', 'pf', 'project-find-file', 'call SpacevimProjectFindFile()', 1)
+call s:spacevim_bind('map', 'pI', 'project-invalidate-cache', 'call SpacevimProjectInvalidateCache()', 1)
 " }}}
 
 " quit {{{
@@ -270,6 +271,14 @@ function! SpacevimBuffers()
     execute "CtrlPBuffer"
   else
     execute "buffers"
+  endif
+endfunction
+
+function! SpacevimProjectInvalidateCache()
+  if exists('g:loaded_unite')
+    execute "call feedkeys(\":UniteWithProjectDir\<CR>\<C-l>\<Esc>\")"
+  elseif exists('g:loaded_ctrlp')
+    execute "CtrlPClearCache"
   endif
 endfunction
 
