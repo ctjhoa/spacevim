@@ -223,9 +223,10 @@ let g:lmap.r = { 'name' : '+registers/rings' }
 
 " search/symbol {{{
 let g:lmap.s = { 'name' : '+search/symbol' }
-call s:spacevim_bind('map', 'p', 'smart-search', 'Ag', 1)
-call s:spacevim_bind('nmap', 'P', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(0)', 1)
-call s:spacevim_bind('vmap', 'P', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(1)', 1)
+call s:spacevim_bind('map', 'sc', 'highlight-persist-remove-all', 'noh', 1)
+call s:spacevim_bind('map', 'sp', 'smart-search', 'Ag', 1)
+call s:spacevim_bind('nmap', 'sP', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(0)', 1)
+call s:spacevim_bind('vmap', 'sP', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(1)', 1)
 " }}}
 
 " toggles {{{
