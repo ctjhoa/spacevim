@@ -153,6 +153,8 @@ call s:spacevim_bind('map', 'fev', 'display-vim-version', 'version', 1)
 " git/versions-control {{{
 let g:lmap.g = { 'name' : '+git/versions-control' }
 call s:spacevim_bind('map', 'gb', 'fugitive-blame', 'Gblame', 1)
+call s:spacevim_bind('map', 'gd', 'fugitive-diff', 'Gdiff', 1)
+call s:spacevim_bind('map', 'gD', 'fugitive-diff-head', 'Gdiff HEAD', 1)
 call s:spacevim_bind('map', 'gi', 'fugitive-init', 'Git init', 1)
 call s:spacevim_bind('map', 'gl', 'fugitive-log', 'Glog', 1)
 call s:spacevim_bind('map', 'gr', 'fugitive-checkout-current-file', 'Gread', 1)
