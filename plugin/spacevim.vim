@@ -75,9 +75,6 @@ nmap <silent> <SID>vim-commentary-line <Plug>(CommentaryLine)
 nmap <Leader>;; <SID>vim-commentary-line
 call s:spacevim_bind('vmap', ';', 'vim-commentary-operator', '''<,''>Commentary', 1)
 
-nmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
-nmap <Leader>y <SID>easymotion-line
-
 " applications {{{
 let g:lmap.a = { 'name' : '+applications' }
 call s:spacevim_bind('map', 'au', 'undo-tree-visualize', 'UndotreeToggle', 1)
@@ -132,8 +129,8 @@ call s:spacevim_bind('map', 'ft', 'explorer-toggle', 'call SpacevimExplorerToggl
 " files/vim {{{
 let g:lmap.f.e = { 'name' : '+vim' }
 call s:spacevim_bind('map', 'fed', 'find-dotfile', 'edit $MYVIMRC', 1)
-call s:spacevim_bind('map', 'fev', 'display-vim-version', 'version', 1)
 call s:spacevim_bind('map', 'feR', 'sync-configuration', 'source $MYVIMRC', 1)
+call s:spacevim_bind('map', 'fev', 'display-vim-version', 'version', 1)
 " }}}
 
 " }}}
@@ -252,6 +249,9 @@ call s:spacevim_bind('map', 'ww', 'other-window', 'wincmd w', 1)
 " text {{{
 let g:lmap.x = { 'name' : '+text' }
 " }}}
+
+nmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
+nmap <Leader>y <SID>easymotion-line
 
 " zoom {{{
 let g:lmap.z = { 'name' : '+zoom' }
