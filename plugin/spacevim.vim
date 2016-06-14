@@ -50,6 +50,15 @@ function! s:spacevim_bind(map, binding, name, value, isCmd)
   execute a:map . " <leader>" . a:binding . " <SID>" . a:name
 endfunction
 
+function! s:spacevim_get_visual_selection()
+  let [lnum1, col1] = getpos("'<")[1:2]
+  let [lnum2, col2] = getpos("'>")[1:2]
+  let lines = getline(lnum1, lnum2)
+  let lines[-1] = lines[-1][: col2 - 2]
+  let lines[0] = lines[0][col1 - 1:]
+  return join(lines, "\n")
+endfunction
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -57,6 +66,8 @@ endfunction
 call s:spacevim_bind('map', '<Tab>', 'last-buffer', 'b#', 1)
 call s:spacevim_bind('map', '!', 'shell-cmd', 'call feedkeys(":! ")', 1)
 call s:spacevim_bind('map', '/', 'smart-search', 'Ag', 1)
+call s:spacevim_bind('nmap', '*', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(0)', 1)
+call s:spacevim_bind('vmap', '*', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(1)', 1)
 
 call s:spacevim_bind('map', '0', 'window-0', '1wincmd w', 1)
 call s:spacevim_bind('map', '1', 'window-1', '2wincmd w', 1)
@@ -206,6 +217,9 @@ let g:lmap.r = { 'name' : '+registers/rings' }
 
 " search/symbol {{{
 let g:lmap.s = { 'name' : '+search/symbol' }
+call s:spacevim_bind('map', 'p', 'smart-search', 'Ag', 1)
+call s:spacevim_bind('nmap', 'P', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(0)', 1)
+call s:spacevim_bind('vmap', 'P', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(1)', 1)
 " }}}
 
 " toggles {{{
@@ -375,6 +389,14 @@ function! SpacevimRecentf()
     execute "CtrlPMRU"
   else
     execute "oldfiles"
+  endif
+endfunction
+
+function! SpacevimSmartSearchWithInput(visual)
+  if a:visual
+    execute "Ag " . <SID>spacevim_get_visual_selection()
+  else
+    execute "Ag " . expand("<cword>")
   endif
 endfunction
 
