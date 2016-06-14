@@ -33,6 +33,7 @@ So every plugin in this list is only needed to execute mapped action but to get 
 - [junegunn/fzf](https://github.com/junegunn/fzf)
 - [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
 - [mbbill/undotree](https://github.com/mbbill/undotree)
+- [scrooloose/syntastic](https://github.com/scrooloose/syntastic)
 - [tpope/vim-commentary](https://github.com/tpope/vim-commentary)
 - [tpope/vim-eunuch](https://github.com/tpope/vim-eunuch)
 - [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
