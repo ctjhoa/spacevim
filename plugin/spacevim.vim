@@ -331,7 +331,7 @@ endfunction
 
 function! SpacevimFindFiles()
   if exists(':Files')
-    execute "Files"
+    execute "Files %:h"
   elseif exists('g:loaded_unite')
     execute "Unite -start-insert file"
   elseif exists('g:loaded_ctrlp')
