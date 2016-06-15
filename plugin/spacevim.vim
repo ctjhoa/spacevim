@@ -277,6 +277,8 @@ let g:lmap.x = { 'name' : '+text' }
 
 nmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
 nmap <Leader>y <SID>easymotion-line
+vmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
+vmap <Leader>y <SID>easymotion-line
 
 " zoom {{{
 let g:lmap.z = { 'name' : '+zoom' }
