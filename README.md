@@ -45,7 +45,7 @@ Alternative to [junegunn/fzf](https://github.com/junegunn/fzf) & [junegunn/fzf.v
 - [Shougo/unite.vim](https://github.com/Shougo/unite.vim)
 - [ctrlpvim/ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
 
-`netrw` is recommended as it's the built-in vim explorer but the following plugins are supported to:
+`netrw` is recommended as it's the built-in vim explorer but the following plugins are supported too:
 - [justinmk/vim-dirvish](https://github.com/justinmk/vim-dirvish)
 - [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
 
