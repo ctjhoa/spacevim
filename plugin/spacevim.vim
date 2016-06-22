@@ -118,9 +118,9 @@ let g:lmap.C = { 'name' : '+capture/colors' }
 " errors {{{
 let g:lmap.e = { 'name' : '+errors' }
 call s:spacevim_bind('map', 'el', 'error-list', 'call SpacevimErrorList()', 1)
-call s:spacevim_bind('map', 'en', 'next-error', 'lnext', 1)
-call s:spacevim_bind('map', 'eN', 'previous-error', 'lprev', 1)
-call s:spacevim_bind('map', 'ep', 'previous-error', 'lprev', 1)
+call s:spacevim_bind('map', 'en', 'next-error', 'call SpacevimErrorNext()', 1)
+call s:spacevim_bind('map', 'eN', 'previous-error', 'call SpacevimErrorPrev()', 1)
+call s:spacevim_bind('map', 'ep', 'previous-error', 'call SpacevimErrorPrev()', 1)
 " }}}
 
 " files {{{
@@ -329,6 +329,25 @@ function! SpacevimErrorList()
     " Nothing was closed, open syntastic error location panel
     SyntasticCheck
   endif
+endfunction
+
+" fixes some weirdness in the case of only one error
+" SEE: https://github.com/scrooloose/syntastic/issues/32
+" also causes it to cycle around, which is quite nice!
+function! SpacevimErrorPrev()
+  try
+    lprev
+  catch /^Vim\%((\a\+)\)\=:E553/
+    llast
+  endtry
+endfunction
+
+function! SpacevimErrorNext()
+  try
+    lnext
+  catch /^Vim\%((\a\+)\)\=:E553/
+    lfirst
+  endtry
 endfunction
 
 function! SpacevimFindFiles()
