@@ -57,4 +57,5 @@ To be the closest to the spacemacs behavior the folowing plugins are recommended
 - [osyo-manga/vim-over](https://github.com/osyo-manga/vim-over)
 - [sheerun/vim-polyglot](https://github.com/sheerun/vim-polyglot)
 - [tpope/vim-surround](https://github.com/tpope/vim-surround)
+- [tpope/vim-vinegar](https://github.com/tpope/vim-vinegar)
 - [Raimondi/delimitMate](https://github.com/Raimondi/delimitMate)
