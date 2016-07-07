@@ -55,5 +55,6 @@ To be the closest to the spacemacs behavior the folowing plugins are recommended
 - [haya14busa/incsearch.vim](https://github.com/haya14busa/incsearch.vim)
 - [hecal3/vim-leader-guide](https://github.com/hecal3/vim-leader-guide)
 - [osyo-manga/vim-over](https://github.com/osyo-manga/vim-over)
+- [sheerun/vim-polyglot](https://github.com/sheerun/vim-polyglot)
 - [tpope/vim-surround](https://github.com/tpope/vim-surround)
 - [Raimondi/delimitMate](https://github.com/Raimondi/delimitMate)
