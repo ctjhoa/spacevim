@@ -33,6 +33,18 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Helpers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:spacevim_is_binding_enabled(binding)
+  if !exists('g:spacevim_exclude_key_binding')
+    return 1
+  endif
+  for regex in g:spacevim_exclude_key_binding
+    if matchstr(a:binding, regex) == a:binding
+       return 0
+    endif
+  endfor
+  return 1
+endfunction
+
 function! s:spacevim_bind(map, binding, name, value, isCmd)
   if a:isCmd
     let l:value = ':' . a:value . '<cr>'
@@ -46,8 +58,10 @@ function! s:spacevim_bind(map, binding, name, value, isCmd)
   elseif a:map == "vmap"
     let l:noremap = 'vnoremap'
   endif
-  execute l:noremap . " <silent> <SID>" . a:name . " " . l:value
-  execute a:map . " <leader>" . a:binding . " <SID>" . a:name
+  if s:spacevim_is_binding_enabled(a:binding)
+    execute l:noremap . " <silent> <SID>" . a:name . " " . l:value
+    execute a:map . " <leader>" . a:binding . " <SID>" . a:name
+  endif
 endfunction
 
 function! s:spacevim_get_visual_selection()
