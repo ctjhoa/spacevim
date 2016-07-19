@@ -65,6 +65,10 @@ function! s:spacevim_get_visual_selection()
   return join(lines, "\n")
 endfunction
 
+function! s:spacevim_is_layer_enabled(name)
+  return index(g:dotspacevim_configuration_layers, a:name) != -1
+endfunction
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
