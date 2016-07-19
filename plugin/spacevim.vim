@@ -10,11 +10,11 @@ let g:loaded_spacevim = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Optionally integrate with vim-leader-guide
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-if exists('loaded_leaderGuide_vim')
-  if !exists('g:lmap')
-    let g:lmap = {}
-  endif
+if !exists('g:lmap')
+  let g:lmap = {}
+endif
 
+if exists('loaded_leaderGuide_vim')
   function! s:spacevim_displayfunc()
     let g:leaderGuide#displayname = substitute(g:leaderGuide#displayname, '\c<cr>$', '', '')
     let g:leaderGuide#displayname = substitute(g:leaderGuide#displayname, '^<SID>', '', '')
