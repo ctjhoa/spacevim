@@ -8,6 +8,27 @@ endif
 	
 call plug#begin('~/.vim/plugged')
 
+" key bindings plugins
+Plug 'airblade/vim-gitgutter'
+Plug 'dbakker/vim-projectroot'
+Plug 'easymotion/vim-easymotion'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'junegunn/gv.vim'
+Plug 'mbbill/undotree'
+Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-fugitive'
+
+" behavior plugins
+Plug 'haya14busa/incsearch.vim'
+Plug 'hecal3/vim-leader-guide'
+Plug 'osyo-manga/vim-over'
+Plug 'sheerun/vim-polyglot'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-vinegar'
+Plug 'Raimondi/delimitMate'
 
 call plug#end()
