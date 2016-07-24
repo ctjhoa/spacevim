@@ -1,0 +1,6 @@
+before_install:
+- gem install mdl
+- pip install vim-vint
+script:
+- mdl -c ./.mdlrc README.md
+- vint vimrc.sample autoload/*.vim plugin/*.vim
