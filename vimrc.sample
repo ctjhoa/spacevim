@@ -20,6 +20,10 @@ let g:dotspacevim_configuration_layers = [
 \  'syntax-checking'
 \]
 
+let g:dotspacevim_additional_plugins = []
+
+let g:dotspacevim_excluded_plugins = []
+
 let mapleader = ' '
 let g:leaderGuide_vertical = 1
 

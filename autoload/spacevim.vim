@@ -39,8 +39,13 @@ function! spacevim#bootstrap() abort
   for layer in g:dotspacevim_configuration_layers
     let l:plugins = get(l:spacevim_layers, layer, [])
     for plugin in plugins
-      Plug plugin
+      if index(g:dotspacevim_excluded_plugins, plugin) == -1
+        Plug plugin
+      endif
     endfor
+  endfor
+  for plugin in g:dotspacevim_additional_plugins
+    Plug plugin
   endfor
   Plug 'ctjhoa/spacevim'
   call plug#end()
