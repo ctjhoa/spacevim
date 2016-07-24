@@ -1,34 +1,26 @@
-" vim-plug automatic installation {{{
-if empty(glob('~/.vim/autoload/plug.vim'))
-	silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-		\ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-	autocmd VimEnter * PlugInstall | source $MYVIMRC
+" -*- mode: vimrc -*-
+"vim: ft=vim
+
+" define a group `vimrc` and initialize. {{{
+augroup vimrc
+  autocmd!
+augroup END
+"}}}
+
+" spacevim automatic installation {{{
+if empty(glob('~/.vim/autoload/spacevim.vim'))
+  silent !mkdir -p ~/.vim/autoload
+  silent !cp ~/spacevim/autoload/spacevim.vim ~/.vim/autoload/spacevim.vim
 endif
 " }}}
-	
-call plug#begin('~/.vim/plugged')
 
-" key bindings plugins
-Plug 'airblade/vim-gitgutter'
-Plug 'dbakker/vim-projectroot'
-Plug 'easymotion/vim-easymotion'
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/gv.vim'
-Plug 'mbbill/undotree'
-Plug 'scrooloose/syntastic'
-Plug 'tpope/vim-sensible'
-Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-eunuch'
-Plug 'tpope/vim-fugitive'
+let g:dotspacevim_configuration_layers = [
+\  'core',
+\  'git'
+\]
 
-" behavior plugins
-Plug 'haya14busa/incsearch.vim'
-Plug 'hecal3/vim-leader-guide'
-Plug 'osyo-manga/vim-over'
-Plug 'sheerun/vim-polyglot'
-Plug 'tpope/vim-surround'
-Plug 'tpope/vim-vinegar'
-Plug 'Raimondi/delimitMate'
+let mapleader = ' '
+let g:leaderGuide_vertical = 1
 
-call plug#end()
+" This must be the end of the file
+call spacevim#bootstrap()

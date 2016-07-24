@@ -1,14 +1,19 @@
-# Spacevim - Spacemacs key bindings for vim
+# Spacevim - Spacemacs for vim
 
-Spacevim provides leader bindings to match most of [Spacemacs](https://github.com/syl20bnr/spacemacs) behaviour.
+Spacevim is [Spacemacs](https://github.com/syl20bnr/spacemacs) for vim.
+It can be used as a full distribution or you can get only the Spacemacs key bindings
 
 ![screenshot](screenshot.png)
 [colorscheme](https://github.com/ctjhoa/miro8)
 
 ## Installation
 
-### Batteries included
+Spacevim provides 2 ways of using it. First you can use it as a vim distribution like Spacemacs.
+Or you can only install it as a set of key bindings and Spacevim will bring out the best of your currently installed plugin.
 
+### Distribution mode
+
+You want a full vim distribution like Spacemacs provides for emacs.
 One line of shell and you're ready to go!
 
 ```shell
@@ -17,7 +22,8 @@ curl -L https://raw.githubusercontent.com/ctjhoa/spacevim/master/vimrc.sample -o
 
 ### Manual
 
-This plugin follows the standard runtime path structure, and as such it can be installed with a variety of plugin managers:
+You already have a vim config and/or want to handle your plugins yourself.
+Install Spacevim as usual:
 
 * [Pathogen](https://github.com/tpope/vim-pathogen)
   * `git clone https://github.com/ctjhoa/spacevim ~/.vim/bundle/spacevim`
@@ -31,46 +37,115 @@ This plugin follows the standard runtime path structure, and as such it can be i
 * manual
   * copy all of the files into your `~/.vim` directory
 
-## Requirements
+## Plugins
 
-Spacevim relies on several other vim plugins for the key bindings implementations and spacemacs behavior.
+Spacevim relies on several other vim plugins for the key bindings implementations and Spacemacs behavior.
 
-### Mapping plugins
+### Key bindings plugins
 
-So every plugin in this list is only needed to execute mapped action but to get the best experience recommended plugins are:
-
-* [airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)
-* [dbakker/vim-projectroot](https://github.com/dbakker/vim-projectroot)
-* [easymotion/vim-easymotion](https://github.com/easymotion/vim-easymotion)
-* [junegunn/fzf](https://github.com/junegunn/fzf)
-* [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
-* [junegunn/gv.vim](https://github.com/junegunn/gv.vim)
-* [mbbill/undotree](https://github.com/mbbill/undotree)
-* [scrooloose/syntastic](https://github.com/scrooloose/syntastic)
-* [tpope/vim-commentary](https://github.com/tpope/vim-commentary)
-* [tpope/vim-eunuch](https://github.com/tpope/vim-eunuch)
-* [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)
-
-Some of the recommended plugins could be replaced by alternatives.
-
-Alternative to [junegunn/fzf](https://github.com/junegunn/fzf) & [junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)
-
-* [Shougo/unite.vim](https://github.com/Shougo/unite.vim)
-* [ctrlpvim/ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)
-
-`netrw` is recommended as it's the built-in vim explorer but the following plugins are supported too:
-
-* [justinmk/vim-dirvish](https://github.com/justinmk/vim-dirvish)
-* [scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)
+<table>
+  <tr>
+    <th>Layer</th>
+    <th>Plugin</th>
+    <th>Supported alternatives</th>
+  </tr>
+  <tr>
+    <td>core</td>
+    <td>`netrw`</td>
+    <td>
+      <ul>
+        <li>[justinmk/vim-dirvish](https://github.com/justinmk/vim-dirvish)</li>
+        <li>[scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>core</td>
+    <td>[dbakker/vim-projectroot](https://github.com/dbakker/vim-projectroot)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>core</td>
+    <td>[easymotion/vim-easymotion](https://github.com/easymotion/vim-easymotion)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>core</td>
+    <td>
+      <ul>
+        <li>[junegunn/fzf](https://github.com/junegunn/fzf)</li>
+        <li>[junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)</li>
+      </ul>
+    </td>
+    <td>
+      <ul>
+        <li>[Shougo/unite.vim](https://github.com/Shougo/unite.vim)</li>
+        <li>[ctrlpvim/ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)</li>
+      </ul>
+    </td>
+  </tr>
+  <tr>
+    <td>core</td>
+    <td>[junegunn/gv.vim](https://github.com/junegunn/gv.vim)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>core</td>
+    <td>[mbbill/undotree](https://github.com/mbbill/undotree)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>core</td>
+    <td>[scrooloose/syntastic](https://github.com/scrooloose/syntastic)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>core</td>
+    <td>[tpope/vim-commentary](https://github.com/tpope/vim-commentary)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>core</td>
+    <td>[tpope/vim-eunuch](https://github.com/tpope/vim-eunuch)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>git</td>
+    <td>[airblade/vim-gitgutter](https://github.com/airblade/vim-gitgutter)</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>git</td>
+    <td>[tpope/vim-fugitive](https://github.com/tpope/vim-fugitive)</td>
+    <td></td>
+  </tr>
+</table>
 
 ### Behavior plugins
 
-To be the closest to the spacemacs behavior the folowing plugins are recommended:
-
-* [haya14busa/incsearch.vim](https://github.com/haya14busa/incsearch.vim)
-* [hecal3/vim-leader-guide](https://github.com/hecal3/vim-leader-guide)
-* [osyo-manga/vim-over](https://github.com/osyo-manga/vim-over)
-* [sheerun/vim-polyglot](https://github.com/sheerun/vim-polyglot)
-* [tpope/vim-surround](https://github.com/tpope/vim-surround)
-* [tpope/vim-vinegar](https://github.com/tpope/vim-vinegar)
-* [Raimondi/delimitMate](https://github.com/Raimondi/delimitMate)
+<table>
+  <tr>
+    <th>Plugin</th>
+  </tr>
+  <tr>
+    <td>[haya14busa/incsearch.vim](https://github.com/haya14busa/incsearch.vim)</td>
+  </tr>
+  <tr>
+    <td>[hecal3/vim-leader-guide](https://github.com/hecal3/vim-leader-guide)</td>
+  </tr>
+  <tr>
+    <td>[osyo-manga/vim-over](https://github.com/osyo-manga/vim-over)</td>
+  </tr>
+  <tr>
+    <td>[sheerun/vim-polyglot](https://github.com/sheerun/vim-polyglot)</td>
+  </tr>
+  <tr>
+    <td>[tpope/vim-surround](https://github.com/tpope/vim-surround)</td>
+  </tr>
+  <tr>
+    <td>[tpope/vim-vinegar](https://github.com/tpope/vim-vinegar)</td>
+  </tr>
+  <tr>
+    <td>[Raimondi/delimitMate](https://github.com/Raimondi/delimitMate)</td>
+  </tr>
+</table>

@@ -160,21 +160,23 @@ call s:spacevim_bind('map', 'fev', 'display-vim-version', 'version', 1)
 " }}}
 
 " git/versions-control {{{
-let g:lmap.g = { 'name' : '+git/versions-control' }
-call s:spacevim_bind('map', 'gb', 'git-blame', 'Gblame', 1)
-call s:spacevim_bind('map', 'gc', 'git-commit', 'Gcommit', 1)
-call s:spacevim_bind('map', 'gC', 'git-checkout', 'Git checkout', 1)
-call s:spacevim_bind('map', 'gd', 'git-diff', 'Gdiff', 1)
-call s:spacevim_bind('map', 'gD', 'git-diff-head', 'Gdiff HEAD', 1)
-call s:spacevim_bind('map', 'gf', 'git-fetch', 'Gfetch', 1)
-call s:spacevim_bind('map', 'gF', 'git-pull', 'Gpull', 1)
-call s:spacevim_bind('map', 'gi', 'git-init', 'Git init', 1)
-call s:spacevim_bind('map', 'gl', 'git-log', 'call SpacevimGitLog()', 1)
-call s:spacevim_bind('map', 'gr', 'git-checkout-current-file', 'Gread', 1)
-call s:spacevim_bind('map', 'gR', 'git-remove-current-file', 'Gremove', 1)
-call s:spacevim_bind('map', 'gs', 'git-status', 'Gstatus', 1)
-call s:spacevim_bind('map', 'gS', 'git-stage-file', 'call feedkeys(":Git add -- ")', 1)
-call s:spacevim_bind('map', 'gw', 'git-stage-current-file', 'Gwrite', 1)
+if s:spacevim_is_layer_enabled('git')
+  let g:lmap.g = { 'name' : '+git/versions-control' }
+  call s:spacevim_bind('map', 'gb', 'git-blame', 'Gblame', 1)
+  call s:spacevim_bind('map', 'gc', 'git-commit', 'Gcommit', 1)
+  call s:spacevim_bind('map', 'gC', 'git-checkout', 'Git checkout', 1)
+  call s:spacevim_bind('map', 'gd', 'git-diff', 'Gdiff', 1)
+  call s:spacevim_bind('map', 'gD', 'git-diff-head', 'Gdiff HEAD', 1)
+  call s:spacevim_bind('map', 'gf', 'git-fetch', 'Gfetch', 1)
+  call s:spacevim_bind('map', 'gF', 'git-pull', 'Gpull', 1)
+  call s:spacevim_bind('map', 'gi', 'git-init', 'Git init', 1)
+  call s:spacevim_bind('map', 'gl', 'git-log', 'call SpacevimGitLog()', 1)
+  call s:spacevim_bind('map', 'gr', 'git-checkout-current-file', 'Gread', 1)
+  call s:spacevim_bind('map', 'gR', 'git-remove-current-file', 'Gremove', 1)
+  call s:spacevim_bind('map', 'gs', 'git-status', 'Gstatus', 1)
+  call s:spacevim_bind('map', 'gS', 'git-stage-file', 'call feedkeys('':Git add -- '')', 1)
+  call s:spacevim_bind('map', 'gw', 'git-stage-current-file', 'Gwrite', 1)
+endif
 " }}}
 
 " help/highlight {{{
