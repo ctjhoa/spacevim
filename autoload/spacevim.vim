@@ -17,6 +17,7 @@ function! spacevim#bootstrap() abort
         \    'junegunn/fzf.vim',
         \    'junegunn/gv.vim',
         \    'mbbill/undotree',
+        \    'mhinz/vim-startify',
         \    'osyo-manga/vim-over',
         \    'Raimondi/delimitMate',
         \    'sheerun/vim-polyglot',
