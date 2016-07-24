@@ -14,11 +14,14 @@ Or you can only install it as a set of key bindings and Spacevim will bring out 
 ### Distribution mode
 
 You want a full vim distribution like Spacemacs provides for emacs.
-One line of shell and you're ready to go!
+Execute this line of shell, it will download a default `.vimrc` and install
+plugins through vim.
 
 ```shell
 curl -L https://raw.githubusercontent.com/ctjhoa/spacevim/master/vimrc.sample -o ~/.vimrc | vim
 ```
+
+After plugins installation restart vim.
 
 ### Manual
 
