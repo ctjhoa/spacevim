@@ -20,12 +20,12 @@ if exists('g:loaded_leaderGuide_vim')
     let g:leaderGuide#displayname = substitute(g:leaderGuide#displayname, '^<SID>', '', '')
   endfunction
   if exists('g:leaderGuide_displayfunc')
-    call add(g:leaderGuide_displayfunc, function("s:spacevim_displayfunc"))
+    call add(g:leaderGuide_displayfunc, function('s:spacevim_displayfunc'))
   else
     let g:leaderGuide_displayfunc = [function('s:spacevim_displayfunc')]
   endif
 
-  call leaderGuide#register_prefix_descriptions("<Space>", "g:lmap")
+  call leaderGuide#register_prefix_descriptions('<Space>', 'g:lmap')
   nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
   vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
 endif
@@ -39,20 +39,19 @@ function! s:spacevim_bind(map, binding, name, value, isCmd)
   else
     let l:value = a:value
   endif
-
-  if a:map == "map" && maparg('<Leader>' . a:binding, '') ==# ''
+  if a:map ==# 'map' && maparg('<Leader>' . a:binding, '') ==# ''
     let l:noremap = 'noremap'
-  elseif a:map == "nmap" && maparg('<Leader>' . a:binding, 'n') ==# ''
+  elseif a:map ==# 'nmap' && maparg('<Leader>' . a:binding, 'n') ==# ''
     let l:noremap = 'nnoremap'
-  elseif a:map == "vmap" && maparg('<Leader>' . a:binding, 'v') ==# ''
+  elseif a:map ==# 'vmap' && maparg('<Leader>' . a:binding, 'v') ==# ''
     let l:noremap = 'vnoremap'
   else
     let l:noremap = ''
   endif
 
   if l:noremap != ''
-    execute l:noremap . " <silent> <SID>" . a:name . " " . l:value
-    execute a:map . " <leader>" . a:binding . " <SID>" . a:name
+    execute l:noremap . ' <silent> <SID>' . a:name . ' ' . l:value
+    execute a:map . ' <leader>' . a:binding . ' <SID>' . a:name
   endif
 endfunction
 
@@ -62,7 +61,7 @@ function! s:spacevim_get_visual_selection()
   let lines = getline(lnum1, lnum2)
   let lines[-1] = lines[-1][: col2 - 2]
   let lines[0] = lines[0][col1 - 1:]
-  return join(lines, "\n")
+  return join(lines, '\n')
 endfunction
 
 function! s:spacevim_is_layer_enabled(name)
@@ -74,7 +73,7 @@ endfunction
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 call s:spacevim_bind('map', '<Tab>', 'last-buffer', 'b#', 1)
-call s:spacevim_bind('map', '!', 'shell-cmd', 'call feedkeys(":! ")', 1)
+call s:spacevim_bind('map', '!', 'shell-cmd', 'call feedkeys('':! '')', 1)
 call s:spacevim_bind('map', '/', 'smart-search', 'Ag', 1)
 call s:spacevim_bind('nmap', '*', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(0)', 1)
 call s:spacevim_bind('vmap', '*', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(1)', 1)
@@ -142,11 +141,11 @@ let g:lmap.f.C = { 'name' : '+files/convert' }
 " }}}
 
 call s:spacevim_bind('map', 'fD', 'delete-current-buffer-file', 'Remove', 1)
-call s:spacevim_bind('map', 'fE', 'sudo-edit', 'call feedkeys(":SudoEdit ")', 1)
+call s:spacevim_bind('map', 'fE', 'sudo-edit', 'call feedkeys('':SudoEdit '')', 1)
 call s:spacevim_bind('map', 'ff', 'find-files', 'call SpacevimFindFiles()', 1)
-call s:spacevim_bind('map', 'fL', 'locate', 'call feedkeys(":Locate ")', 1)
+call s:spacevim_bind('map', 'fL', 'locate', 'call feedkeys('':Locate '')', 1)
 call s:spacevim_bind('map', 'fr', 'recentf', 'call SpacevimRecentf()', 1)
-call s:spacevim_bind('map', 'fR', 'rename-current-buffer-file', 'call feedkeys(":Rename ")', 1)
+call s:spacevim_bind('map', 'fR', 'rename-current-buffer-file', 'call feedkeys('':Rename '')', 1)
 call s:spacevim_bind('map', 'fs', 'save-buffer', 'write', 1)
 call s:spacevim_bind('map', 'fS', 'write-all', 'wa', 1)
 call s:spacevim_bind('map', 'ft', 'explorer-toggle', 'call SpacevimExplorerToggle()', 1)
@@ -190,8 +189,8 @@ call s:spacevim_bind('nmap', 'ik', 'vim-insert-line-above', 'maO<Esc>`a', 0)
 
 " join/split {{{
 let g:lmap.j = { 'name' : '+join/split' }
-call s:spacevim_bind("nmap", "j=", "indent-region-or-buffer", "mzgg=G`z", 0)
-call s:spacevim_bind("vmap", "j=", "indent-region-or-buffer", "==", 0)
+call s:spacevim_bind('nmap', 'j=', 'indent-region-or-buffer', 'mzgg=G`z', 0)
+call s:spacevim_bind('vmap', 'j=', 'indent-region-or-buffer', '==', 0)
 call s:spacevim_bind('map', 'jj', 'sp-newline', 'i<CR><Esc>', 0)
 call s:spacevim_bind('map', 'jJ', 'split-and-newline', 'i<CR><Esc>', 0) " same as j.j ?
 call s:spacevim_bind('map', 'jo', 'open-line', 'i<CR><Esc>k$', 0)
@@ -302,33 +301,33 @@ let g:lmap.z = { 'name' : '+zoom' }
 
 function! SpacevimBuffers()
   if exists(':Buffers')
-    execute "Buffers"
+    execute 'Buffers'
   elseif exists('g:loaded_unite')
-    execute "Unite -start-insert buffer"
+    execute 'Unite -start-insert buffer'
   elseif exists('g:loaded_ctrlp')
-    execute "CtrlPBuffer"
+    execute 'CtrlPBuffer'
   else
-    execute "buffers"
+    execute 'buffers'
   endif
 endfunction
 
 function! SpacevimCommands()
   if exists(':Commands')
-    execute "Commands"
+    execute 'Commands'
   elseif exists('g:loaded_unite')
-    execute "Unite -start-insert command"
+    execute 'Unite -start-insert command'
   else
-    execute "call feedkeys(\":\<Tab>\")"
+    execute 'call feedkeys('':\<Tab>'')'
   endif
 endfunction
 
 function! SpacevimExplorerToggle()
   if exists(':NERDTreeToggle')
-    execute "NERDTreeToggle"
+    execute 'NERDTreeToggle'
   elseif exists('g:loaded_dirvish')
-    execute "Dirvish"
+    execute 'Dirvish'
   else
-    execute "Lexplore"
+    execute 'Lexplore'
   endif
 endfunction
 
@@ -362,25 +361,25 @@ endfunction
 
 function! SpacevimFindFiles()
   if exists(':Files')
-    execute "Files %:h"
+    execute 'Files %:h'
   elseif exists('g:loaded_unite')
-    execute "Unite -start-insert file"
+    execute 'Unite -start-insert file'
   elseif exists('g:loaded_ctrlp')
-    execute "CtrlPCurFile"
+    execute 'CtrlPCurFile'
   endif
 endfunction
 
 function! SpacevimGitLog()
   if exists(':GV')
-    execute "GV"
+    execute 'GV'
   else
-    execute "silent! Glog<CR>:bot copen"
+    execute 'silent! Glog<CR>:bot copen'
   endif
 endfunction
 
 function! SpacevimMaximizeBuffer()
-  if exists("s:maximize_session")
-    exec "source " . s:maximize_session
+  if exists('s:maximize_session')
+    exec 'source ' . s:maximize_session
     call delete(s:maximize_session)
     unlet s:maximize_session
     let &hidden=s:maximize_hidden_save
@@ -389,7 +388,7 @@ function! SpacevimMaximizeBuffer()
     let s:maximize_hidden_save = &hidden
     let s:maximize_session = tempname()
     set hidden
-    exec "mksession! " . s:maximize_session
+    exec 'mksession! ' . s:maximize_session
     only
   endif
 endfunction
@@ -397,11 +396,11 @@ endfunction
 function! SpacevimProjectDirectory()
   if exists(':ProjectRootExe')
     if exists(':NERDTreeToggle')
-      execute "ProjectRootExe NERDTreeToggle"
+      execute 'ProjectRootExe NERDTreeToggle'
     elseif exists('g:loaded_dirvish')
-      execute "ProjectRootExe Dirvish"
+      execute 'ProjectRootExe Dirvish'
     else
-      execute "ProjectRootExe Lexplore"
+      execute 'ProjectRootExe Lexplore'
     endif
   else
     call SpacevimExplorerToggle()
@@ -410,39 +409,39 @@ endfunction
 
 function! SpacevimProjectFindFile()
   if exists(':GitFiles')
-    execute "GitFiles"
+    execute 'GitFiles'
   elseif exists('g:loaded_unite')
-    execute "UniteWithProjectDir -start-insert file_rec/async"
+    execute 'UniteWithProjectDir -start-insert file_rec/async'
   elseif exists('g:loaded_ctrlp')
-    execute "CtrlPRoot"
+    execute 'CtrlPRoot'
   endif
 endfunction
 
 function! SpacevimProjectInvalidateCache()
   if exists('g:loaded_unite')
-    execute "call feedkeys(\":UniteWithProjectDir\<CR>\<C-l>\<Esc>\")"
+    execute 'call feedkeys('':UniteWithProjectDir\<CR>\<C-l>\<Esc>'')'
   elseif exists('g:loaded_ctrlp')
-    execute "CtrlPClearCache"
+    execute 'CtrlPClearCache'
   endif
 endfunction
 
 function! SpacevimRecentf()
   if exists(':History')
-    execute "History"
+    execute 'History'
   elseif exists('g:loaded_unite')
-    execute "Unite -start-insert file_mru"
+    execute 'Unite -start-insert file_mru'
   elseif exists('g:loaded_ctrlp')
-    execute "CtrlPMRU"
+    execute 'CtrlPMRU'
   else
-    execute "oldfiles"
+    execute 'oldfiles'
   endif
 endfunction
 
 function! SpacevimSmartSearchWithInput(visual)
   if a:visual
-    execute "Ag " . <SID>spacevim_get_visual_selection()
+    execute 'Ag ' . <SID>spacevim_get_visual_selection()
   else
-    execute "Ag " . expand("<cword>")
+    execute 'Ag ' . expand('<cword>')
   endif
 endfunction
 
