@@ -19,13 +19,15 @@ function! spacevim#bootstrap() abort
         \    'mbbill/undotree',
         \    'osyo-manga/vim-over',
         \    'Raimondi/delimitMate',
-        \    'scrooloose/syntastic',
         \    'sheerun/vim-polyglot',
         \    'tpope/vim-commentary',
         \    'tpope/vim-eunuch',
         \    'tpope/vim-surround',
         \    'tpope/vim-sensible',
         \    'tpope/vim-vinegar'
+        \  ],
+        \  'syntax-checking': [
+        \    'scrooloose/syntastic'
         \  ],
         \  'git': [
         \    'airblade/vim-gitgutter',

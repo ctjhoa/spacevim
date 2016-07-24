@@ -16,7 +16,8 @@ endif
 
 let g:dotspacevim_configuration_layers = [
 \  'core',
-\  'git'
+\  'git',
+\  'syntax-checking'
 \]
 
 let mapleader = ' '
