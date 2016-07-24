@@ -9,8 +9,8 @@ augroup END
 
 " spacevim automatic installation {{{
 if empty(glob('~/.vim/autoload/spacevim.vim'))
-  silent !mkdir -p ~/.vim/autoload
-  silent !cp ~/spacevim/autoload/spacevim.vim ~/.vim/autoload/spacevim.vim
+    silent !curl -fLo ~/.vim/autoload/spacevim.vim --create-dirs
+          \ https://raw.githubusercontent.com/ctjhoa/spacevim/dev/autoload/spacevim.vim
 endif
 " }}}
 
