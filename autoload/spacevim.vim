@@ -49,5 +49,6 @@ function! spacevim#bootstrap() abort
   endfor
   Plug 'ctjhoa/spacevim'
   call plug#end()
+  source $MYVIMRC
 endfunction
 "
