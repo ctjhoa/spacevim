@@ -212,8 +212,8 @@ call s:spacevim_bind('map', 'pI', 'project-invalidate-cache', 'call SpacevimProj
 
 " quit {{{
 let g:lmap.q = { 'name' : '+quit' }
-call s:spacevim_bind('map', 'qq', 'prompt-kill-vim', 'quit', 1)
-call s:spacevim_bind('map', 'qQ', 'kill-vim', 'quit!', 1)
+call s:spacevim_bind('map', 'qq', 'prompt-kill-vim', 'qa', 1)
+call s:spacevim_bind('map', 'qQ', 'kill-vim', 'qa!', 1)
 call s:spacevim_bind('map', 'qs', 'save-buffers-kill-vim', 'xa', 1)
 " }}}
 
