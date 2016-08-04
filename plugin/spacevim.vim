@@ -33,6 +33,12 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Helpers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+function! s:spacevim_add_category(binding, name)
+  if s:spacevim_is_binding_enabled(a:binding)
+    execute 'let g:lmap.' . join(split(a:binding, '\zs'), '.') . ' = { ''name '' : ''+' . a:name . ''' } '
+  endif
+endfunction
+
 function! s:spacevim_bind(map, binding, name, value, isCmd)
   if a:isCmd
     let l:value = ':' . a:value . '<cr>'
@@ -49,10 +55,21 @@ function! s:spacevim_bind(map, binding, name, value, isCmd)
     let l:noremap = ''
   endif
 
-  if l:noremap != ''
+  if l:noremap != '' && s:spacevim_is_binding_enabled(a:binding)
     execute l:noremap . ' <silent> <SID>' . a:name . ' ' . l:value
     execute a:map . ' <leader>' . a:binding . ' <SID>' . a:name
   endif
+endfunction
+
+function! s:spacevim_is_binding_enabled(binding)
+  if !exists('g:dotspacevim_excluded_key_bindings')
+    return 1
+  endif
+  return a:binding !~ g:dotspacevim_excluded_key_bindings
+endfunction
+
+function! s:spacevim_is_layer_enabled(name)
+  return index(g:dotspacevim_configuration_layers, a:name) != -1
 endfunction
 
 function! s:spacevim_get_visual_selection()
@@ -62,10 +79,6 @@ function! s:spacevim_get_visual_selection()
   let lines[-1] = lines[-1][: col2 - 2]
   let lines[0] = lines[0][col1 - 1:]
   return join(lines, '\n')
-endfunction
-
-function! s:spacevim_is_layer_enabled(name)
-  return index(g:dotspacevim_configuration_layers, a:name) != -1
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -91,17 +104,19 @@ call s:spacevim_bind('map', '0', 'window-10', '10wincmd w', 1)
 
 call s:spacevim_bind('map', ':', 'M-x', 'call SpacevimCommands()', 1)
 call s:spacevim_bind('nmap', ';', 'vim-commentary-operator', 'Commentary', 1)
-nmap <silent> <SID>vim-commentary-line <Plug>(CommentaryLine)
-nmap <Leader>;; <SID>vim-commentary-line
+if s:spacevim_is_binding_enabled(';;')
+  nmap <silent> <SID>vim-commentary-line <Plug>(CommentaryLine)
+  nmap <Leader>;; <SID>vim-commentary-line
+endif
 call s:spacevim_bind('vmap', ';', 'vim-commentary-operator', '''<,''>Commentary', 1)
 
 " applications {{{
-let g:lmap.a = { 'name' : '+applications' }
+call s:spacevim_add_category('a', 'applications')
 call s:spacevim_bind('map', 'au', 'undo-tree-visualize', 'UndotreeToggle', 1)
 " }}}
 
 " buffers {{{
-let g:lmap.b = { 'name' : '+buffers' }
+call s:spacevim_add_category('b', 'buffers')
 call s:spacevim_bind('map', 'bb', 'buffers', 'call SpacevimBuffers()', 1)
 call s:spacevim_bind('map', 'bd', 'kill-this-buffer', 'bd', 1)
 call s:spacevim_bind('map', 'bn', 'next-useful-buffer', 'bnext', 1)
@@ -109,7 +124,7 @@ call s:spacevim_bind('map', 'bp', 'previous-useful-buffer', 'bprevious', 1)
 call s:spacevim_bind('map', 'bR', 'safe-revert-buffer', 'e', 1)
 
 " buffers/move {{{
-let g:lmap.b.m = { 'name' : '+move' }
+call s:spacevim_add_category('bm', 'move')
 call s:spacevim_bind('map', 'bmr', 'buf-rotate-down-right', 'wincmd r', 1)
 call s:spacevim_bind('map', 'bmR', 'buf-rotate-up-left', 'wincmd R', 1)
 " }}}
@@ -117,15 +132,15 @@ call s:spacevim_bind('map', 'bmR', 'buf-rotate-up-left', 'wincmd R', 1)
 " }}}
 
 " comile/comments {{{
-let g:lmap.c = { 'name' : '+compile/comments' }
+call s:spacevim_add_category('c', 'compile/comments')
 " }}}
 
 " capture/colors {{{
-let g:lmap.C = { 'name' : '+capture/colors' }
+call s:spacevim_add_category('C', 'capture/colors')
 " }}}
 
 " errors {{{
-let g:lmap.e = { 'name' : '+errors' }
+call s:spacevim_add_category('e', 'errors')
 call s:spacevim_bind('map', 'el', 'error-list', 'call SpacevimErrorList()', 1)
 call s:spacevim_bind('map', 'en', 'next-error', 'call SpacevimErrorNext()', 1)
 call s:spacevim_bind('map', 'eN', 'previous-error', 'call SpacevimErrorPrev()', 1)
@@ -133,11 +148,11 @@ call s:spacevim_bind('map', 'ep', 'previous-error', 'call SpacevimErrorPrev()', 
 " }}}
 
 " files {{{
-let g:lmap.f = { 'name' : '+files' }
+call s:spacevim_add_category('f', 'files')
 call s:spacevim_bind('map', 'fc', 'copy-file', 'saveas', 1)
 
 " files/convert {{{
-let g:lmap.f.C = { 'name' : '+files/convert' }
+call s:spacevim_add_category('fC', 'files/convert')
 " }}}
 
 call s:spacevim_bind('map', 'fD', 'delete-current-buffer-file', 'Remove', 1)
@@ -151,7 +166,7 @@ call s:spacevim_bind('map', 'fS', 'write-all', 'wa', 1)
 call s:spacevim_bind('map', 'ft', 'explorer-toggle', 'call SpacevimExplorerToggle()', 1)
 
 " files/vim {{{
-let g:lmap.f.e = { 'name' : '+vim' }
+call s:spacevim_add_category('fe', 'vim')
 call s:spacevim_bind('map', 'fed', 'find-dotfile', 'edit $MYVIMRC', 1)
 call s:spacevim_bind('map', 'feR', 'sync-configuration', 'source $MYVIMRC', 1)
 call s:spacevim_bind('map', 'fev', 'display-vim-version', 'version', 1)
@@ -161,7 +176,7 @@ call s:spacevim_bind('map', 'fev', 'display-vim-version', 'version', 1)
 
 " git/versions-control {{{
 if s:spacevim_is_layer_enabled('git')
-  let g:lmap.g = { 'name' : '+git/versions-control' }
+  call s:spacevim_add_category('g', 'git/versions-control')
   call s:spacevim_bind('map', 'gb', 'git-blame', 'Gblame', 1)
   call s:spacevim_bind('map', 'gc', 'git-commit', 'Gcommit', 1)
   call s:spacevim_bind('map', 'gC', 'git-checkout', 'Git checkout', 1)
@@ -180,17 +195,17 @@ endif
 " }}}
 
 " help/highlight {{{
-let g:lmap.h = { 'name' : '+help/highlight' }
+call s:spacevim_add_category('h', 'help/highlight')
 " }}}
 
 " insertion {{{
-let g:lmap.i = { 'name' : '+insertion' }
+call s:spacevim_add_category('i', 'insertion')
 call s:spacevim_bind('nmap', 'ij', 'vim-insert-line-below', 'mao<Esc>`a', 0)
 call s:spacevim_bind('nmap', 'ik', 'vim-insert-line-above', 'maO<Esc>`a', 0)
 " }}}
 
 " join/split {{{
-let g:lmap.j = { 'name' : '+join/split' }
+call s:spacevim_add_category('j', 'join/split')
 call s:spacevim_bind('nmap', 'j=', 'indent-region-or-buffer', 'mzgg=G`z', 0)
 call s:spacevim_bind('vmap', 'j=', 'indent-region-or-buffer', '==', 0)
 call s:spacevim_bind('map', 'jj', 'sp-newline', 'i<CR><Esc>', 0)
@@ -200,11 +215,11 @@ call s:spacevim_bind('map', 'jo', 'open-line', 'i<CR><Esc>k$', 0)
 " }}}
 
 " lisp {{{
-let g:lmap.k = { 'name' : '+lisp' }
+call s:spacevim_add_category('k', 'lisp')
 " }}}
 
 " narrow/numbers {{{
-let g:lmap.n = { 'name' : '+narrow/numbers' }
+call s:spacevim_add_category('n', 'narrow/numbers')
 call s:spacevim_bind('map', 'n=', 'numbers-increase', '<C-a>', 0)
 call s:spacevim_bind('map', 'n+', 'numbers-increase', '<C-a>', 0)
 call s:spacevim_bind('map', 'n-', 'numbers-decrease', '<C-x>', 0)
@@ -215,25 +230,25 @@ call s:spacevim_bind('map', 'n>', 'half-page-down', '<C-d>', 0)
 " }}}
 
 " projects {{{
-let g:lmap.p = { 'name' : '+projects' }
+call s:spacevim_add_category('p', 'projects')
 call s:spacevim_bind('map', 'pf', 'project-find-file', 'call SpacevimProjectFindFile()', 1)
 call s:spacevim_bind('map', 'pD', 'project-directory', 'call SpacevimProjectDirectory()', 1)
 call s:spacevim_bind('map', 'pI', 'project-invalidate-cache', 'call SpacevimProjectInvalidateCache()', 1)
 " }}}
 
 " quit {{{
-let g:lmap.q = { 'name' : '+quit' }
+call s:spacevim_add_category('q', 'quit')
 call s:spacevim_bind('map', 'qq', 'prompt-kill-vim', 'qa', 1)
 call s:spacevim_bind('map', 'qQ', 'kill-vim', 'qa!', 1)
 call s:spacevim_bind('map', 'qs', 'save-buffers-kill-vim', 'xa', 1)
 " }}}
 
 " registers/rings {{{
-let g:lmap.r = { 'name' : '+registers/rings' }
+call s:spacevim_add_category('r', 'registers/rings')
 " }}}
 
 " search/symbol {{{
-let g:lmap.s = { 'name' : '+search/symbol' }
+call s:spacevim_add_category('s', 'search/symbol')
 call s:spacevim_bind('map', 'sc', 'highlight-persist-remove-all', 'noh', 1)
 call s:spacevim_bind('map', 'sp', 'smart-search', 'Ag', 1)
 call s:spacevim_bind('nmap', 'sP', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(0)', 1)
@@ -241,13 +256,13 @@ call s:spacevim_bind('vmap', 'sP', 'smart-search-with-input', 'call SpacevimSmar
 " }}}
 
 " toggles {{{
-let g:lmap.t = { 'name' : '+toggles' }
+call s:spacevim_add_category('t', 'toggles')
 call s:spacevim_bind('map', 'tl', 'truncate-line', 'set invwrap', 1)
 call s:spacevim_bind('map', 'tn', 'line-numbers', 'set invnumber', 1)
 call s:spacevim_bind('map', 'tr', 'linum-relative-toggle', 'set invrelativenumber', 1)
 
 " registers/rings {{{
-let g:lmap.t.h = { 'name' : '+highlight' }
+call s:spacevim_add_category('th', 'highlight')
 call s:spacevim_bind('nmap', 'thc', 'highlight-indentation-current-column', 'set invcursorcolumn', 1)
 call s:spacevim_bind('nmap', 'thl', 'highlight-current-line-globaly', 'set invcursorline', 1)
 " }}}
@@ -255,12 +270,12 @@ call s:spacevim_bind('nmap', 'thl', 'highlight-current-line-globaly', 'set invcu
 " }}}
 
 " UI toggles/themes {{{
-let g:lmap.T = { 'name' : '+UI toggles/themes' }
+call s:spacevim_add_category('T', 'UI toggles/themes')
 call s:spacevim_bind('map', 'Td', 'version-control-margin', 'GitGutterToggle', 1)
 " }}}
 
 " windows {{{
-let g:lmap.w = { 'name' : '+windows' }
+call s:spacevim_add_category('w', 'windows')
 call s:spacevim_bind('map', 'w-', 'split-window-below', 'split', 1)
 call s:spacevim_bind('map', 'w/', 'split-window-right', 'vsplit', 1)
 call s:spacevim_bind('map', 'w=', 'balance-windows', 'wincmd =', 1)
@@ -283,16 +298,18 @@ call s:spacevim_bind('map', 'ww', 'other-window', 'wincmd w', 1)
 " }}}
 
 " text {{{
-let g:lmap.x = { 'name' : '+text' }
+call s:spacevim_add_category('x', 'text')
 " }}}
 
-nmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
-nmap <Leader>y <SID>easymotion-line
-vmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
-vmap <Leader>y <SID>easymotion-line
+if s:spacevim_is_binding_enabled('y')
+  nmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
+  nmap <Leader>y <SID>easymotion-line
+  vmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
+  vmap <Leader>y <SID>easymotion-line
+endif
 
 " zoom {{{
-let g:lmap.z = { 'name' : '+zoom' }
+call s:spacevim_add_category('z', 'zoom')
 " }}}
 
 

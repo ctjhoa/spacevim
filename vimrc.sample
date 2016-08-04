@@ -24,6 +24,9 @@ let g:dotspacevim_additional_plugins = []
 
 let g:dotspacevim_excluded_plugins = []
 
+" Exclude some key bindings with a regex
+" let g:dotspacevim_excluded_key_bindings = '^(b.*\|f.*)$'
+
 let mapleader = ' '
 let g:leaderGuide_vertical = 1
 
