@@ -1,145 +1,170 @@
-*spacevim.txt*  Spacemacs key bindings for vim
+*spacevim.txt*  Spacemacs for vim
+
+
+  /$$$$$$                                          /$$    /$$ /$$              
+ /$$__  $$                                        | $$   | $$|__/              
+| $$  \__/  /$$$$$$   /$$$$$$   /$$$$$$$  /$$$$$$ | $$   | $$ /$$ /$$$$$$/$$$$ 
+|  $$$$$$  /$$__  $$ |____  $$ /$$_____/ /$$__  $$|  $$ / $$/| $$| $$_  $$_  $$
+ \____  $$| $$  \ $$  /$$$$$$$| $$      | $$$$$$$$ \  $$ $$/ | $$| $$ \ $$ \ $$
+ /$$  \ $$| $$  | $$ /$$__  $$| $$      | $$_____/  \  $$$/  | $$| $$ | $$ | $$
+|  $$$$$$/| $$$$$$$/|  $$$$$$$|  $$$$$$$|  $$$$$$$   \  $/   | $$| $$ | $$ | $$
+ \______/ | $$____/  \_______/ \_______/ \_______/    \_/    |__/|__/ |__/ |__/
+          | $$                                                                 
+          | $$                                                                 
+          |__/                                                                 
+
 
 Author:  Camille Tjhoa <http://github.com/ctjhoa/>
 License: MIT
 
-INTRODUCTION
-
-Spacemacs key bindings for vim. Use <Space> as leader to provide a set of
-key bindings to match the same workflow as spacemacs.
-
-REQUIREMENTS
-
-    hecal3/vim-leader-guide
-    junegunn/fzf
-    junegunn/fzf.vim
-    tpope/vim-commentary
-    tpope/vim-eunuch
-    tpope/vim-fugitive
-
-<Space>      Default leader which display the leader guide.
-      Subset of key bindings:
-
-      TAB  last buffer
-      !  shell cmd
-      /  smart-search
-      [0-9]  window N
-      :  M-x (command search)
-      ;  vim-commentary-operator
-
-      a  +application
-             TODO
-
-      b  +buffers
-        b  fzf-buffers
-        d  kill-this-buffer
-        m  move
-        n  next-useful-buffer
-        p  previous-useful-buffer
-        R  safe-revert-buffer
-
-      C  +capture/colors
-        TODO
-
-      c  +compile/comments
-        TODO
-
-      e  +errors
-        TODO
-
-      f  +files
-        c  copy-file
-        C  +files/convert
-          TODO
-
-        D  delete-current-buffer-file
-        E  sudo-edit
-        e  +vim
-          d  find-dotfile
-          v  display-vim-version
-
-        f  fzf-find-files
-        L  fzf-locate
-        r  fzf-recentf
-        R  rename-current-buffer-file
-        s  save-buffer
-        S  write-all
-        t  netrw-toggle
-
-      g  +git/versions-control
-        b  fugitive-blame
-        i  fugitive-init
-        l  fugitive-log
-        r  fugitive-remove-current-file
-        s  fugitive-status
-        S  fugitive-stage-file
-        W  fugitive-stage-current-file
-
-      h  +help/highlight
-        TODO
-
-      i  +insertion
-        j  vim-insert-line-below
-        k  vim-insert-line-above
-
-      j  +join/split
-        =  indent-region-or-buffer
-        j  sp-newline
-        J  split-and-newline
-        o  open-line
-
-      k  +lisp
-        TODO
-
-      n  +narrow/numbers
-        TODO
-
-      p  +projects
-        f  fzf-project-find-file
-
-      q  +quit
-        q  prompt-kill-vim
-        Q  kill-vim
-        r  reload-vimrc
-        s  save-buffers-kill-vim
-
-      r  +registers/rings
-        TODO
-
-      s  +search/symbol
-        TODO
-
-      T  +UI toggles/themes
-        TODO
-
-      t  +toggles
-        n line-numbers
-
-      w  +windows
-        -  split-window-below
-        /  split-window-right
-        =  balance-windows
-        c  delete-window
-        H  window-move-far-left
-        h  window-left
-        J  window-move-far-down
-        j  window-down
-        K  window-move-far-up
-        k  window-up
-        L  window-move-far-right
-        l  window-right
-        m  maximize-buffer
-        S  split-window-below-and-focus
-        s  split-window-below
-        V  split-window-right-and-focus
-        v  split-window-right
-        w  other-window
-
-      x  +text
-        TODO
-
-      z  +zoom
-        TODO
 
 
-http://github.com/ctjhoa/spacevim
+==============================================================================
+CONTENTS                                                     *spacevim-contents*
+
+    1. Usage ....................................... |SpacevimUsage|
+    2. Layers ...................................... |SpacevimLayers|
+        2.1 Core Layer ............................. |SpacevimCoreLayer|
+        2.2 Git Layer .............................. |SpacevimGitLayer|
+        2.3 Syntax Checking Layer .................. |SpacevimSyntaxCheckingLayer|
+    3. Configuration ............................... |SpacevimConfiguration|
+        3.1 g:dotspacevim_configuration_layers ..... |SpacevimConfiguration_configuration_layers|
+        3.2 g:dotspacevim_additional_plugins ....... |SpacevimConfiguration_additional_plugins|
+        3.2 g:dotspacevim_excluded_plugins ......... |SpacevimConfiguration_excluded_plugins|
+        3.3 g:dotspacevim_excluded_key_bindings .... |SpacevimConfiguration_excluded_key_bindings|
+    4. License ..................................... |SpacevimLicense|
+    5. Bugs ........................................ |SpacevimBugs|
+    6. Contributing ................................ |SpacevimContributing|
+    7. Changelog ................................... |SpacevimChangelog|
+
+==============================================================================
+1. Usage                                                         *SpacevimUsage*
+
+Spacevim is available in two modes.
+
+The first one is distribution mode. In this mode, Spacevim will manage plugins
+installation for you. This mode has been created to mirror the Spacemacs
+distrubtion. It's more advisable for vim's beginners.
+
+The second mode is key bindings only. It define spacemacs key bindings and
+try to provide the best behavior with your installed plugins. It's more
+advisable for vim's expert who already get a vim confguration and only want
+Spacemacs key bindings.
+
+==============================================================================
+2. Layers                                                       *SpacevimLayers*
+
+Spacevim, like Spacemacs, is organized around layer system. A layer define
+plugin which will be installed and associatied key bindings. 
+convenience. 
+
+------------------------------------------------------------------------------
+2.1 Core Layer                                               *SpacevimCoreLayer*
+
+Main layer which provides core Spacemacs functionalities and behaviour.
+
+Plugin list:
+- https://github.com/dbakker/vim-projectroot
+- https://github.com/easymotion/vim-easymotion
+- https://github.com/haya14busa/incsearch.vim
+- https://github.com/hecal3/vim-leader-guide
+- https://github.com/junegunn/fzf
+- https://github.com/junegunn/fzf.vim
+- https://github.com/junegunn/gv.vim
+- https://github.com/mbbill/undotree
+- https://github.com/osyo-manga/vim-over
+- https://github.com/sheerun/vim-polyglot
+- https://github.com/tpope/vim-commentary
+- https://github.com/tpope/vim-eunuch
+- https://github.com/tpope/vim-surround
+- https://github.com/tpope/vim-vinegar
+- https://github.com/Raimondi/delimitMate
+
+------------------------------------------------------------------------------
+2.2 Git Layer                                                 *SpacevimGitLayer*
+
+Manage your git repository with vim directly in vim.
+
+Plugin list:
+- https://github.com/airblade/vim-gitgutter
+- https://github.com/tpope/vim-fugitive
+
+------------------------------------------------------------------------------
+2.2 Syntax Checking Layer                          *SpacevimSyntaxCheckingLayer*
+
+Enable syntax checking in vim and display any resulting errors to the user.
+
+Plugin list:
+- https://github.com/scrooloose/syntastic
+
+==============================================================================
+3. Configuration                                         *SpacevimConfiguration*
+
+You can configure the following settings to change how Spacevim works.
+
+------------------------------------------------------------------------------
+3.1 g:dotspacevim_configuration_layers  *SpacevimConfiguration_configuration_layers*
+
+Define the list of layers you want to enabled: >
+
+    let g:dotspacevim_configuration_layers = ['core']
+
+Default: ['core', 'git', 'syntax-checking']
+
+------------------------------------------------------------------------------
+3.2 g:dotspacevim_additional_plugins  *SpacevimConfiguration_additional_plugins*
+
+This option is for adding additional plugins which are not present in layer : >
+
+    let g:dotspacevim_additional_plugins = ['ctjhoa/miro8']
+
+Default: None | []
+
+------------------------------------------------------------------------------
+3.3 g:dotspacevim_excluded_plugins      *SpacevimConfiguration_excluded_plugins*
+
+This option is for exclude plugins which are not preset in layer : >
+
+    let g:dotspacevim_excluded_plugins = ['haya14busa/incsearch.vim']
+
+Default: None | []
+
+------------------------------------------------------------------------------
+3.3 g:dotspacevim_excluded_key_bindings *SpacevimConfiguration_excluded_key_bindings*
+
+This option is for adding additional plugins which are not preset in layer  : >
+
+    let g:dotspacevim_excluded_key_bindings = '^(b.*\|f.*)$'
+
+Default: None | ''
+
+==============================================================================
+4. License                                                     *SpacevimLicense*
+
+Spacevim is MIT licensed.
+
+==============================================================================
+5. Bugs                                                           *SpacevimBugs*
+
+If you find a bug please post it on the issue tracker:
+http://github.com/ctjhoa/spacevim/issues/
+
+==============================================================================
+6. Contributing                                           *SpacevimContributing*
+
+Think you can make this plugin better?  Awesome!  Fork it on GitHub and
+send a pull request.
+
+GitHub: http://github.com/ctjhoa/spacevim/
+
+==============================================================================
+7. Changelog                                                 *SpacevimChangelog*
+
+v2.0.0
+    * Add distribution mode with layer system.
+    * Add more configuration
+v1.0.0
+    * Initial stable release.
+
+==============================================================================
+ vim:tw=78:ts=8:ft=help:norl:
