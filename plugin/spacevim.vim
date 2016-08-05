@@ -14,7 +14,7 @@ if !exists('g:lmap')
   let g:lmap = {}
 endif
 
-if exists('loaded_leaderGuide_vim')
+if exists('g:loaded_leaderGuide_vim')
   function! s:spacevim_displayfunc()
     let g:leaderGuide#displayname = substitute(g:leaderGuide#displayname, '\c<cr>$', '', '')
     let g:leaderGuide#displayname = substitute(g:leaderGuide#displayname, '^<SID>', '', '')
@@ -39,15 +39,21 @@ function! s:spacevim_bind(map, binding, name, value, isCmd)
   else
     let l:value = a:value
   endif
-  if a:map == "map"
+
+  if a:map == "map" && maparg('<Leader>' . a:binding, '') ==# ''
     let l:noremap = 'noremap'
-  elseif a:map == "nmap"
+  elseif a:map == "nmap" && maparg('<Leader>' . a:binding, 'n') ==# ''
     let l:noremap = 'nnoremap'
-  elseif a:map == "vmap"
+  elseif a:map == "vmap" && maparg('<Leader>' . a:binding, 'v') ==# ''
     let l:noremap = 'vnoremap'
+  else
+    let l:noremap = ''
   endif
-  execute l:noremap . " <silent> <SID>" . a:name . " " . l:value
-  execute a:map . " <leader>" . a:binding . " <SID>" . a:name
+
+  if l:noremap != ''
+    execute l:noremap . " <silent> <SID>" . a:name . " " . l:value
+    execute a:map . " <leader>" . a:binding . " <SID>" . a:name
+  endif
 endfunction
 
 function! s:spacevim_get_visual_selection()
