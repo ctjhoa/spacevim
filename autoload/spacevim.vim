@@ -16,7 +16,6 @@ function! spacevim#bootstrap() abort
         \    'hecal3/vim-leader-guide',
         \    'junegunn/fzf',
         \    'junegunn/fzf.vim',
-        \    'junegunn/gv.vim',
         \    'mbbill/undotree',
         \    'mhinz/vim-startify',
         \    'osyo-manga/vim-over',
@@ -33,6 +32,7 @@ function! spacevim#bootstrap() abort
         \  ],
         \  'git': [
         \    'airblade/vim-gitgutter',
+        \    'junegunn/gv.vim',
         \    'tpope/vim-fugitive'
         \  ]
         \  }

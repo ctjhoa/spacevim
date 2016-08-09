@@ -71,7 +71,6 @@ Plugin list:
 - https://github.com/hecal3/vim-leader-guide
 - https://github.com/junegunn/fzf
 - https://github.com/junegunn/fzf.vim
-- https://github.com/junegunn/gv.vim
 - https://github.com/mbbill/undotree
 - https://github.com/osyo-manga/vim-over
 - https://github.com/sheerun/vim-polyglot
@@ -88,6 +87,7 @@ Manage your git repository with vim directly in vim.
 
 Plugin list:
 - https://github.com/airblade/vim-gitgutter
+- https://github.com/junegunn/gv.vim
 - https://github.com/tpope/vim-fugitive
 
 ------------------------------------------------------------------------------
