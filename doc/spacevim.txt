@@ -31,7 +31,6 @@ CONTENTS                                                     *spacevim-contents*
     3.1 g:dotspacevim_configuration_layers ... |SpacevimConfiguration_configuration_layers|
     3.2 g:dotspacevim_additional_plugins ..... |SpacevimConfiguration_additional_plugins|
     3.2 g:dotspacevim_excluded_plugins ....... |SpacevimConfiguration_excluded_plugins|
-    3.3 g:dotspacevim_excluded_key_bindings .. |SpacevimConfiguration_excluded_key_bindings|
   4. License ................................. |SpacevimLicense|
   5. Bugs .................................... |SpacevimBugs|
   6. Contributing ............................ |SpacevimContributing|
@@ -106,11 +105,12 @@ You can configure the following settings to change how Spacevim works.
 ------------------------------------------------------------------------------
 3.1 g:dotspacevim_configuration_layers  *SpacevimConfiguration_configuration_layers*
 
-Define the list of layers you want to enabled: >
+Define the list of layers you want to enabled. List support regex, in this
+example all core layers are enabled: >
 
-    let g:dotspacevim_configuration_layers = ['core']
+    let g:dotspacevim_configuration_layers = ['core/.*']
 
-Default: ['core', 'git', 'syntax-checking']
+Default: ['core/.*', 'git', 'syntax-checking']
 
 ------------------------------------------------------------------------------
 3.2 g:dotspacevim_additional_plugins  *SpacevimConfiguration_additional_plugins*
@@ -129,15 +129,6 @@ This option is for exclude plugins which are not preset in layer : >
     let g:dotspacevim_excluded_plugins = ['haya14busa/incsearch.vim']
 
 Default: None | []
-
-------------------------------------------------------------------------------
-3.3 g:dotspacevim_excluded_key_bindings *SpacevimConfiguration_excluded_key_bindings*
-
-This option is for adding additional plugins which are not preset in layer  : >
-
-    let g:dotspacevim_excluded_key_bindings = '^(b.*\|f.*)$'
-
-Default: None | ''
 
 ==============================================================================
 4. License                                                     *SpacevimLicense*

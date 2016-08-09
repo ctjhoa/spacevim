@@ -52,12 +52,6 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Helpers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-function! s:spacevim_add_category(binding, name)
-  if s:spacevim_is_binding_enabled(a:binding)
-    execute 'let g:lmap.' . join(split(a:binding, '\zs'), '.') . ' = { ''name '' : ''+' . a:name . ''' } '
-  endif
-endfunction
-
 function! s:spacevim_bind(map, binding, name, value, isCmd)
   if a:isCmd
     let l:value = ':' . a:value . '<cr>'
@@ -74,21 +68,17 @@ function! s:spacevim_bind(map, binding, name, value, isCmd)
     let l:noremap = ''
   endif
 
-  if l:noremap != '' && s:spacevim_is_binding_enabled(a:binding)
+  if l:noremap !=# ''
     execute l:noremap . ' <silent> <SID>' . a:name . ' ' . l:value
     execute a:map . ' <leader>' . a:binding . ' <SID>' . a:name
   endif
 endfunction
 
-function! s:spacevim_is_binding_enabled(binding)
-  if !exists('g:dotspacevim_excluded_key_bindings')
+function! s:spacevim_is_layer_enabled(name)
+  if !exists('g:spacevim_enabled_layers')
     return 1
   endif
-  return a:binding !~ g:dotspacevim_excluded_key_bindings
-endfunction
-
-function! s:spacevim_is_layer_enabled(name)
-  return index(g:dotspacevim_configuration_layers, a:name) != -1
+  return index(g:spacevim_enabled_layers, a:name) != -1
 endfunction
 
 function! s:spacevim_get_visual_selection()
@@ -104,98 +94,118 @@ endfunction
 " Bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-call s:spacevim_bind('map', '<Tab>', 'last-buffer', 'b#', 1)
-call s:spacevim_bind('map', '!', 'shell-cmd', 'call feedkeys('':! '')', 1)
-call s:spacevim_bind('map', '/', 'smart-search', 'Ag', 1)
-call s:spacevim_bind('nmap', '*', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(0)', 1)
-call s:spacevim_bind('vmap', '*', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(1)', 1)
+if s:spacevim_is_layer_enabled('core/root')
+  call s:spacevim_bind('map', '<Tab>', 'last-buffer', 'b#', 1)
+  call s:spacevim_bind('map', '!', 'shell-cmd', 'call feedkeys('':! '')', 1)
+  call s:spacevim_bind('map', '/', 'smart-search', 'Ag', 1)
+  call s:spacevim_bind('nmap', '*', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(0)', 1)
+  call s:spacevim_bind('vmap', '*', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(1)', 1)
 
-call s:spacevim_bind('map', '1', 'window-1', '1wincmd w', 1)
-call s:spacevim_bind('map', '2', 'window-2', '2wincmd w', 1)
-call s:spacevim_bind('map', '3', 'window-3', '3wincmd w', 1)
-call s:spacevim_bind('map', '4', 'window-4', '4wincmd w', 1)
-call s:spacevim_bind('map', '5', 'window-5', '5wincmd w', 1)
-call s:spacevim_bind('map', '6', 'window-6', '6wincmd w', 1)
-call s:spacevim_bind('map', '7', 'window-7', '7wincmd w', 1)
-call s:spacevim_bind('map', '8', 'window-8', '8wincmd w', 1)
-call s:spacevim_bind('map', '9', 'window-9', '9wincmd w', 1)
-call s:spacevim_bind('map', '0', 'window-10', '10wincmd w', 1)
+  call s:spacevim_bind('map', '1', 'window-1', '1wincmd w', 1)
+  call s:spacevim_bind('map', '2', 'window-2', '2wincmd w', 1)
+  call s:spacevim_bind('map', '3', 'window-3', '3wincmd w', 1)
+  call s:spacevim_bind('map', '4', 'window-4', '4wincmd w', 1)
+  call s:spacevim_bind('map', '5', 'window-5', '5wincmd w', 1)
+  call s:spacevim_bind('map', '6', 'window-6', '6wincmd w', 1)
+  call s:spacevim_bind('map', '7', 'window-7', '7wincmd w', 1)
+  call s:spacevim_bind('map', '8', 'window-8', '8wincmd w', 1)
+  call s:spacevim_bind('map', '9', 'window-9', '9wincmd w', 1)
+  call s:spacevim_bind('map', '0', 'window-10', '10wincmd w', 1)
 
-call s:spacevim_bind('map', ':', 'M-x', 'call SpacevimCommands()', 1)
-call s:spacevim_bind('nmap', ';', 'vim-commentary-operator', 'Commentary', 1)
-if s:spacevim_is_binding_enabled(';;')
-  nmap <silent> <SID>vim-commentary-line <Plug>(CommentaryLine)
-  nmap <Leader>;; <SID>vim-commentary-line
+  call s:spacevim_bind('map', ':', 'M-x', 'call SpacevimCommands()', 1)
+  call s:spacevim_bind('nmap', ';', 'vim-commentary-operator', 'Commentary', 1)
+  if maparg('<Leader>;;', 'n') ==# ''
+    nmap <silent> <SID>vim-commentary-line <Plug>(CommentaryLine)
+    nmap <Leader>;; <SID>vim-commentary-line
+  endif
+  call s:spacevim_bind('vmap', ';', 'vim-commentary-operator', '''<,''>Commentary', 1)
 endif
-call s:spacevim_bind('vmap', ';', 'vim-commentary-operator', '''<,''>Commentary', 1)
 
 " applications {{{
-call s:spacevim_add_category('a', 'applications')
-call s:spacevim_bind('map', 'au', 'undo-tree-visualize', 'UndotreeToggle', 1)
+if s:spacevim_is_layer_enabled('core/applications')
+  let g:lmap.a = { 'name': '+applications' }
+  call s:spacevim_bind('map', 'au', 'undo-tree-visualize', 'UndotreeToggle', 1)
+endif
 " }}}
 
 " buffers {{{
-call s:spacevim_add_category('b', 'buffers')
-call s:spacevim_bind('map', 'bb', 'buffers', 'call SpacevimBuffers()', 1)
-call s:spacevim_bind('map', 'bd', 'kill-this-buffer', 'bd', 1)
-call s:spacevim_bind('map', 'bn', 'next-useful-buffer', 'bnext', 1)
-call s:spacevim_bind('map', 'bp', 'previous-useful-buffer', 'bprevious', 1)
-call s:spacevim_bind('map', 'bR', 'safe-revert-buffer', 'e', 1)
+if s:spacevim_is_layer_enabled('core/buffers')
+  let g:lmap.b = { 'name': '+buffers' }
+  call s:spacevim_bind('map', 'bb', 'buffers', 'call SpacevimBuffers()', 1)
+  call s:spacevim_bind('map', 'bd', 'kill-this-buffer', 'bd', 1)
+  call s:spacevim_bind('map', 'bn', 'next-useful-buffer', 'bnext', 1)
+  call s:spacevim_bind('map', 'bp', 'previous-useful-buffer', 'bprevious', 1)
+  call s:spacevim_bind('map', 'bR', 'safe-revert-buffer', 'e', 1)
 
-" buffers/move {{{
-call s:spacevim_add_category('bm', 'move')
-call s:spacevim_bind('map', 'bmr', 'buf-rotate-down-right', 'wincmd r', 1)
-call s:spacevim_bind('map', 'bmR', 'buf-rotate-up-left', 'wincmd R', 1)
+  " buffers/move {{{
+  if s:spacevim_is_layer_enabled('core/buffers/move')
+    let g:lmap.b.m = { 'name': '+move' }
+    call s:spacevim_bind('map', 'bmr', 'buf-rotate-down-right', 'wincmd r', 1)
+    call s:spacevim_bind('map', 'bmR', 'buf-rotate-up-left', 'wincmd R', 1)
+  endif
+endif
 " }}}
 
 " }}}
 
 " comile/comments {{{
-call s:spacevim_add_category('c', 'compile/comments')
+if s:spacevim_is_layer_enabled('core/compile-comments')
+  let g:lmap.c = { 'name': '+compile/comments' }
+endif
 " }}}
 
 " capture/colors {{{
-call s:spacevim_add_category('C', 'capture/colors')
+if s:spacevim_is_layer_enabled('core/capture-colors')
+  let g:lmap.C = { 'name': '+capture/colors' }
+endif
 " }}}
 
 " errors {{{
-call s:spacevim_add_category('e', 'errors')
-call s:spacevim_bind('map', 'el', 'error-list', 'call SpacevimErrorList()', 1)
-call s:spacevim_bind('map', 'en', 'next-error', 'call SpacevimErrorNext()', 1)
-call s:spacevim_bind('map', 'eN', 'previous-error', 'call SpacevimErrorPrev()', 1)
-call s:spacevim_bind('map', 'ep', 'previous-error', 'call SpacevimErrorPrev()', 1)
+if s:spacevim_is_layer_enabled('syntax-checking')
+  let g:lmap.e = { 'name': '+errors' }
+  call s:spacevim_bind('map', 'el', 'error-list', 'call SpacevimErrorList()', 1)
+  call s:spacevim_bind('map', 'en', 'next-error', 'call SpacevimErrorNext()', 1)
+  call s:spacevim_bind('map', 'eN', 'previous-error', 'call SpacevimErrorPrev()', 1)
+  call s:spacevim_bind('map', 'ep', 'previous-error', 'call SpacevimErrorPrev()', 1)
+endif
 " }}}
 
 " files {{{
-call s:spacevim_add_category('f', 'files')
-call s:spacevim_bind('map', 'fc', 'copy-file', 'saveas', 1)
+if s:spacevim_is_layer_enabled('core/files')
+  let g:lmap.f = { 'name': '+files' }
+  call s:spacevim_bind('map', 'fc', 'copy-file', 'saveas', 1)
 
-" files/convert {{{
-call s:spacevim_add_category('fC', 'files/convert')
-" }}}
+  " files/convert {{{
+  if s:spacevim_is_layer_enabled('core/files/convert')
+    let g:lmap.f.C = { 'name': '+files/convert' }
+  endif
+  " }}}
 
-call s:spacevim_bind('map', 'fD', 'delete-current-buffer-file', 'Remove', 1)
-call s:spacevim_bind('map', 'fE', 'sudo-edit', 'call feedkeys('':SudoEdit '')', 1)
-call s:spacevim_bind('map', 'ff', 'find-files', 'call SpacevimFindFiles()', 1)
-call s:spacevim_bind('map', 'fL', 'locate', 'call feedkeys('':Locate '')', 1)
-call s:spacevim_bind('map', 'fr', 'recentf', 'call SpacevimRecentf()', 1)
-call s:spacevim_bind('map', 'fR', 'rename-current-buffer-file', 'call feedkeys('':Rename '')', 1)
-call s:spacevim_bind('map', 'fs', 'save-buffer', 'write', 1)
-call s:spacevim_bind('map', 'fS', 'write-all', 'wa', 1)
-call s:spacevim_bind('map', 'ft', 'explorer-toggle', 'call SpacevimExplorerToggle()', 1)
+  call s:spacevim_bind('map', 'fD', 'delete-current-buffer-file', 'Remove', 1)
+  call s:spacevim_bind('map', 'fE', 'sudo-edit', 'call feedkeys('':SudoEdit '')', 1)
+  call s:spacevim_bind('map', 'ff', 'find-files', 'call SpacevimFindFiles()', 1)
+  call s:spacevim_bind('map', 'fL', 'locate', 'call feedkeys('':Locate '')', 1)
+  call s:spacevim_bind('map', 'fr', 'recentf', 'call SpacevimRecentf()', 1)
+  call s:spacevim_bind('map', 'fR', 'rename-current-buffer-file', 'call feedkeys('':Rename '')', 1)
+  call s:spacevim_bind('map', 'fs', 'save-buffer', 'write', 1)
+  call s:spacevim_bind('map', 'fS', 'write-all', 'wa', 1)
+  call s:spacevim_bind('map', 'ft', 'explorer-toggle', 'call SpacevimExplorerToggle()', 1)
 
-" files/vim {{{
-call s:spacevim_add_category('fe', 'vim')
-call s:spacevim_bind('map', 'fed', 'find-dotfile', 'edit $MYVIMRC', 1)
-call s:spacevim_bind('map', 'feR', 'sync-configuration', 'source $MYVIMRC', 1)
-call s:spacevim_bind('map', 'fev', 'display-vim-version', 'version', 1)
-" }}}
+  " files/vim {{{
+  if s:spacevim_is_layer_enabled('core/files/vim')
+    let g:lmap.f.e = { 'name': '+files/vim' }
+    call s:spacevim_bind('map', 'fed', 'find-dotfile', 'edit $MYVIMRC', 1)
+    call s:spacevim_bind('map', 'feR', 'sync-configuration', 'source $MYVIMRC', 1)
+    call s:spacevim_bind('map', 'fev', 'display-vim-version', 'version', 1)
+  endif
+  " }}}
 
+endif
 " }}}
 
 " git/versions-control {{{
 if s:spacevim_is_layer_enabled('git')
-  call s:spacevim_add_category('g', 'git/versions-control')
+  let g:lmap.g = { 'name': '+git/versions-control' }
   call s:spacevim_bind('map', 'gb', 'git-blame', 'Gblame', 1)
   call s:spacevim_bind('map', 'gc', 'git-commit', 'Gcommit', 1)
   call s:spacevim_bind('map', 'gC', 'git-checkout', 'Git checkout', 1)
@@ -214,121 +224,155 @@ endif
 " }}}
 
 " help/highlight {{{
-call s:spacevim_add_category('h', 'help/highlight')
+if s:spacevim_is_layer_enabled('core/help-highlight')
+  let g:lmap.h = { 'name': '+help/highlight' }
+endif
 " }}}
 
 " insertion {{{
-call s:spacevim_add_category('i', 'insertion')
-call s:spacevim_bind('nmap', 'ij', 'vim-insert-line-below', 'mao<Esc>`a', 0)
-call s:spacevim_bind('nmap', 'ik', 'vim-insert-line-above', 'maO<Esc>`a', 0)
+if s:spacevim_is_layer_enabled('core/insertion')
+  let g:lmap.i = { 'name': '+insertion' }
+  call s:spacevim_bind('nmap', 'ij', 'vim-insert-line-below', 'mao<Esc>`a', 0)
+  call s:spacevim_bind('nmap', 'ik', 'vim-insert-line-above', 'maO<Esc>`a', 0)
+endif
 " }}}
 
 " join/split {{{
-call s:spacevim_add_category('j', 'join/split')
-call s:spacevim_bind('nmap', 'j=', 'indent-region-or-buffer', 'mzgg=G`z', 0)
-call s:spacevim_bind('vmap', 'j=', 'indent-region-or-buffer', '==', 0)
-call s:spacevim_bind('map', 'jj', 'sp-newline', 'i<CR><Esc>', 0)
-call s:spacevim_bind('map', 'jJ', 'split-and-newline', 'i<CR><Esc>', 0) " same as j.j ?
-call s:spacevim_bind('map', 'jo', 'open-line', 'i<CR><Esc>k$', 0)
-
+if s:spacevim_is_layer_enabled('core/join-split')
+  let g:lmap.j = { 'name': '+join/split' }
+  call s:spacevim_bind('nmap', 'j=', 'indent-region-or-buffer', 'mzgg=G`z', 0)
+  call s:spacevim_bind('vmap', 'j=', 'indent-region-or-buffer', '==', 0)
+  call s:spacevim_bind('map', 'jj', 'sp-newline', 'i<CR><Esc>', 0)
+  call s:spacevim_bind('map', 'jJ', 'split-and-newline', 'i<CR><Esc>', 0) " same as j.j ?
+  call s:spacevim_bind('map', 'jo', 'open-line', 'i<CR><Esc>k$', 0)
+endif
 " }}}
 
 " lisp {{{
-call s:spacevim_add_category('k', 'lisp')
+if s:spacevim_is_layer_enabled('core/lisp')
+  let g:lmap.k = { 'name': '+lisp' }
+endif
 " }}}
 
 " narrow/numbers {{{
-call s:spacevim_add_category('n', 'narrow/numbers')
-call s:spacevim_bind('map', 'n=', 'numbers-increase', '<C-a>', 0)
-call s:spacevim_bind('map', 'n+', 'numbers-increase', '<C-a>', 0)
-call s:spacevim_bind('map', 'n-', 'numbers-decrease', '<C-x>', 0)
-call s:spacevim_bind('map', 'n,', 'page-up', '<PageUp>', 0)
-call s:spacevim_bind('map', 'n.', 'page-down', '<PageDown>', 0)
-call s:spacevim_bind('map', 'n<lt>', 'half-page-up', '<C-u>', 0)
-call s:spacevim_bind('map', 'n>', 'half-page-down', '<C-d>', 0)
+if s:spacevim_is_layer_enabled('core/narrow-numbers')
+  let g:lmap.n = { 'name': '+narrow/numbers' }
+  call s:spacevim_bind('map', 'n=', 'numbers-increase', '<C-a>', 0)
+  call s:spacevim_bind('map', 'n+', 'numbers-increase', '<C-a>', 0)
+  call s:spacevim_bind('map', 'n-', 'numbers-decrease', '<C-x>', 0)
+  call s:spacevim_bind('map', 'n,', 'page-up', '<PageUp>', 0)
+  call s:spacevim_bind('map', 'n.', 'page-down', '<PageDown>', 0)
+  call s:spacevim_bind('map', 'n<lt>', 'half-page-up', '<C-u>', 0)
+  call s:spacevim_bind('map', 'n>', 'half-page-down', '<C-d>', 0)
+endif
 " }}}
 
 " projects {{{
-call s:spacevim_add_category('p', 'projects')
+if s:spacevim_is_layer_enabled('core/projects')
+let g:lmap.p = { 'name': '+projects' }
 call s:spacevim_bind('map', 'pf', 'project-find-file', 'call SpacevimProjectFindFile()', 1)
 call s:spacevim_bind('map', 'pD', 'project-directory', 'call SpacevimProjectDirectory()', 1)
 call s:spacevim_bind('map', 'pI', 'project-invalidate-cache', 'call SpacevimProjectInvalidateCache()', 1)
+endif
 " }}}
 
 " quit {{{
-call s:spacevim_add_category('q', 'quit')
-call s:spacevim_bind('map', 'qq', 'prompt-kill-vim', 'qa', 1)
-call s:spacevim_bind('map', 'qQ', 'kill-vim', 'qa!', 1)
-call s:spacevim_bind('map', 'qs', 'save-buffers-kill-vim', 'xa', 1)
+if s:spacevim_is_layer_enabled('core/quit')
+  let g:lmap.q = { 'name': '+quit' }
+  call s:spacevim_bind('map', 'qq', 'prompt-kill-vim', 'qa', 1)
+  call s:spacevim_bind('map', 'qQ', 'kill-vim', 'qa!', 1)
+  call s:spacevim_bind('map', 'qs', 'save-buffers-kill-vim', 'xa', 1)
+endif
 " }}}
 
 " registers/rings {{{
-call s:spacevim_add_category('r', 'registers/rings')
+if s:spacevim_is_layer_enabled('core/registers-rings')
+  let g:lmap.r = { 'name': '+registers/rings' }
+endif
 " }}}
 
 " search/symbol {{{
-call s:spacevim_add_category('s', 'search/symbol')
-call s:spacevim_bind('map', 'sc', 'highlight-persist-remove-all', 'noh', 1)
-call s:spacevim_bind('map', 'sp', 'smart-search', 'Ag', 1)
-call s:spacevim_bind('nmap', 'sP', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(0)', 1)
-call s:spacevim_bind('vmap', 'sP', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(1)', 1)
+if s:spacevim_is_layer_enabled('core/search-symbol')
+  let g:lmap.s = { 'name': '+search/symbol' }
+  call s:spacevim_bind('map', 'sc', 'highlight-persist-remove-all', 'noh', 1)
+  call s:spacevim_bind('map', 'sp', 'smart-search', 'Ag', 1)
+  call s:spacevim_bind('nmap', 'sP', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(0)', 1)
+  call s:spacevim_bind('vmap', 'sP', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(1)', 1)
+endif
 " }}}
 
 " toggles {{{
-call s:spacevim_add_category('t', 'toggles')
-call s:spacevim_bind('map', 'tl', 'truncate-line', 'set invwrap', 1)
-call s:spacevim_bind('map', 'tn', 'line-numbers', 'set invnumber', 1)
-call s:spacevim_bind('map', 'tr', 'linum-relative-toggle', 'set invrelativenumber', 1)
+if s:spacevim_is_layer_enabled('core/toggles')
+  let g:lmap.t = { 'name': '+toggles' }
+  call s:spacevim_bind('map', 'tl', 'truncate-line', 'set invwrap', 1)
+  call s:spacevim_bind('map', 'tn', 'line-numbers', 'set invnumber', 1)
+  call s:spacevim_bind('map', 'tr', 'linum-relative-toggle', 'set invrelativenumber', 1)
 
-" registers/rings {{{
-call s:spacevim_add_category('th', 'highlight')
-call s:spacevim_bind('nmap', 'thc', 'highlight-indentation-current-column', 'set invcursorcolumn', 1)
-call s:spacevim_bind('nmap', 'thl', 'highlight-current-line-globaly', 'set invcursorline', 1)
-" }}}
+  " toggles/highlight {{{
+  if s:spacevim_is_layer_enabled('core/toggles/highlight')
+    let g:lmap.t.h = { 'name': '+toggles/highlight' }
+    call s:spacevim_bind('nmap', 'thc', 'highlight-indentation-current-column', 'set invcursorcolumn', 1)
+    call s:spacevim_bind('nmap', 'thl', 'highlight-current-line-globaly', 'set invcursorline', 1)
+  endif
+  " }}}
 
+endif
 " }}}
 
 " UI toggles/themes {{{
-call s:spacevim_add_category('T', 'UI toggles/themes')
-call s:spacevim_bind('map', 'Td', 'version-control-margin', 'GitGutterToggle', 1)
+if s:spacevim_is_layer_enabled('core/ui-toggles-themes')
+  let g:lmap.T = { 'name': '+UI toggles/themes' }
+  if s:spacevim_is_layer_enabled('git')
+    call s:spacevim_bind('map', 'Td', 'version-control-margin', 'GitGutterToggle', 1)
+  endif
+endif
 " }}}
 
 " windows {{{
-call s:spacevim_add_category('w', 'windows')
-call s:spacevim_bind('map', 'w-', 'split-window-below', 'split', 1)
-call s:spacevim_bind('map', 'w/', 'split-window-right', 'vsplit', 1)
-call s:spacevim_bind('map', 'w=', 'balance-windows', 'wincmd =', 1)
-call s:spacevim_bind('map', 'wc', 'delete-window', 'q', 1)
-call s:spacevim_bind('map', 'wh', 'window-left', 'wincmd h', 1)
-call s:spacevim_bind('map', 'wH', 'window-move-far-left', 'wincmd H', 1)
-call s:spacevim_bind('map', 'wj', 'window-down', 'wincmd j', 1)
-call s:spacevim_bind('map', 'wJ', 'window-move-far-down', 'wincmd J', 1)
-call s:spacevim_bind('map', 'wk', 'window-up', 'wincmd k', 1)
-call s:spacevim_bind('map', 'wK', 'window-move-far-up', 'wincmd K', 1)
-call s:spacevim_bind('map', 'wl', 'window-right', 'wincmd l', 1)
-call s:spacevim_bind('map', 'wL', 'window-move-far-right', 'wincmd L', 1)
-call s:spacevim_bind('map', 'wm', 'maximize-buffer', 'call SpacevimMaximizeBuffer()', 1)
-call s:spacevim_bind('map', 'ws', 'split-window-below', 'split', 1)
-call s:spacevim_bind('map', 'wS', 'split-window-below-and-focus', 'split\|wincmd w', 1)
-call s:spacevim_bind('map', 'wv', 'split-window-right', 'vsplit', 1)
-call s:spacevim_bind('map', 'wV', 'split-window-right-and-focus', 'vsplit\|wincmd w', 1)
-call s:spacevim_bind('map', 'ww', 'other-window', 'wincmd w', 1)
-
+if s:spacevim_is_layer_enabled('core/windows')
+  let g:lmap.w = { 'name': '+windows' }
+  call s:spacevim_bind('map', 'w-', 'split-window-below', 'split', 1)
+  call s:spacevim_bind('map', 'w/', 'split-window-right', 'vsplit', 1)
+  call s:spacevim_bind('map', 'w=', 'balance-windows', 'wincmd =', 1)
+  call s:spacevim_bind('map', 'wc', 'delete-window', 'q', 1)
+  call s:spacevim_bind('map', 'wh', 'window-left', 'wincmd h', 1)
+  call s:spacevim_bind('map', 'wH', 'window-move-far-left', 'wincmd H', 1)
+  call s:spacevim_bind('map', 'wj', 'window-down', 'wincmd j', 1)
+  call s:spacevim_bind('map', 'wJ', 'window-move-far-down', 'wincmd J', 1)
+  call s:spacevim_bind('map', 'wk', 'window-up', 'wincmd k', 1)
+  call s:spacevim_bind('map', 'wK', 'window-move-far-up', 'wincmd K', 1)
+  call s:spacevim_bind('map', 'wl', 'window-right', 'wincmd l', 1)
+  call s:spacevim_bind('map', 'wL', 'window-move-far-right', 'wincmd L', 1)
+  call s:spacevim_bind('map', 'wm', 'maximize-buffer', 'call SpacevimMaximizeBuffer()', 1)
+  call s:spacevim_bind('map', 'ws', 'split-window-below', 'split', 1)
+  call s:spacevim_bind('map', 'wS', 'split-window-below-and-focus', 'split\|wincmd w', 1)
+  call s:spacevim_bind('map', 'wv', 'split-window-right', 'vsplit', 1)
+  call s:spacevim_bind('map', 'wV', 'split-window-right-and-focus', 'vsplit\|wincmd w', 1)
+  call s:spacevim_bind('map', 'ww', 'other-window', 'wincmd w', 1)
+endif
 " }}}
 
 " text {{{
-call s:spacevim_add_category('x', 'text')
+if s:spacevim_is_layer_enabled('core/text')
+  let g:lmap.x = { 'name': '+text' }
+endif
 " }}}
 
-if s:spacevim_is_binding_enabled('y')
-  nmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
-  nmap <Leader>y <SID>easymotion-line
-  vmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
-  vmap <Leader>y <SID>easymotion-line
+if s:spacevim_is_layer_enabled('core/root')
+  if maparg('<Leader>y', 'n') ==# ''
+    nmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
+    nmap <Leader>y <SID>easymotion-line
+  endif
+  if maparg('<Leader>y', 'v') ==# ''
+    vmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
+    vmap <Leader>y <SID>easymotion-line
+  endif
 endif
 
 " zoom {{{
-call s:spacevim_add_category('z', 'zoom')
+if s:spacevim_is_layer_enabled('core/zoom')
+  let g:lmap.z = { 'name': '+zoom' }
+endif
 " }}}
 
 
