@@ -22,20 +22,20 @@ License: MIT
 ==============================================================================
 CONTENTS                                                     *spacevim-contents*
 
-    1. Usage ....................................... |SpacevimUsage|
-    2. Layers ...................................... |SpacevimLayers|
-        2.1 Core Layer ............................. |SpacevimCoreLayer|
-        2.2 Git Layer .............................. |SpacevimGitLayer|
-        2.3 Syntax Checking Layer .................. |SpacevimSyntaxCheckingLayer|
-    3. Configuration ............................... |SpacevimConfiguration|
-        3.1 g:dotspacevim_configuration_layers ..... |SpacevimConfiguration_configuration_layers|
-        3.2 g:dotspacevim_additional_plugins ....... |SpacevimConfiguration_additional_plugins|
-        3.2 g:dotspacevim_excluded_plugins ......... |SpacevimConfiguration_excluded_plugins|
-        3.3 g:dotspacevim_excluded_key_bindings .... |SpacevimConfiguration_excluded_key_bindings|
-    4. License ..................................... |SpacevimLicense|
-    5. Bugs ........................................ |SpacevimBugs|
-    6. Contributing ................................ |SpacevimContributing|
-    7. Changelog ................................... |SpacevimChangelog|
+  1. Usage ................................... |SpacevimUsage|
+  2. Layers .................................. |SpacevimLayers|
+    2.1 Core Layer ........................... |SpacevimCoreLayer|
+    2.2 Git Layer ............................ |SpacevimGitLayer|
+    2.3 Syntax Checking Layer ................ |SpacevimSyntaxCheckingLayer|
+  3. Configuration ........................... |SpacevimConfiguration|
+    3.1 g:dotspacevim_configuration_layers ... |SpacevimConfiguration_configuration_layers|
+    3.2 g:dotspacevim_additional_plugins ..... |SpacevimConfiguration_additional_plugins|
+    3.2 g:dotspacevim_excluded_plugins ....... |SpacevimConfiguration_excluded_plugins|
+    3.3 g:dotspacevim_excluded_key_bindings .. |SpacevimConfiguration_excluded_key_bindings|
+  4. License ................................. |SpacevimLicense|
+  5. Bugs .................................... |SpacevimBugs|
+  6. Contributing ............................ |SpacevimContributing|
+  7. Changelog ............................... |SpacevimChangelog|
 
 ==============================================================================
 1. Usage                                                         *SpacevimUsage*
