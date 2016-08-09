@@ -1,13 +1,6 @@
 function! spacevim#bootstrap() abort
-  " vim-plug automatic installation {{{
-  if empty(glob('~/.vim/autoload/plug.vim'))
-    silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-          \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-    autocmd vimrc VimEnter * PlugInstall | source $MYVIMRC
-  endif
-  " }}}
 
-  let l:spacevim_layers = {
+  let g:spacevim_layers = {
         \  'core': [
         \    'dbakker/vim-projectroot',
         \    'easymotion/vim-easymotion',
@@ -37,23 +30,35 @@ function! spacevim#bootstrap() abort
         \  ]
         \  }
 
-  if exists('g:dotspacevim_configuration_layers')
-    call plug#begin('~/.vim/plugged')
-    for layer in g:dotspacevim_configuration_layers
-      let l:plugins = get(l:spacevim_layers, layer, [])
-      for plugin in plugins
-        if !exists('g:dotspacevim_additional_plugins') || index(g:dotspacevim_excluded_plugins, plugin) == -1
-          Plug plugin
-        endif
-      endfor
-    endfor
-    if exists('g:dotspacevim_additional_plugins')
-      for plugin in g:dotspacevim_additional_plugins
-        Plug plugin
-      endfor
+  if exists('g:dotspacevim_distribution_mode') && g:dotspacevim_distribution_mode
+    " vim-plug automatic installation {{{
+    if empty(glob('~/.vim/autoload/plug.vim'))
+      silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+      autocmd vimrc VimEnter * PlugInstall | source $MYVIMRC
     endif
-    Plug 'ctjhoa/spacevim'
-    call plug#end()
+    " }}}
+
+    " plugins installation {{{
+    if exists('g:dotspacevim_configuration_layers')
+      call plug#begin('~/.vim/plugged')
+      for layer in g:dotspacevim_configuration_layers
+        let l:plugins = get(g:spacevim_layers, layer, [])
+        for plugin in plugins
+          if !exists('g:dotspacevim_additional_plugins') || index(g:dotspacevim_excluded_plugins, plugin) == -1
+            Plug plugin
+          endif
+        endfor
+      endfor
+      if exists('g:dotspacevim_additional_plugins')
+        for plugin in g:dotspacevim_additional_plugins
+          Plug plugin
+        endfor
+      endif
+      Plug 'ctjhoa/spacevim'
+      call plug#end()
+    endif
+    " }}}
   endif
 endfunction
 "
