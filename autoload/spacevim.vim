@@ -36,19 +36,23 @@ function! spacevim#bootstrap() abort
         \  ]
         \  }
 
-  call plug#begin('~/.vim/plugged')
-  for layer in g:dotspacevim_configuration_layers
-    let l:plugins = get(l:spacevim_layers, layer, [])
-    for plugin in plugins
-      if index(g:dotspacevim_excluded_plugins, plugin) == -1
-        Plug plugin
-      endif
+  if exists('g:dotspacevim_configuration_layers')
+    call plug#begin('~/.vim/plugged')
+    for layer in g:dotspacevim_configuration_layers
+      let l:plugins = get(l:spacevim_layers, layer, [])
+      for plugin in plugins
+        if !exists('g:dotspacevim_additional_plugins') || index(g:dotspacevim_excluded_plugins, plugin) == -1
+          Plug plugin
+        endif
+      endfor
     endfor
-  endfor
-  for plugin in g:dotspacevim_additional_plugins
-    Plug plugin
-  endfor
-  Plug 'ctjhoa/spacevim'
-  call plug#end()
+    if exists('g:dotspacevim_additional_plugins')
+      for plugin in g:dotspacevim_additional_plugins
+        Plug plugin
+      endfor
+    endif
+    Plug 'ctjhoa/spacevim'
+    call plug#end()
+  endif
 endfunction
 "
