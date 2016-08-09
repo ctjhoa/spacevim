@@ -83,7 +83,7 @@ Plugin list:
 ------------------------------------------------------------------------------
 2.2 Git Layer                                                 *SpacevimGitLayer*
 
-Manage your git repository with vim directly in vim.
+Manage your git repository directly in vim.
 
 Plugin list:
 - https://github.com/airblade/vim-gitgutter
