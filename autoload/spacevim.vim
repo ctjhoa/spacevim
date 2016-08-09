@@ -11,6 +11,7 @@ function! spacevim#bootstrap() abort
         \  'core': [
         \    'dbakker/vim-projectroot',
         \    'easymotion/vim-easymotion',
+        \    'editorconfig/editorconfig-vim',
         \    'haya14busa/incsearch.vim',
         \    'hecal3/vim-leader-guide',
         \    'junegunn/fzf',
