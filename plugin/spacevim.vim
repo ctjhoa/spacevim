@@ -222,9 +222,9 @@ if s:spacevim_is_layer_enabled('git')
   call s:spacevim_bind('map', 'gS', 'git-stage-file', 'call feedkeys('':Git add -- '')', 1)
   call s:spacevim_bind('map', 'gw', 'git-stage-current-file', 'Gwrite', 1)
 
-  if s:spacevim_is_layer_enabled('git/patch')
+  if s:spacevim_is_layer_enabled('git/vcs-micro-state')
     " Put this in your vimrc: let g:gitgutter_map_keys = 0
-    let g:lmap.g['.'] = { 'name': '+patch' }
+    let g:lmap.g['.'] = { 'name': '+vcs-micro-state' }
     nmap <leader>g.s <plug>GitGutterStageHunk
     nmap <leader>g.r <plug>GitGutterRevertHunk
     nmap <leader>g.h <plug>GitGutterPreviewHunk
