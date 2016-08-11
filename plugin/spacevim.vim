@@ -188,7 +188,7 @@ if s:spacevim_is_layer_enabled('core/files')
   call s:spacevim_bind('map', 'fr', 'recentf', 'call SpacevimRecentf()', 1)
   call s:spacevim_bind('map', 'fR', 'rename-current-buffer-file', 'call feedkeys('':Rename '')', 1)
   call s:spacevim_bind('map', 'fs', 'save-buffer', 'write', 1)
-  call s:spacevim_bind('map', 'fS', 'write-all', 'wa', 1)
+  call s:spacevim_bind('map', 'fS', 'write-all', 'wall', 1)
   call s:spacevim_bind('map', 'ft', 'explorer-toggle', 'call SpacevimExplorerToggle()', 1)
 
   " files/vim {{{
@@ -291,9 +291,9 @@ endif
 " quit {{{
 if s:spacevim_is_layer_enabled('core/quit')
   let g:lmap.q = { 'name': '+quit' }
-  call s:spacevim_bind('map', 'qq', 'prompt-kill-vim', 'qa', 1)
-  call s:spacevim_bind('map', 'qQ', 'kill-vim', 'qa!', 1)
-  call s:spacevim_bind('map', 'qs', 'save-buffers-kill-vim', 'xa', 1)
+  call s:spacevim_bind('map', 'qq', 'prompt-kill-vim', 'quitall', 1)
+  call s:spacevim_bind('map', 'qQ', 'kill-vim', 'quitall!', 1)
+  call s:spacevim_bind('map', 'qs', 'save-buffers-kill-vim', 'xall', 1)
 endif
 " }}}
 
