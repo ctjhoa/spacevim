@@ -345,9 +345,12 @@ endif
 " toggles {{{
 if s:spacevim_is_layer_enabled('core/toggles')
   let g:lmap.t = { 'name': '+toggles' }
+  call s:spacevim_bind('map', 'tf', 'wrap', 'call SpacevimToggleWrap()', 1)
   call s:spacevim_bind('map', 'tl', 'truncate-line', 'set invwrap', 1)
   call s:spacevim_bind('map', 'tn', 'line-numbers', 'set invnumber', 1)
   call s:spacevim_bind('map', 'tr', 'linum-relative-toggle', 'set invrelativenumber', 1)
+  call s:spacevim_bind('map', 'ts', 'syntax', 'call SpacevimToggleSyntax()', 1)
+  call s:spacevim_bind('map', 'tS', 'spelling', 'set invspell', 1)
 
   " toggles/highlight {{{
   if s:spacevim_is_layer_enabled('core/toggles/highlight')
@@ -567,6 +570,23 @@ function! SpacevimSmartSearchWithInput(visual)
     execute 'Ag ' . expand('<cword>')
   endif
 endfunction
+
+function! SpacevimToggleWrap()
+  if &formatoptions =~ 't'
+    set formatoptions-='t'
+  else
+    set formatoptions+='t'
+  endif
+endfunction
+
+function! SpacevimToggleSyntax()
+  if exists("g:syntax_on")
+    syntax off
+  else
+    syntax enable
+  endif
+endfunction
+
 
 " vim:set ft=vim sw=2 sts=2 et:
 " vim:fdm=marker
