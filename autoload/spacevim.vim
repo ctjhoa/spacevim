@@ -27,6 +27,7 @@ function! spacevim#bootstrap() abort
   \ 'core/text',
   \ 'core/zoom',
   \ 'git',
+  \ 'git/patch',
   \ 'syntax-checking',
   \ ]
 
