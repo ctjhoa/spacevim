@@ -80,6 +80,7 @@ function! spacevim#bootstrap() abort
 
     " plugins installation {{{
     call plug#begin('~/.vim/plugged')
+    Plug 'ctjhoa/spacevim'
     for layer in g:spacevim_enabled_layers
       for plugin in g:spacevim_plugins
         if index(plugin.layers, layer) != -1 &&
@@ -93,7 +94,6 @@ function! spacevim#bootstrap() abort
         Plug plugin
       endfor
     endif
-    Plug 'ctjhoa/spacevim'
     call plug#end()
     " }}}
   endif
