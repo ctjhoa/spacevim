@@ -15,16 +15,12 @@ if exists('g:loaded_arpeggio')
   if exists('g:dotspacevim_escape_key_sequence')
     call arpeggio#map('i', '', 0, g:dotspacevim_escape_key_sequence, '<Esc>')
   endif
-  if !exists('g:arpeggio_timeoutlen')
-    let g:arpeggio_timeoutlen = 100
-  endif
+  let g:arpeggio_timeoutlen = get(g:, 'arpeggio_timeoutlen', 100)
 endif
 " }}}
 
 " vim-leader-guide {{{
-if !exists('g:lmap')
-  let g:lmap = {}
-endif
+let g:lmap = get(g:, 'lmap', {})
 
 if exists('g:loaded_leaderGuide_vim')
   function! s:spacevim_displayfunc()
@@ -44,31 +40,27 @@ endif
 " }}}
 
 " vim-startify {{{
-if !exists('g:startify_custom_header')
-  let g:startify_custom_header = [
-    \'',
-    \'',
-    \'        /$$$$$$                                     /$$    /$$/$$             ',
-    \'       /$$__  $$                                   | $$   | $|__/             ',
-    \'      | $$  \__/ /$$$$$$  /$$$$$$  /$$$$$$$ /$$$$$$| $$   | $$/$$/$$$$$$/$$$$ ',
-    \'      |  $$$$$$ /$$__  $$|____  $$/$$_____//$$__  $|  $$ / $$| $| $$_  $$_  $$',
-    \'       \____  $| $$  \ $$ /$$$$$$| $$     | $$$$$$$$\  $$ $$/| $| $$ \ $$ \ $$',
-    \'       /$$  \ $| $$  | $$/$$__  $| $$     | $$_____/ \  $$$/ | $| $$ | $$ | $$',
-    \'      |  $$$$$$| $$$$$$$|  $$$$$$|  $$$$$$|  $$$$$$$  \  $/  | $| $$ | $$ | $$',
-    \'       \______/| $$____/ \_______/\_______/\_______/   \_/   |__|__/ |__/ |__/',
-    \'               | $$                                                           ',
-    \'               | $$                                                           ',
-    \'               |__/                                                           '
-    \'',
-    \'',
-  \ ]
-endif
+let g:startify_custom_header = get(g:, 'startify_custom_header', [
+\'',
+\'',
+\'        /$$$$$$                                     /$$    /$$/$$             ',
+\'       /$$__  $$                                   | $$   | $|__/             ',
+\'      | $$  \__/ /$$$$$$  /$$$$$$  /$$$$$$$ /$$$$$$| $$   | $$/$$/$$$$$$/$$$$ ',
+\'      |  $$$$$$ /$$__  $$|____  $$/$$_____//$$__  $|  $$ / $$| $| $$_  $$_  $$',
+\'       \____  $| $$  \ $$ /$$$$$$| $$     | $$$$$$$$\  $$ $$/| $| $$ \ $$ \ $$',
+\'       /$$  \ $| $$  | $$/$$__  $| $$     | $$_____/ \  $$$/ | $| $$ | $$ | $$',
+\'      |  $$$$$$| $$$$$$$|  $$$$$$|  $$$$$$|  $$$$$$$  \  $/  | $| $$ | $$ | $$',
+\'       \______/| $$____/ \_______/\_______/\_______/   \_/   |__|__/ |__/ |__/',
+\'               | $$                                                           ',
+\'               | $$                                                           ',
+\'               |__/                                                           '
+\'',
+\'',
+\ ])
 " }}}
 
 " vim-swoop {{{
-if !exists('g:swoopUseDefaultKeyMap')
-  let g:swoopUseDefaultKeyMap = 0
-endif
+let g:swoopUseDefaultKeyMap = get(g:, 'swoopUseDefaultKeyMap', 0)
 " }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
