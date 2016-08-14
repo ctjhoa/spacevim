@@ -59,6 +59,7 @@ function! spacevim#bootstrap() abort
     \ { 'name': 'mbbill/undotree',                'layers': ['core/applications'] },
     \ { 'name': 'mhinz/vim-startify',             'layers': ['core/behavior'] },
     \ { 'name': 'osyo-manga/vim-over',            'layers': ['core/behavior'] },
+    \ { 'name': 'pelodelfuego/vim-swoop',         'layers': ['core/search-symbol'] },
     \ { 'name': 'Raimondi/delimitMate',           'layers': ['core/behavior'] },
     \ { 'name': 'scrooloose/syntastic',           'layers': ['syntax-checking'] },
     \ { 'name': 'sheerun/vim-polyglot',           'layers': ['core/behavior'] },

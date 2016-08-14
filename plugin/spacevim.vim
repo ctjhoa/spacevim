@@ -307,6 +307,8 @@ if s:spacevim_is_layer_enabled('core/search-symbol')
   let g:lmap.s = { 'name': '+search/symbol' }
   call s:spacevim_bind('map', 'sc', 'highlight-persist-remove-all', 'noh', 1)
   call s:spacevim_bind('map', 'sp', 'smart-search', 'Ag', 1)
+  call s:spacevim_bind('nmap', 'ss', 'vim-swoop', 'call Swoop()', 1)
+  call s:spacevim_bind('vmap', 'ss', 'vim-swoop', 'call SwoopSelection()', 1)
   call s:spacevim_bind('nmap', 'sP', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(0)', 1)
   call s:spacevim_bind('vmap', 'sP', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(1)', 1)
 endif

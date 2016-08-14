@@ -72,6 +72,7 @@ Plugin list:
 - https://github.com/junegunn/fzf.vim
 - https://github.com/mbbill/undotree
 - https://github.com/osyo-manga/vim-over
+- https://github.com/pelodelfuego/vim-swoop
 - https://github.com/sheerun/vim-polyglot
 - https://github.com/tpope/vim-commentary
 - https://github.com/tpope/vim-eunuch
