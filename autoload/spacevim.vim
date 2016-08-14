@@ -56,6 +56,7 @@ function! spacevim#bootstrap() abort
     \ { 'name': 'junegunn/fzf',                   'layers': ['core/buffers', 'core/files', 'core/projects', 'core/root'] },
     \ { 'name': 'junegunn/fzf.vim',               'layers': ['core/buffers', 'core/files', 'core/projects', 'core/root'] },
     \ { 'name': 'junegunn/gv.vim',                'layers': ['git'] },
+    \ { 'name': 'kana/vim-arpeggio',              'layers': ['core/behavior'] },
     \ { 'name': 'mbbill/undotree',                'layers': ['core/applications'] },
     \ { 'name': 'mhinz/vim-startify',             'layers': ['core/behavior'] },
     \ { 'name': 'osyo-manga/vim-over',            'layers': ['core/behavior'] },

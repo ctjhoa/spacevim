@@ -12,6 +12,7 @@ Spacevim relies on several other vim plugins for the key bindings implementation
 | [hecal3/vim-leader-guide](https://github.com/hecal3/vim-leader-guide) | <ul><li>core/behavior</li></ul> |  |
 | <ul><li>[junegunn/fzf](https://github.com/junegunn/fzf)</li><li>[junegunn/fzf.vim](https://github.com/junegunn/fzf.vim)</li></ul> | <ul><li>core/buffers</li><li>core/files</li><li>core/projects</li><li>core/root</li></ul> | <ul><li>[Shougo/unite.vim](https://github.com/Shougo/unite.vim)</li><li>[ctrlpvim/ctrlp.vim](https://github.com/ctrlpvim/ctrlp.vim)</li></ul> |
 | [junegunn/gv.vim](https://github.com/junegunn/gv.vim) | <ul><li>git</li></ul> |  |
+| [kana/vim-arpeggio](https://github.com/kana/vim-arpeggio) | <ul><li>git</li></ul> |  |
 | [mbbill/undotree](https://github.com/mbbill/undotree) | <ul><li>core/applications</li></ul> |  |
 | [osyo-manga/vim-over](https://github.com/osyo-manga/vim-over) | <ul><li>core/behavior</li></ul> |  |
 | [pelodelfuego/vim-swoop](https://github.com/pelodelfuego/vim-swoop) | <ul><li>core/search-symbol</li></ul> |  |

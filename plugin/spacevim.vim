@@ -10,6 +10,17 @@ let g:loaded_spacevim = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Default plugin config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-arpeggio {{{
+if exists('g:loaded_arpeggio')
+  if exists('g:dotspacevim_escape_key_sequence')
+    call arpeggio#map('i', '', 0, g:dotspacevim_escape_key_sequence, '<Esc>')
+  endif
+  if !exists('g:arpeggio_timeoutlen')
+    let g:arpeggio_timeoutlen = 100
+  endif
+endif
+" }}}
+
 " vim-leader-guide {{{
 if !exists('g:lmap')
   let g:lmap = {}
