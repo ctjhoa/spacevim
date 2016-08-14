@@ -8,8 +8,9 @@ endif
 let g:loaded_spacevim = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Optionally integrate with vim-leader-guide
+" Default plugin config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-leader-guide {{{
 if !exists('g:lmap')
   let g:lmap = {}
 endif
@@ -29,10 +30,9 @@ if exists('g:loaded_leaderGuide_vim')
   nnoremap <silent> <leader> :<c-u>LeaderGuide '<Space>'<CR>
   vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
 endif
+" }}}
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Startify
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" vim-startify {{{
 if !exists('g:startify_custom_header')
   let g:startify_custom_header = [
     \'',
@@ -52,6 +52,13 @@ if !exists('g:startify_custom_header')
     \'',
   \ ]
 endif
+" }}}
+
+" vim-swoop {{{
+if !exists('g:swoopUseDefaultKeyMap')
+  let g:swoopUseDefaultKeyMap = 0
+endif
+" }}}
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Helpers
