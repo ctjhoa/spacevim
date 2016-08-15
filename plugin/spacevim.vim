@@ -50,6 +50,16 @@ if !exists('g:startify_custom_header')
 endif
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Disable keybindings that conflict
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if !exists('g:gitgutter_map_keys')
+  if s:spacevim_is_layer_enabled('git/vcs-micro-state')
+        \ || s:spacevim_is_layer_enabled('core/help-highlight')
+    let g:gitgutter_map_keys = 0
+  endif
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Helpers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:spacevim_bind(map, binding, name, value, isCmd)
