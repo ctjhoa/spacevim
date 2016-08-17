@@ -12,6 +12,10 @@ let g:loaded_spacevim = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! s:spacevim_preinstall()
+  " vim-gitgutter {{{
+  let g:gitgutter_map_keys = get(g:, 'gitgutter_map_keys', 0)
+  " }}}
+
   " vim-leader-guide {{{
   let g:lmap = get(g:, 'lmap', {})
   " }}}
