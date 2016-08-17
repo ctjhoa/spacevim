@@ -24,4 +24,4 @@ Spacevim relies on several other vim plugins for the key bindings implementation
 | [tpope/vim-vinegar](https://github.com/tpope/vim-vinegar) | <ul><li>core/behavior</li></ul> |  |
 | [tpope/vim-surround](https://github.com/tpope/vim-surround) | <ul><li>core/behavior</li></ul> |  |
 | [Raimondi/delimitMate](https://github.com/Raimondi/delimitMate) | <ul><li>core/behavior</li></ul> |  |
-| `netrw` | <ul><li>core/files</li><li>core/projects</li></ul> | <ul><li>[justinmk/vim-dirvish](https://github.com/justinmk/vim-dirvish)</li><li>[scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)</li></ul> |
+| `netrw` | <ul><li>core/files</li><li>core/projects</li></ul> | <ul><li>[justinmk/vim-dirvish](https://github.com/justinmk/vim-dirvish)</li><li>[scrooloose/nerdtree](https://github.com/scrooloose/nerdtree)</li><li>[Shougo/vimfiler.vim](https://github.com/Shougo/vimfiler.vim)</li></ul> |

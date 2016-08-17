@@ -493,6 +493,8 @@ function! SpacevimExplorerToggle()
     execute 'NERDTreeToggle'
   elseif exists('g:loaded_dirvish')
     execute 'Dirvish'
+  elseif exists('g:loaded_vimfiler')
+    execute 'VimFiler'
   else
     execute 'Lexplore'
   endif
@@ -566,6 +568,8 @@ function! SpacevimProjectDirectory()
       execute 'ProjectRootExe NERDTreeToggle'
     elseif exists('g:loaded_dirvish')
       execute 'ProjectRootExe Dirvish'
+    elseif exists('g:loaded_vimfiler')
+      execute 'ProjectRootExe VimFiler'
     else
       execute 'ProjectRootExe Lexplore'
     endif
