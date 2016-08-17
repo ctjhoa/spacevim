@@ -79,6 +79,16 @@ function! s:spacevim_postinstall()
 endfunction
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Disable keybindings that conflict
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+if !exists('g:gitgutter_map_keys')
+  if s:spacevim_is_layer_enabled('git/vcs-micro-state')
+        \ || s:spacevim_is_layer_enabled('core/help-highlight')
+    let g:gitgutter_map_keys = 0
+  endif
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Helpers
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 function! s:spacevim_bind(map, binding, name, value, isCmd)
@@ -217,7 +227,7 @@ if s:spacevim_is_layer_enabled('core/files')
   call s:spacevim_bind('map', 'fr', 'recentf', 'call SpacevimRecentf()', 1)
   call s:spacevim_bind('map', 'fR', 'rename-current-buffer-file', 'call feedkeys('':Rename '')', 1)
   call s:spacevim_bind('map', 'fs', 'save-buffer', 'write', 1)
-  call s:spacevim_bind('map', 'fS', 'write-all', 'wa', 1)
+  call s:spacevim_bind('map', 'fS', 'write-all', 'wall', 1)
   call s:spacevim_bind('map', 'ft', 'explorer-toggle', 'call SpacevimExplorerToggle()', 1)
 
   " files/vim {{{
@@ -243,12 +253,25 @@ if s:spacevim_is_layer_enabled('git')
   call s:spacevim_bind('map', 'gf', 'git-fetch', 'Gfetch', 1)
   call s:spacevim_bind('map', 'gF', 'git-pull', 'Gpull', 1)
   call s:spacevim_bind('map', 'gi', 'git-init', 'Git init', 1)
+  call s:spacevim_bind('map', 'gI', 'git-ignore', 'Gedit .gitignore', 1)
   call s:spacevim_bind('map', 'gl', 'git-log', 'call SpacevimGitLog()', 1)
   call s:spacevim_bind('map', 'gr', 'git-checkout-current-file', 'Gread', 1)
   call s:spacevim_bind('map', 'gR', 'git-remove-current-file', 'Gremove', 1)
   call s:spacevim_bind('map', 'gs', 'git-status', 'Gstatus', 1)
   call s:spacevim_bind('map', 'gS', 'git-stage-file', 'call feedkeys('':Git add -- '')', 1)
   call s:spacevim_bind('map', 'gw', 'git-stage-current-file', 'Gwrite', 1)
+
+  if s:spacevim_is_layer_enabled('git/vcs-micro-state')
+    " Put this in your vimrc: let g:gitgutter_map_keys = 0
+    let g:lmap.g['.'] = { 'name': '+vcs-micro-state' }
+    nmap <leader>g.s <plug>GitGutterStageHunk
+    nmap <leader>g.r <plug>GitGutterRevertHunk
+    nmap <leader>g.h <plug>GitGutterPreviewHunk
+    nmap <leader>g.n <plug>GitGutterNextHunk
+    nmap <leader>g.N <plug>GitGutterNextHunk
+    nmap <leader>g.p <plug>GitGutterPrevHunk
+    call s:spacevim_bind('nmap', 'g.t', 'toggle margin', 'GitGutterSignsToggle', 1)
+  endif
 endif
 " }}}
 
@@ -308,9 +331,9 @@ endif
 " quit {{{
 if s:spacevim_is_layer_enabled('core/quit')
   let g:lmap.q = { 'name': '+quit' }
-  call s:spacevim_bind('map', 'qq', 'prompt-kill-vim', 'qa', 1)
-  call s:spacevim_bind('map', 'qQ', 'kill-vim', 'qa!', 1)
-  call s:spacevim_bind('map', 'qs', 'save-buffers-kill-vim', 'xa', 1)
+  call s:spacevim_bind('map', 'qq', 'prompt-kill-vim', 'quitall', 1)
+  call s:spacevim_bind('map', 'qQ', 'kill-vim', 'quitall!', 1)
+  call s:spacevim_bind('map', 'qs', 'save-buffers-kill-vim', 'xall', 1)
 endif
 " }}}
 
@@ -335,9 +358,12 @@ endif
 " toggles {{{
 if s:spacevim_is_layer_enabled('core/toggles')
   let g:lmap.t = { 'name': '+toggles' }
+  call s:spacevim_bind('map', 'tf', 'wrap', 'call SpacevimToggleWrap()', 1)
   call s:spacevim_bind('map', 'tl', 'truncate-line', 'set invwrap', 1)
   call s:spacevim_bind('map', 'tn', 'line-numbers', 'set invnumber', 1)
   call s:spacevim_bind('map', 'tr', 'linum-relative-toggle', 'set invrelativenumber', 1)
+  call s:spacevim_bind('map', 'ts', 'syntax', 'call SpacevimToggleSyntax()', 1)
+  call s:spacevim_bind('map', 'tS', 'spelling', 'set invspell', 1)
 
   " toggles/highlight {{{
   if s:spacevim_is_layer_enabled('core/toggles/highlight')
@@ -557,6 +583,23 @@ function! SpacevimSmartSearchWithInput(visual)
     execute 'Ag ' . expand('<cword>')
   endif
 endfunction
+
+function! SpacevimToggleWrap()
+  if &formatoptions =~ 't'
+    set formatoptions-='t'
+  else
+    set formatoptions+='t'
+  endif
+endfunction
+
+function! SpacevimToggleSyntax()
+  if exists("g:syntax_on")
+    syntax off
+  else
+    syntax enable
+  endif
+endfunction
+
 
 " vim:set ft=vim sw=2 sts=2 et:
 " vim:fdm=marker
