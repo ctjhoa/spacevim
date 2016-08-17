@@ -105,6 +105,23 @@ function! s:spacevim_bind(map, binding, name, value, isCmd)
   endif
 endfunction
 
+function! s:spacevim_bind_plug(map, binding, name, value)
+  if a:map ==# 'map' && maparg('<Leader>' . a:binding, '') ==# ''
+    let l:map = 'map'
+  elseif a:map ==# 'nmap' && maparg('<Leader>' . a:binding, 'n') ==# ''
+    let l:map = 'nmap'
+  elseif a:map ==# 'vmap' && maparg('<Leader>' . a:binding, 'v') ==# ''
+    let l:map = 'vmap'
+  else
+    let l:map = ''
+  endif
+
+  if l:map !=# ''
+    execute l:map . ' <silent> <SID>' . a:name . ' <Plug>(' . a:value . ')'
+    execute a:map . ' <Leader>' . a:binding . ' <SID>' . a:name
+  endif
+endfunction
+
 function! s:spacevim_is_layer_enabled(name)
   if !exists('g:spacevim_enabled_layers')
     return 1
@@ -145,10 +162,8 @@ if s:spacevim_is_layer_enabled('core/root')
 
   call s:spacevim_bind('map', ':', 'M-x', 'call SpacevimCommands()', 1)
   call s:spacevim_bind('nmap', ';', 'vim-commentary-operator', 'Commentary', 1)
-  if maparg('<Leader>;;', 'n') ==# ''
-    nmap <silent> <SID>vim-commentary-line <Plug>(CommentaryLine)
-    nmap <Leader>;; <SID>vim-commentary-line
-  endif
+
+  call s:spacevim_bind_plug('nmap', ';;', 'vim-commentary-line', 'CommentaryLine')
   call s:spacevim_bind('vmap', ';', 'vim-commentary-operator', '''<,''>Commentary', 1)
 endif
 
@@ -255,12 +270,12 @@ if s:spacevim_is_layer_enabled('git')
 
   if s:spacevim_is_layer_enabled('git/vcs-micro-state')
     let g:lmap.g['.'] = { 'name': '+vcs-micro-state' }
-    nmap <Leader>g.s <Plug>GitGutterStageHunk
-    nmap <Leader>g.r <Plug>GitGutterRevertHunk
-    nmap <Leader>g.h <Plug>GitGutterPreviewHunk
-    nmap <Leader>g.n <Plug>GitGutterNextHunk
-    nmap <Leader>g.N <Plug>GitGutterNextHunk
-    nmap <Leader>g.p <Plug>GitGutterPrevHunk
+    call s:spacevim_bind_plug('nmap', 'g.s', 'stage', 'GitGutterStageHunk')
+    call s:spacevim_bind_plug('nmap', 'g.r', 'revert', 'GitGutterRevertHunk')
+    call s:spacevim_bind_plug('nmap', 'g.h', 'show-hunk', 'GitGutterPreviewHunk')
+    call s:spacevim_bind_plug('nmap', 'g.n', 'next', 'GitGutterNextHunk')
+    call s:spacevim_bind_plug('nmap', 'g.N', 'previous', 'GitGutterPrevHunk')
+    call s:spacevim_bind_plug('nmap', 'g.p', 'previous', 'GitGutterPrevHunk')
     call s:spacevim_bind('nmap', 'g.t', 'toggle margin', 'GitGutterSignsToggle', 1)
   endif
 endif
@@ -407,14 +422,8 @@ endif
 " }}}
 
 if s:spacevim_is_layer_enabled('core/root')
-  if maparg('<Leader>y', 'n') ==# ''
-    nmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
-    nmap <Leader>y <SID>easymotion-line
-  endif
-  if maparg('<Leader>y', 'v') ==# ''
-    vmap <silent> <SID>easymotion-line <Plug>(easymotion-bd-jk)
-    vmap <Leader>y <SID>easymotion-line
-  endif
+  call s:spacevim_bind_plug('nmap', 'y', 'easymotion-line', 'easymotion-bd-jk')
+  call s:spacevim_bind_plug('vmap', 'y', 'easymotion-line', 'easymotion-bd-jk')
 endif
 
 " zoom {{{
