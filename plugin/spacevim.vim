@@ -12,8 +12,8 @@ let g:loaded_spacevim = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! s:spacevim_preinstall()
-  " vim-swoop {{{
-  let g:swoopUseDefaultKeyMap = get(g:, 'swoopUseDefaultKeyMap', 0)
+  " vim-leader-guide {{{
+  let g:lmap = get(g:, 'lmap', {})
   " }}}
 
   " vim-startify {{{
@@ -36,8 +36,8 @@ function! s:spacevim_preinstall()
   \ ])
   " }}}
 
-  " vim-leader-guide {{{
-  let g:lmap = get(g:, 'lmap', {})
+  " vim-swoop {{{
+  let g:swoopUseDefaultKeyMap = get(g:, 'swoopUseDefaultKeyMap', 0)
   " }}}
 endfunction
 
@@ -572,14 +572,6 @@ function! SpacevimSmartSearchWithInput(visual)
   endif
 endfunction
 
-function! SpacevimToggleWrap()
-  if &formatoptions =~ 't'
-    set formatoptions-='t'
-  else
-    set formatoptions+='t'
-  endif
-endfunction
-
 function! SpacevimToggleSyntax()
   if exists("g:syntax_on")
     syntax off
@@ -588,6 +580,13 @@ function! SpacevimToggleSyntax()
   endif
 endfunction
 
+function! SpacevimToggleWrap()
+  if &formatoptions =~ 't'
+    set formatoptions-='t'
+  else
+    set formatoptions+='t'
+  endif
+endfunction
 
 " vim:set ft=vim sw=2 sts=2 et:
 " vim:fdm=marker
