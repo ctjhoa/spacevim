@@ -18,7 +18,7 @@ Spacevim relies on several other vim plugins for the key bindings implementation
 | [pelodelfuego/vim-swoop](https://github.com/pelodelfuego/vim-swoop) | <ul><li>core/search-symbol</li></ul> |  |
 | [scrooloose/syntastic](https://github.com/scrooloose/syntastic) | <ul><li>syntax-checking</li></ul> |  |
 | [sheerun/vim-polyglot](https://github.com/sheerun/vim-polyglot) | <ul><li>core/behavior</li></ul> |  |
-| [tpope/vim-commentary](https://github.com/tpope/vim-commentary) | <ul><li>core/root</li></ul> |  |
+| [tpope/vim-commentary](https://github.com/tpope/vim-commentary) | <ul><li>core/root</li></ul> | <ul><li>[scrooloose/nerdcommenter](https://github.com/scrooloose/nerdcommenter)</li></ul> |
 | [tpope/vim-eunuch](https://github.com/tpope/vim-eunuch) | <ul><li>core/files</li></ul> |  |
 | [tpope/vim-fugitive](https://github.com/tpope/vim-fugitive) | <ul><li>git</li></ul> |  |
 | [tpope/vim-vinegar](https://github.com/tpope/vim-vinegar) | <ul><li>core/behavior</li></ul> |  |

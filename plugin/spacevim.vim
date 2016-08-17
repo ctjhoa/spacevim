@@ -12,6 +12,10 @@ let g:loaded_spacevim = 1
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 function! s:spacevim_preinstall()
+  " nerdcommenter {{{
+  let g:NERDCreateDefaultMappings = get(g:, 'NERDCreateDefaultMappings', 0)
+  " }}}
+
   " vim-gitgutter {{{
   let g:gitgutter_map_keys = get(g:, 'gitgutter_map_keys', 0)
   " }}}
@@ -144,7 +148,7 @@ endfunction
 
 if s:spacevim_is_layer_enabled('core/root')
   call s:spacevim_bind('map', '<Tab>', 'last-buffer', 'b#', 1)
-  call s:spacevim_bind('map', '!', 'shell-cmd', 'call feedkeys('':! '')', 1)
+  call s:spacevim_bind('map', '!', 'shell-cmd', 'call feedkeys(":! ")', 1)
   call s:spacevim_bind('map', '/', 'smart-search', 'Ag', 1)
   call s:spacevim_bind('nmap', '*', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(0)', 1)
   call s:spacevim_bind('vmap', '*', 'smart-search-with-input', 'call SpacevimSmartSearchWithInput(1)', 1)
@@ -161,10 +165,10 @@ if s:spacevim_is_layer_enabled('core/root')
   call s:spacevim_bind('map', '0', 'window-10', '10wincmd w', 1)
 
   call s:spacevim_bind('map', ':', 'M-x', 'call SpacevimCommands()', 1)
-  call s:spacevim_bind('nmap', ';', 'vim-commentary-operator', 'Commentary', 1)
 
-  call s:spacevim_bind_plug('nmap', ';;', 'vim-commentary-line', 'CommentaryLine')
-  call s:spacevim_bind('vmap', ';', 'vim-commentary-operator', '''<,''>Commentary', 1)
+  call s:spacevim_bind('nmap', ';', 'comment-operator', 'call SpacevimCommentOperator(0)', 1)
+  call s:spacevim_bind_plug('nmap', ';;', 'comment-line', 'call SpacevimCommentLine()')
+  call s:spacevim_bind('vmap', ';', 'comment-operator', 'call SpacevimCommentOperator(1)', 1)
 endif
 
 " applications {{{
@@ -228,11 +232,11 @@ if s:spacevim_is_layer_enabled('core/files')
   " }}}
 
   call s:spacevim_bind('map', 'fD', 'delete-current-buffer-file', 'Remove', 1)
-  call s:spacevim_bind('map', 'fE', 'sudo-edit', 'call feedkeys('':SudoEdit '')', 1)
+  call s:spacevim_bind('map', 'fE', 'sudo-edit', 'call feedkeys(":SudoEdit ")', 1)
   call s:spacevim_bind('map', 'ff', 'find-files', 'call SpacevimFindFiles()', 1)
-  call s:spacevim_bind('map', 'fL', 'locate', 'call feedkeys('':Locate '')', 1)
+  call s:spacevim_bind('map', 'fL', 'locate', 'call feedkeys(":Locate ")', 1)
   call s:spacevim_bind('map', 'fr', 'recentf', 'call SpacevimRecentf()', 1)
-  call s:spacevim_bind('map', 'fR', 'rename-current-buffer-file', 'call feedkeys('':Rename '')', 1)
+  call s:spacevim_bind('map', 'fR', 'rename-current-buffer-file', 'call feedkeys(":Rename ")', 1)
   call s:spacevim_bind('map', 'fs', 'save-buffer', 'write', 1)
   call s:spacevim_bind('map', 'fS', 'write-all', 'wall', 1)
   call s:spacevim_bind('map', 'ft', 'explorer-toggle', 'call SpacevimExplorerToggle()', 1)
@@ -265,7 +269,7 @@ if s:spacevim_is_layer_enabled('git')
   call s:spacevim_bind('map', 'gr', 'git-checkout-current-file', 'Gread', 1)
   call s:spacevim_bind('map', 'gR', 'git-remove-current-file', 'Gremove', 1)
   call s:spacevim_bind('map', 'gs', 'git-status', 'Gstatus', 1)
-  call s:spacevim_bind('map', 'gS', 'git-stage-file', 'call feedkeys('':Git add -- '')', 1)
+  call s:spacevim_bind('map', 'gS', 'git-stage-file', 'call feedkeys(":Git add -- ")', 1)
   call s:spacevim_bind('map', 'gw', 'git-stage-current-file', 'Gwrite', 1)
 
   if s:spacevim_is_layer_enabled('git/vcs-micro-state')
@@ -456,7 +460,31 @@ function! SpacevimCommands()
   elseif exists('g:loaded_unite')
     execute 'Unite -start-insert command'
   else
-    execute 'call feedkeys('':\<Tab>'')'
+    execute 'call feedkeys(":\<Tab>")'
+  endif
+endfunction
+
+function! SpacevimCommentLine()
+  if exists('g:loaded_commentary')
+    execute 'call feedkeys(":CommentaryLine\<CR>")'
+  elseif exists('g:loaded_nerd_comments')
+    execute 'call NERDComment("n", "Toggle")'
+  endif
+endfunction
+
+function! SpacevimCommentOperator(visual)
+  if exists('g:loaded_commentary')
+    if a:visual
+      execute 'call feedkeys(":''<,''>Commentary\<CR>")'
+    else
+      execute 'call feedkeys(":Commentary\<CR>")'
+    endif
+  elseif exists('g:loaded_nerd_comments')
+    if a:visual
+      execute 'call NERDComment("v", "Toggle")'
+    else
+      execute 'call NERDComment("n", "Toggle")'
+    endif
   endif
 endfunction
 
@@ -558,7 +586,7 @@ endfunction
 
 function! SpacevimProjectInvalidateCache()
   if exists('g:loaded_unite')
-    execute 'call feedkeys('':UniteWithProjectDir\<CR>\<C-l>\<Esc>'')'
+    execute 'call feedkeys(":UniteWithProjectDir\<CR>\<C-l>\<Esc>")'
   elseif exists('g:loaded_ctrlp')
     execute 'CtrlPClearCache'
   endif
