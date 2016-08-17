@@ -23,10 +23,10 @@ curl -L https://raw.githubusercontent.com/ctjhoa/spacevim/master/vimrc.sample -o
 
 After plugins installation restart vim.
 
-### Manual
+### Key bindings only mode
 
 You already have a vim config and/or want to manage your plugins yourself.
-This mode will provide only Spacemacs key bindings and adapt spacevim with currently installed plugins.
+This mode will provide only Spacemacs key bindings and adapt Spacevim with currently installed plugins.
 Install Spacevim as usual:
 
 * [Pathogen](https://github.com/tpope/vim-pathogen)
