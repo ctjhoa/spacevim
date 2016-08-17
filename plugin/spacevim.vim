@@ -101,7 +101,7 @@ function! s:spacevim_bind(map, binding, name, value, isCmd)
 
   if l:noremap !=# ''
     execute l:noremap . ' <silent> <SID>' . a:name . ' ' . l:value
-    execute a:map . ' <leader>' . a:binding . ' <SID>' . a:name
+    execute a:map . ' <Leader>' . a:binding . ' <SID>' . a:name
   endif
 endfunction
 
@@ -254,14 +254,13 @@ if s:spacevim_is_layer_enabled('git')
   call s:spacevim_bind('map', 'gw', 'git-stage-current-file', 'Gwrite', 1)
 
   if s:spacevim_is_layer_enabled('git/vcs-micro-state')
-    " Put this in your vimrc: let g:gitgutter_map_keys = 0
     let g:lmap.g['.'] = { 'name': '+vcs-micro-state' }
-    nmap <leader>g.s <plug>GitGutterStageHunk
-    nmap <leader>g.r <plug>GitGutterRevertHunk
-    nmap <leader>g.h <plug>GitGutterPreviewHunk
-    nmap <leader>g.n <plug>GitGutterNextHunk
-    nmap <leader>g.N <plug>GitGutterNextHunk
-    nmap <leader>g.p <plug>GitGutterPrevHunk
+    nmap <Leader>g.s <Plug>GitGutterStageHunk
+    nmap <Leader>g.r <Plug>GitGutterRevertHunk
+    nmap <Leader>g.h <Plug>GitGutterPreviewHunk
+    nmap <Leader>g.n <Plug>GitGutterNextHunk
+    nmap <Leader>g.N <Plug>GitGutterNextHunk
+    nmap <Leader>g.p <Plug>GitGutterPrevHunk
     call s:spacevim_bind('nmap', 'g.t', 'toggle margin', 'GitGutterSignsToggle', 1)
   endif
 endif
