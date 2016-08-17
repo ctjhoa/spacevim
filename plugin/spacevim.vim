@@ -585,7 +585,7 @@ function! SpacevimSmartSearchWithInput(visual)
 endfunction
 
 function! SpacevimToggleSyntax()
-  if exists("g:syntax_on")
+  if exists('g:syntax_on')
     syntax off
   else
     syntax enable
@@ -593,7 +593,7 @@ function! SpacevimToggleSyntax()
 endfunction
 
 function! SpacevimToggleWrap()
-  if &formatoptions =~ 't'
+  if &formatoptions =~# 't'
     set formatoptions-='t'
   else
     set formatoptions+='t'
