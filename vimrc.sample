@@ -1,12 +1,6 @@
 " -*- mode: vimrc -*-
 "vim: ft=vim
 
-" define a group `vimrc` and initialize. {{{
-augroup vimrc
-  autocmd!
-augroup END
-"}}}
-
 " spacevim automatic installation {{{
 if empty(glob('~/.vim/autoload/spacevim.vim'))
     silent !curl -fLo ~/.vim/autoload/spacevim.vim --create-dirs

@@ -76,7 +76,10 @@ function! spacevim#bootstrap() abort
     if empty(glob('~/.vim/autoload/plug.vim'))
       silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
             \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-      autocmd vimrc VimEnter * PlugInstall | source $MYVIMRC
+      augroup spacevim_bootstrap
+        autocmd!
+        autocmd VimEnter * PlugInstall | source $MYVIMRC
+      augroup END
     endif
     " }}}
 
