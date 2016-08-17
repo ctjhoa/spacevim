@@ -1,6 +1,6 @@
 " spacevim.vim - Spacemacs key bindings for vim.
 " Maintainer:   Camille Tjhoa <http://github.com/ctjhoa>
-" Version:      1.0
+" Version:      2.0.0
 
 if exists('g:loaded_spacevim')
   finish
