@@ -3,8 +3,9 @@
 Spacevim is [Spacemacs](https://github.com/syl20bnr/spacemacs) for vim.
 It can be used as a full distribution or you can get only the Spacemacs key bindings
 
-![screenshot](screenshot.png)
-[colorscheme](https://github.com/ctjhoa/miro8)
+![screenshot1](assets/screeshot-startify-2.0.0.png)
+![screenshot2](assets/screeshot-leader-2.0.0.png)
+[colorscheme](https://github.com/joshdick/onedark.vim)
 
 ## Installation
 
