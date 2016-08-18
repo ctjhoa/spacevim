@@ -54,7 +54,6 @@ function! spacevim#bootstrap() abort
     \ { 'name': 'airblade/vim-gitgutter',         'layers': ['git', 'git/vcs-micro-state'] },
     \ { 'name': 'dbakker/vim-projectroot',        'layers': ['core/projects'] },
     \ { 'name': 'easymotion/vim-easymotion',      'layers': ['core'] },
-    \ { 'name': 'editorconfig/editorconfig-vim',  'layers': ['core/behavior'] },
     \ { 'name': 'haya14busa/incsearch.vim',       'layers': ['core/behavior'] },
     \ { 'name': 'hecal3/vim-leader-guide',        'layers': ['core/behavior'] },
     \ { 'name': 'junegunn/fzf',                   'layers': ['core/buffers', 'core/files', 'core/projects', 'core'] },
