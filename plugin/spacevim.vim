@@ -151,7 +151,7 @@ endfunction
 " Bindings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-if s:spacevim_is_layer_enabled('core/root')
+if s:spacevim_is_layer_enabled('core')
   call s:spacevim_bind('map', '<Tab>', 'last-buffer', 'b#', 1)
   call s:spacevim_bind('map', '!', 'shell-cmd', 'call feedkeys(":! ")', 1)
   call s:spacevim_bind('map', '/', 'smart-search', 'Ag', 1)
@@ -279,6 +279,7 @@ if s:spacevim_is_layer_enabled('git')
   call s:spacevim_bind('map', 'gS', 'git-stage-file', 'call feedkeys(":Git add -- ")', 1)
   call s:spacevim_bind('map', 'gw', 'git-stage-current-file', 'Gwrite', 1)
 
+  " git/vcs-micro-state {{{
   if s:spacevim_is_layer_enabled('git/vcs-micro-state')
     let g:lmap.g['.'] = { 'name': '+vcs-micro-state' }
     call s:spacevim_bind('nmap', 'g.s', 'stage', 'GitGutterStageHunk', 1)
@@ -289,6 +290,7 @@ if s:spacevim_is_layer_enabled('git')
     call s:spacevim_bind('nmap', 'g.p', 'previous', 'GitGutterPrevHunk', 1)
     call s:spacevim_bind('nmap', 'g.t', 'toggle margin', 'GitGutterSignsToggle', 1)
   endif
+  " }}}
 endif
 " }}}
 
@@ -437,7 +439,7 @@ if s:spacevim_is_layer_enabled('core/text')
 endif
 " }}}
 
-if s:spacevim_is_layer_enabled('core/root')
+if s:spacevim_is_layer_enabled('core')
   call s:spacevim_bind_plug('nmap', 'y', 'easymotion-line', '(easymotion-bd-jk)')
   call s:spacevim_bind_plug('vmap', 'y', 'easymotion-line', '(easymotion-bd-jk)')
 endif

@@ -1,35 +1,35 @@
 function! spacevim#bootstrap() abort
 
   let g:spacevim_layers = [
-  \ 'core/root',
-  \ 'core/applications',
-  \ 'core/behavior',
-  \ 'core/buffers',
-  \ 'core/buffers/move',
-  \ 'core/compile-comments',
-  \ 'core/capture-colors',
-  \ 'core/files',
-  \ 'core/files/convert',
-  \ 'core/files/vim',
-  \ 'core/help-highlight',
-  \ 'core/insertion',
-  \ 'core/join-split',
-  \ 'core/lisp',
-  \ 'core/narrow-numbers',
-  \ 'core/projects',
-  \ 'core/quit',
-  \ 'core/registers-rings',
-  \ 'core/search-symbol',
-  \ 'core/toggles',
-  \ 'core/toggles/highlight',
-  \ 'core/toggles/colors',
-  \ 'core/ui-toggles-themes',
-  \ 'core/windows',
-  \ 'core/text',
-  \ 'core/zoom',
-  \ 'git',
-  \ 'git/vcs-micro-state',
-  \ 'syntax-checking',
+  \ { 'name': 'core', 'alias': 'core/_' },
+  \ { 'name': 'core/applications' },
+  \ { 'name': 'core/behavior' },
+  \ { 'name': 'core/buffers', 'alias': 'core/buffers/_' },
+  \ { 'name': 'core/buffers/move' },
+  \ { 'name': 'core/compile-comments' },
+  \ { 'name': 'core/capture-colors' },
+  \ { 'name': 'core/files', 'alias': 'core/files/_' },
+  \ { 'name': 'core/files/convert' },
+  \ { 'name': 'core/files/vim' },
+  \ { 'name': 'core/help-highlight' },
+  \ { 'name': 'core/insertion' },
+  \ { 'name': 'core/join-split' },
+  \ { 'name': 'core/lisp' },
+  \ { 'name': 'core/narrow-numbers' },
+  \ { 'name': 'core/projects' },
+  \ { 'name': 'core/quit' },
+  \ { 'name': 'core/registers-rings' },
+  \ { 'name': 'core/search-symbol' },
+  \ { 'name': 'core/toggles', 'alias': 'core/toggles/_' },
+  \ { 'name': 'core/toggles/highlight' },
+  \ { 'name': 'core/toggles/colors' },
+  \ { 'name': 'core/ui-toggles-themes' },
+  \ { 'name': 'core/windows' },
+  \ { 'name': 'core/text' },
+  \ { 'name': 'core/zoom' },
+  \ { 'name': 'git', 'alias': 'git/_' },
+  \ { 'name': 'git/vcs-micro-state' },
+  \ { 'name': 'syntax-checking' },
   \ ]
 
   let g:spacevim_enabled_layers = []
@@ -37,40 +37,41 @@ function! spacevim#bootstrap() abort
   if exists('g:dotspacevim_configuration_layers')
     for configuration_layer in g:dotspacevim_configuration_layers
       for layer in g:spacevim_layers
-        if layer =~ configuration_layer
-          call add(g:spacevim_enabled_layers, layer)
+        if layer.name =~ configuration_layer || get(layer, 'alias', '') =~ configuration_layer
+          call add(g:spacevim_enabled_layers, layer.name)
         endif
       endfor
     endfor
   else
-    let g:spacevim_enabled_layers = g:spacevim_layers
+    let g:spacevim_enabled_layers = map(g:spacevim_layers, 'v:val.name')
   endif
 
   if exists('g:dotspacevim_distribution_mode') && g:dotspacevim_distribution_mode
 
+    " Default plugins in distribution mode
     let g:spacevim_plugins = [
-    \ { 'name': 'airblade/vim-gitgutter',         'layers': ['git'] },
+    \ { 'name': 'Raimondi/delimitMate',           'layers': ['core/behavior'] },
+    \ { 'name': 'airblade/vim-gitgutter',         'layers': ['git', 'git/vcs-micro-state'] },
     \ { 'name': 'dbakker/vim-projectroot',        'layers': ['core/projects'] },
-    \ { 'name': 'easymotion/vim-easymotion',      'layers': ['core/root'] },
+    \ { 'name': 'easymotion/vim-easymotion',      'layers': ['core'] },
     \ { 'name': 'editorconfig/editorconfig-vim',  'layers': ['core/behavior'] },
     \ { 'name': 'haya14busa/incsearch.vim',       'layers': ['core/behavior'] },
     \ { 'name': 'hecal3/vim-leader-guide',        'layers': ['core/behavior'] },
-    \ { 'name': 'junegunn/fzf',                   'layers': ['core/buffers', 'core/files', 'core/projects', 'core/root'] },
-    \ { 'name': 'junegunn/fzf.vim',               'layers': ['core/buffers', 'core/files', 'core/projects', 'core/root'] },
+    \ { 'name': 'junegunn/fzf',                   'layers': ['core/buffers', 'core/files', 'core/projects', 'core'] },
+    \ { 'name': 'junegunn/fzf.vim',               'layers': ['core/buffers', 'core/files', 'core/projects', 'core'] },
     \ { 'name': 'junegunn/gv.vim',                'layers': ['git'] },
     \ { 'name': 'kana/vim-arpeggio',              'layers': ['core/behavior'] },
     \ { 'name': 'mbbill/undotree',                'layers': ['core/applications'] },
     \ { 'name': 'mhinz/vim-startify',             'layers': ['core/behavior'] },
     \ { 'name': 'osyo-manga/vim-over',            'layers': ['core/behavior'] },
     \ { 'name': 'pelodelfuego/vim-swoop',         'layers': ['core/search-symbol'] },
-    \ { 'name': 'Raimondi/delimitMate',           'layers': ['core/behavior'] },
     \ { 'name': 'scrooloose/syntastic',           'layers': ['syntax-checking'] },
     \ { 'name': 'sheerun/vim-polyglot',           'layers': ['core/behavior'] },
-    \ { 'name': 'tpope/vim-commentary',           'layers': ['core/root'] },
+    \ { 'name': 'tpope/vim-commentary',           'layers': ['core'] },
     \ { 'name': 'tpope/vim-eunuch',               'layers': ['core/files'] },
     \ { 'name': 'tpope/vim-fugitive',             'layers': ['git'] },
-    \ { 'name': 'tpope/vim-surround',             'layers': ['core/behavior'] },
     \ { 'name': 'tpope/vim-sensible',             'layers': ['core/behavior'] },
+    \ { 'name': 'tpope/vim-surround',             'layers': ['core/behavior'] },
     \ { 'name': 'tpope/vim-vinegar',              'layers': ['core/files', 'core/projects'] }
     \ ]
 
