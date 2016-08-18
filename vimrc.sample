@@ -27,7 +27,7 @@ endif
   \  'syntax-checking'
   \]
 
-  let g:dotspacevim_additional_plugins = ['morhetz/gruvbox']
+  let g:dotspacevim_additional_plugins = ['editorconfig/editorconfig-vim', 'morhetz/gruvbox']
 
   let g:dotspacevim_excluded_plugins = []
 

@@ -65,7 +65,6 @@ Main layer which provides core Spacemacs functionalities and behaviour.
 Plugin list:
 - https://github.com/dbakker/vim-projectroot
 - https://github.com/easymotion/vim-easymotion
-- https://github.com/editorconfig/editorconfig-vim
 - https://github.com/haya14busa/incsearch.vim
 - https://github.com/hecal3/vim-leader-guide
 - https://github.com/junegunn/fzf
