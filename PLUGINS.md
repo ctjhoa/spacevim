@@ -1,31 +1,38 @@
 # Plugins
 
 Spacevim relies on several other vim plugins for the key bindings implementations and Spacemacs behavior.
+All plugins are optional.
 
-| Plugin | Layers | Supported alternatives |
-| ----- | ------ | ---------------------- |
-| [airblade/vim-gitgutter][] | <ul><li>git</li></ul> |  |
-| [dbakker/vim-projectroot][] | <ul><li>core/projects</li></ul> |  |
-| [easymotion/vim-easymotion][] | <ul><li>core/root</li></ul> |  |
-| [editorconfig/editorconfig-vim][] | <ul><li>core/behavior</li></ul> |  |
-| [haya14busa/incsearch.vim][] | <ul><li>core/behavior</li></ul> |  |
-| [hecal3/vim-leader-guide][] | <ul><li>core/behavior</li></ul> |  |
-| <ul><li>[junegunn/fzf][]</li><li>[junegunn/fzf.vim][]</li></ul> | <ul><li>core/buffers</li><li>core/files</li><li>core/projects</li><li>core/root</li></ul> | <ul><li>[Shougo/unite.vim][]</li><li>[ctrlpvim/ctrlp.vim][]</li></ul> |
-| [junegunn/gv.vim][] | <ul><li>git</li></ul> |  |
-| [kana/vim-arpeggio][] | <ul><li>core/behavior</li></ul> |  |
-| [mbbill/undotree][] | <ul><li>core/applications</li></ul> |  |
-| [osyo-manga/vim-over][] | <ul><li>core/behavior</li></ul> |  |
-| [pelodelfuego/vim-swoop][] | <ul><li>core/search-symbol</li></ul> |  |
-| [scrooloose/syntastic][] | <ul><li>syntax-checking</li></ul> |  |
-| [sheerun/vim-polyglot][] | <ul><li>core/behavior</li></ul> |  |
-| [tpope/vim-commentary][] | <ul><li>core/root</li></ul> | <ul><li>[scrooloose/nerdcommenter][]</li></ul> |
-| [tpope/vim-eunuch][] | <ul><li>core/files</li></ul> |  |
-| [tpope/vim-fugitive][] | <ul><li>git</li></ul> |  |
-| [tpope/vim-vinegar][] | <ul><li>core/behavior</li></ul> |  |
-| [tpope/vim-surround][] | <ul><li>core/behavior</li></ul> |  |
-| [Raimondi/delimitMate][] | <ul><li>core/behavior</li></ul> |  |
-| `netrw` | <ul><li>core/files</li><li>core/projects</li></ul> | <ul><li>[justinmk/vim-dirvish][]</li><li>[scrooloose/nerdtree][]</li><li>[Shougo/vimfiler.vim][]</li></ul> |
-
+| Layers | Supported plugins |
+| ------ | ------------------------------------------- |
+| core/root | <ul><li>[easymotion/vim-easymotion][]</li><li>([junegunn/fzf.vim][] + [junegunn/fzf][]) OR [Shougo/unite.vim][] OR [ctrlpvim/ctrlp.vim][]</li><li>[scrooloose/nerdcommenter][] OR [tpope/vim-commentary][]</li></ul> |
+| core/applications | <ul><li>[mbbill/undotree][]</li></ul> |
+| core/behavior | <ul><li>[editorconfig/editorconfig-vim][]</li><li>[haya14busa/incsearch.vim][]</li><li>[hecal3/vim-leader-guide][]</li><li>[kana/vim-arpeggio][]</li><li>[mhinz/vim-startify][]</li><li>[osyo-manga/vim-over][]</li><li>[Raimondi/delimitMate][]</li><li>[sheerun/vim-polyglot][]</li><li>[tpope/vim-surround][]</li></ul> |
+| core/buffers | <ul><li>([junegunn/fzf.vim][] + [junegunn/fzf][]) OR [Shougo/unite.vim][] OR [ctrlpvim/ctrlp.vim][]</li></ul> |
+| core/buffers/move | None required |
+| core/compile-comments | None required |
+| core/capture-colors | None required |
+| core/files | <ul><li>([junegunn/fzf.vim][] + [junegunn/fzf][]) OR [Shougo/unite.vim][] OR [ctrlpvim/ctrlp.vim][]</li><li>(`netrw` + [tpope/vim-vinegar][]) OR [scrooloose/nerdtree][] OR [justinmk/vim-dirvish][]</li><li>[tpope/vim-eunuch][]</li></ul> |
+| core/files/convert | None required |
+| core/files/vim | None required |
+| core/help-highlight | None required |
+| core/insertion | None required |
+| core/join-split | None required |
+| core/lisp | None required |
+| core/narrow-numbers | None required |
+| core/projects | <ul><li>[dbakker/vim-projectroot][]</li><li>([junegunn/fzf.vim][] + [junegunn/fzf][]) OR [Shougo/unite.vim][] OR [ctrlpvim/ctrlp.vim][]</li><li>[tpope/vim-vinegar][]</li></ul> |
+| core/quit | None required |
+| core/registers-rings | None required |
+| core/search-symbol | <ul><li>[pelodelfuego/vim-swoop][]</li></ul> |
+| core/toggles | None required |
+| core/toggles/highlight | None required |
+| core/ui-toggles-themes | None required |
+| core/windows | None required |
+| core/text | None required |
+| core/zoom | None required |
+| git | <ul><li>[airblade/vim-gitgutter][]</li><li>[junegunn/gv.vim][]</li><li>[tpope/vim-fugitive][]</li></ul> |
+| git/vcs-micro-state | <ul><li>[airblade/vim-gitgutter][]</li></ul> |
+| syntax-checking | <ul><li>[scrooloose/syntastic][]</li></ul> |
 
 <!-- Plugins -->
 
@@ -45,6 +52,7 @@ Spacevim relies on several other vim plugins for the key bindings implementation
 [justinmk/vim-dirvish]: https://github.com/justinmk/vim-dirvish
 [kana/vim-arpeggio]: https://github.com/kana/vim-arpeggio
 [mbbill/undotree]: https://github.com/mbbill/undotree
+[mhinz/vim-startify]: https://github.com/mhinz/vim-startify
 [osyo-manga/vim-over]: https://github.com/osyo-manga/vim-over
 [pelodelfuego/vim-swoop]: https://github.com/pelodelfuego/vim-swoop
 [scrooloose/nerdcommenter]: https://github.com/scrooloose/nerdcommenter
