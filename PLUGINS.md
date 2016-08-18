@@ -1,7 +1,8 @@
 # Plugins
 
 Spacevim relies on several other vim plugins for the key bindings implementations and Spacemacs behavior.
-All plugins are optional.
+
+All plugins are optional and are needed only when the associated shorcut is pressed (except for `core/behavior` plugins).
 
 | Layers | Supported plugins |
 | ------ | ------------------------------------------- |
