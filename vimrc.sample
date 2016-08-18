@@ -22,7 +22,7 @@ endif
   let g:dotspacevim_distribution_mode = 1
 
   let g:dotspacevim_configuration_layers = [
-  \  'core/.*',
+  \  'core',
   \  'git',
   \  'syntax-checking'
   \]
@@ -30,8 +30,6 @@ endif
   let g:dotspacevim_additional_plugins = ['morhetz/gruvbox']
 
   let g:dotspacevim_excluded_plugins = []
-
-  " let g:dotspacevim_escape_key_sequence = 'fd'
 
 " }}}
 
