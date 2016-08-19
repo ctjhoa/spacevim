@@ -1,4 +1,4 @@
-" spacevim.vim - Spacemacs key bindings for vim.
+" spacevim.vim - Spacemacs for vim.
 " Maintainer:   Camille Tjhoa <http://github.com/ctjhoa>
 " Version:      2.0.0
 
