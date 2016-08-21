@@ -274,12 +274,12 @@ if s:spacevim_is_layer_enabled('git')
 
   if s:spacevim_is_layer_enabled('git/vcs-micro-state')
     let g:lmap.g['.'] = { 'name': '+vcs-micro-state' }
-    call s:spacevim_bind_plug('nmap', 'g.s', 'stage', 'GitGutterStageHunk')
-    call s:spacevim_bind_plug('nmap', 'g.r', 'revert', 'GitGutterRevertHunk')
-    call s:spacevim_bind_plug('nmap', 'g.h', 'show-hunk', 'GitGutterPreviewHunk')
-    call s:spacevim_bind_plug('nmap', 'g.n', 'next', 'GitGutterNextHunk')
-    call s:spacevim_bind_plug('nmap', 'g.N', 'previous', 'GitGutterPrevHunk')
-    call s:spacevim_bind_plug('nmap', 'g.p', 'previous', 'GitGutterPrevHunk')
+    call s:spacevim_bind('nmap', 'g.s', 'stage', 'GitGutterStageHunk', 1)
+    call s:spacevim_bind('nmap', 'g.r', 'revert', 'GitGutterRevertHunk', 1)
+    call s:spacevim_bind('nmap', 'g.h', 'show-hunk', 'GitGutterPreviewHunk', 1)
+    call s:spacevim_bind('nmap', 'g.n', 'next', 'GitGutterNextHunk', 1)
+    call s:spacevim_bind('nmap', 'g.N', 'previous', 'GitGutterPrevHunk', 1)
+    call s:spacevim_bind('nmap', 'g.p', 'previous', 'GitGutterPrevHunk', 1)
     call s:spacevim_bind('nmap', 'g.t', 'toggle margin', 'GitGutterSignsToggle', 1)
   endif
 endif
