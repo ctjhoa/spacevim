@@ -22,6 +22,7 @@ function! spacevim#bootstrap() abort
   \ 'core/search-symbol',
   \ 'core/toggles',
   \ 'core/toggles/highlight',
+  \ 'core/toggles/colors',
   \ 'core/ui-toggles-themes',
   \ 'core/windows',
   \ 'core/text',

@@ -382,6 +382,12 @@ if s:spacevim_is_layer_enabled('core/toggles')
     call s:spacevim_bind('nmap', 'thl', 'highlight-current-line-globaly', 'setlocal invcursorline', 1)
   endif
   " }}}
+  "
+  if s:spacevim_is_layer_enabled('core/toggles/colors')
+    let g:lmap.t.C = { 'name': '+toggles/colors' }
+    call s:spacevim_bind('nmap', 'tCp', 'parenthesis-highlight-mode', 'setlocal invshowmatch', 1)
+    
+  endif
 
 endif
 " }}}
