@@ -121,7 +121,7 @@ function! s:spacevim_bind_plug(map, binding, name, value)
   endif
 
   if l:map !=# ''
-    execute l:map . ' <silent> <SID>' . a:name . ' <Plug>(' . a:value . ')'
+    execute l:map . ' <silent> <SID>' . a:name . ' <Plug>' . a:value
     execute a:map . ' <Leader>' . a:binding . ' <SID>' . a:name
   endif
 endfunction
@@ -426,8 +426,8 @@ endif
 " }}}
 
 if s:spacevim_is_layer_enabled('core/root')
-  call s:spacevim_bind_plug('nmap', 'y', 'easymotion-line', 'easymotion-bd-jk')
-  call s:spacevim_bind_plug('vmap', 'y', 'easymotion-line', 'easymotion-bd-jk')
+  call s:spacevim_bind_plug('nmap', 'y', 'easymotion-line', '(easymotion-bd-jk)')
+  call s:spacevim_bind_plug('vmap', 'y', 'easymotion-line', '(easymotion-bd-jk)')
 endif
 
 " zoom {{{
