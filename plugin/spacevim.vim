@@ -7,6 +7,10 @@ if exists('g:loaded_spacevim')
 endif
 let g:loaded_spacevim = 1
 
+" vim-leader-guide {{{
+let g:lmap = get(g:, 'lmap', {})
+" }}}
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Default plugin config
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -18,10 +22,6 @@ function! s:spacevim_preinstall()
 
   " vim-gitgutter {{{
   let g:gitgutter_map_keys = get(g:, 'gitgutter_map_keys', 0)
-  " }}}
-
-  " vim-leader-guide {{{
-  let g:lmap = get(g:, 'lmap', {})
   " }}}
 
   " vim-startify {{{
@@ -121,7 +121,7 @@ function! s:spacevim_bind_plug(map, binding, name, value)
   endif
 
   if l:map !=# ''
-    execute l:map . ' <silent> <SID>' . a:name . ' <Plug>(' . a:value . ')'
+    execute l:map . ' <silent> <SID>' . a:name . ' <Plug>' . a:value
     execute a:map . ' <Leader>' . a:binding . ' <SID>' . a:name
   endif
 endfunction
@@ -274,12 +274,12 @@ if s:spacevim_is_layer_enabled('git')
 
   if s:spacevim_is_layer_enabled('git/vcs-micro-state')
     let g:lmap.g['.'] = { 'name': '+vcs-micro-state' }
-    call s:spacevim_bind_plug('nmap', 'g.s', 'stage', 'GitGutterStageHunk')
-    call s:spacevim_bind_plug('nmap', 'g.r', 'revert', 'GitGutterRevertHunk')
-    call s:spacevim_bind_plug('nmap', 'g.h', 'show-hunk', 'GitGutterPreviewHunk')
-    call s:spacevim_bind_plug('nmap', 'g.n', 'next', 'GitGutterNextHunk')
-    call s:spacevim_bind_plug('nmap', 'g.N', 'previous', 'GitGutterPrevHunk')
-    call s:spacevim_bind_plug('nmap', 'g.p', 'previous', 'GitGutterPrevHunk')
+    call s:spacevim_bind('nmap', 'g.s', 'stage', 'GitGutterStageHunk', 1)
+    call s:spacevim_bind('nmap', 'g.r', 'revert', 'GitGutterRevertHunk', 1)
+    call s:spacevim_bind('nmap', 'g.h', 'show-hunk', 'GitGutterPreviewHunk', 1)
+    call s:spacevim_bind('nmap', 'g.n', 'next', 'GitGutterNextHunk', 1)
+    call s:spacevim_bind('nmap', 'g.N', 'previous', 'GitGutterPrevHunk', 1)
+    call s:spacevim_bind('nmap', 'g.p', 'previous', 'GitGutterPrevHunk', 1)
     call s:spacevim_bind('nmap', 'g.t', 'toggle margin', 'GitGutterSignsToggle', 1)
   endif
 endif
@@ -432,8 +432,8 @@ endif
 " }}}
 
 if s:spacevim_is_layer_enabled('core/root')
-  call s:spacevim_bind_plug('nmap', 'y', 'easymotion-line', 'easymotion-bd-jk')
-  call s:spacevim_bind_plug('vmap', 'y', 'easymotion-line', 'easymotion-bd-jk')
+  call s:spacevim_bind_plug('nmap', 'y', 'easymotion-line', '(easymotion-bd-jk)')
+  call s:spacevim_bind_plug('vmap', 'y', 'easymotion-line', '(easymotion-bd-jk)')
 endif
 
 " zoom {{{
