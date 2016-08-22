@@ -50,6 +50,7 @@ Install Spacevim as usual:
 
 * Load plugin in async
 * Improve performance
+* Fix OSX
 * Better documentation
 * OO programming (as suggested [here](https://www.reddit.com/r/vim/comments/4y8w38/spacevim_20_the_war_is_not_over/d6m1i02))
 
