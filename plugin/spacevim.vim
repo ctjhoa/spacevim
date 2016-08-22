@@ -183,6 +183,7 @@ if s:spacevim_is_layer_enabled('core/buffers')
   let g:lmap.b = { 'name': '+buffers' }
   call s:spacevim_bind('map', 'bb', 'buffers', 'call SpacevimBuffers()', 1)
   call s:spacevim_bind('map', 'bd', 'kill-this-buffer', 'bd', 1)
+  call s:spacevim_bind('map', 'bK', 'kill-other-buffers', 'call SpacevimKillOtherBuffers()', 1)
   call s:spacevim_bind('map', 'bn', 'next-useful-buffer', 'bnext', 1)
   call s:spacevim_bind('map', 'bp', 'previous-useful-buffer', 'bprevious', 1)
   call s:spacevim_bind('map', 'bR', 'safe-revert-buffer', 'e', 1)
@@ -387,7 +388,6 @@ if s:spacevim_is_layer_enabled('core/toggles')
   if s:spacevim_is_layer_enabled('core/toggles/colors')
     let g:lmap.t.C = { 'name': '+toggles/colors' }
     call s:spacevim_bind('nmap', 'tCp', 'parenthesis-highlight-mode', 'setlocal invshowmatch', 1)
-    
   endif
 
 endif
@@ -550,6 +550,39 @@ function! SpacevimGitLog()
     execute 'GV'
   else
     execute 'silent! Glog<CR>:bot copen'
+  endif
+endfunction
+
+function! SpacevimKillOtherBuffers()
+  if confirm('Killing all buffers except "'. @% . '"?')
+    " see https://github.com/vim-scripts/BufOnly.vim/blob/master/plugin/BufOnly.vim
+    let buffer = bufnr('%')
+    let last_buffer = bufnr('$')
+
+    let delete_count = 0
+    let n = 1
+    while n <= last_buffer
+      if n != buffer && buflisted(n)
+        if getbufvar(n, '&modified')
+          echohl ErrorMsg
+          echomsg 'No write since last change for buffer'
+                \ n
+          echohl None
+        else
+          silent exe 'bdel ' . n
+          if ! buflisted(n)
+            let delete_count = delete_count+1
+          endif
+        endif
+      endif
+      let n = n+1
+    endwhile
+
+    if delete_count == 1
+      echomsg delete_count "Buffer deleted"
+    elseif delete_count > 1
+      echomsg delete_count "Buffers deleted"
+    endif
   endif
 endfunction
 
