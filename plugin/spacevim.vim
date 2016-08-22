@@ -369,19 +369,25 @@ endif
 if s:spacevim_is_layer_enabled('core/toggles')
   let g:lmap.t = { 'name': '+toggles' }
   call s:spacevim_bind('map', 'tf', 'wrap', 'call SpacevimToggleWrap()', 1)
-  call s:spacevim_bind('map', 'tl', 'truncate-line', 'set invwrap', 1)
-  call s:spacevim_bind('map', 'tn', 'line-numbers', 'set invnumber', 1)
-  call s:spacevim_bind('map', 'tr', 'linum-relative-toggle', 'set invrelativenumber', 1)
+  call s:spacevim_bind('map', 'tl', 'truncate-line', 'setlocal invwrap', 1)
+  call s:spacevim_bind('map', 'tn', 'line-numbers', 'setlocal invnumber', 1)
+  call s:spacevim_bind('map', 'tr', 'linum-relative-toggle', 'setlocal invrelativenumber', 1)
   call s:spacevim_bind('map', 'ts', 'syntax', 'call SpacevimToggleSyntax()', 1)
-  call s:spacevim_bind('map', 'tS', 'spelling', 'set invspell', 1)
+  call s:spacevim_bind('map', 'tS', 'spelling', 'setlocal invspell', 1)
 
   " toggles/highlight {{{
   if s:spacevim_is_layer_enabled('core/toggles/highlight')
     let g:lmap.t.h = { 'name': '+toggles/highlight' }
-    call s:spacevim_bind('nmap', 'thc', 'highlight-indentation-current-column', 'set invcursorcolumn', 1)
-    call s:spacevim_bind('nmap', 'thl', 'highlight-current-line-globaly', 'set invcursorline', 1)
+    call s:spacevim_bind('nmap', 'thc', 'highlight-indentation-current-column', 'setlocal invcursorcolumn', 1)
+    call s:spacevim_bind('nmap', 'thl', 'highlight-current-line-globaly', 'setlocal invcursorline', 1)
   endif
   " }}}
+  "
+  if s:spacevim_is_layer_enabled('core/toggles/colors')
+    let g:lmap.t.C = { 'name': '+toggles/colors' }
+    call s:spacevim_bind('nmap', 'tCp', 'parenthesis-highlight-mode', 'setlocal invshowmatch', 1)
+    
+  endif
 
 endif
 " }}}
@@ -626,9 +632,9 @@ endfunction
 
 function! SpacevimToggleWrap()
   if &formatoptions =~# 't'
-    set formatoptions-='t'
+    setlocal formatoptions-='t'
   else
-    set formatoptions+='t'
+    setlocal formatoptions+='t'
   endif
 endfunction
 
