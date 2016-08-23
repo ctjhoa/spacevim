@@ -580,9 +580,9 @@ function! SpacevimKillOtherBuffers()
     endwhile
 
     if delete_count == 1
-      echomsg delete_count "Buffer deleted"
+      echomsg delete_count 'Buffer deleted'
     elseif delete_count > 1
-      echomsg delete_count "Buffers deleted"
+      echomsg delete_count 'Buffers deleted'
     endif
   endif
 endfunction
