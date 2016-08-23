@@ -64,6 +64,7 @@ function! s:spacevim_postinstall()
     function! s:spacevim_displayfunc()
       let g:leaderGuide#displayname = substitute(g:leaderGuide#displayname, '\c<cr>$', '', '')
       let g:leaderGuide#displayname = substitute(g:leaderGuide#displayname, '^<SID>', '', '')
+      let g:leaderGuide#displayname = substitute(g:leaderGuide#displayname, '#', '', '')
     endfunction
     if exists('g:leaderGuide_displayfunc')
       call add(g:leaderGuide_displayfunc, function('s:spacevim_displayfunc'))
@@ -104,8 +105,8 @@ function! s:spacevim_bind(map, binding, name, value, isCmd)
   endif
 
   if l:noremap !=# ''
-    execute l:noremap . ' <silent> <SID>' . a:name . ' ' . l:value
-    execute a:map . ' <Leader>' . a:binding . ' <SID>' . a:name
+    execute l:noremap . ' <silent> <SID>' . a:name . '# ' . l:value
+    execute a:map . ' <Leader>' . a:binding . ' <SID>' . a:name . '#'
   endif
 endfunction
 
@@ -121,8 +122,8 @@ function! s:spacevim_bind_plug(map, binding, name, value)
   endif
 
   if l:map !=# ''
-    execute l:map . ' <silent> <SID>' . a:name . ' <Plug>' . a:value
-    execute a:map . ' <Leader>' . a:binding . ' <SID>' . a:name
+    execute l:map . ' <silent> <SID>' . a:name . '# <Plug>' . a:value
+    execute a:map . ' <Leader>' . a:binding . ' <SID>' . a:name . '#'
   endif
 endfunction
 
