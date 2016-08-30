@@ -183,7 +183,7 @@ endif
 if s:spacevim_is_layer_enabled('core/buffers')
   let g:lmap.b = { 'name': '+buffers' }
   call s:spacevim_bind('map', 'bb', 'buffers', 'call SpacevimBuffers()', 1)
-  call s:spacevim_bind('map', 'bd', 'kill-this-buffer', 'bd', 1)
+  call s:spacevim_bind('map', 'bd', 'kill-this-buffer', 'call SpacevimKillBuffer()', 1)
   call s:spacevim_bind('map', 'bK', 'kill-other-buffers', 'call SpacevimKillOtherBuffers()', 1)
   call s:spacevim_bind('map', 'bn', 'next-useful-buffer', 'bnext', 1)
   call s:spacevim_bind('map', 'bp', 'previous-useful-buffer', 'bprevious', 1)
@@ -334,10 +334,10 @@ endif
 
 " projects {{{
 if s:spacevim_is_layer_enabled('core/projects')
-let g:lmap.p = { 'name': '+projects' }
-call s:spacevim_bind('map', 'pf', 'project-find-file', 'call SpacevimProjectFindFile()', 1)
-call s:spacevim_bind('map', 'pD', 'project-directory', 'call SpacevimProjectDirectory()', 1)
-call s:spacevim_bind('map', 'pI', 'project-invalidate-cache', 'call SpacevimProjectInvalidateCache()', 1)
+  let g:lmap.p = { 'name': '+projects' }
+  call s:spacevim_bind('map', 'pf', 'project-find-file', 'call SpacevimProjectFindFile()', 1)
+  call s:spacevim_bind('map', 'pD', 'project-directory', 'call SpacevimProjectDirectory()', 1)
+  call s:spacevim_bind('map', 'pI', 'project-invalidate-cache', 'call SpacevimProjectInvalidateCache()', 1)
 endif
 " }}}
 
@@ -551,6 +551,15 @@ function! SpacevimGitLog()
     execute 'GV'
   else
     execute 'silent! Glog<CR>:bot copen'
+  endif
+endfunction
+
+function! SpacevimKillBuffer()
+  if exists(':Bdelete')
+    " https://github.com/moll/vim-bbye
+    execute 'Bdelete'
+  else
+    execute 'bdelete'
   endif
 endfunction
 
