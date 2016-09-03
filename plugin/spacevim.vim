@@ -20,6 +20,10 @@ function! s:spacevim_preinstall()
   let g:NERDCreateDefaultMappings = get(g:, 'NERDCreateDefaultMappings', 0)
   " }}}
 
+  " vim-easymotion {{{
+  let g:EasyMotion_do_mapping = get(g:, 'EasyMotion_do_mapping', 0)
+  " }}}
+
   " vim-gitgutter {{{
   let g:gitgutter_map_keys = get(g:, 'gitgutter_map_keys', 0)
   " }}}
