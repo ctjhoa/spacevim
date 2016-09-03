@@ -5,7 +5,7 @@
 " Automatic installation of spacevim.
 
 if empty(glob('~/.vim/autoload/spacevim.vim'))
-    silent !curl -fLo ~/.vim/autoload/spacevim.vim --create-dirs
+    silent !curl -sSfLo ~/.vim/autoload/spacevim.vim --create-dirs
           \ https://raw.githubusercontent.com/ctjhoa/spacevim/master/autoload/spacevim.vim
 endif
 
