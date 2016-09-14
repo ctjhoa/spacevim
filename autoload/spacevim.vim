@@ -83,7 +83,7 @@ function! spacevim#bootstrap() abort
     let vim_plugged = expand(resolve(vim_config_dir . '/autoload/plug.vim'))
 
     if empty(vim_plugged)
-      exectue "!curl -fLo" . vim_plugged . "--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
+      exectue "!curl -fLo" . vim_plugged . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
       augroup spacevim_bootstrap
         autocmd!
         autocmd VimEnter * PlugInstall | source $MYVIMRC
