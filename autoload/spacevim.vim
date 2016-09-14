@@ -75,9 +75,15 @@ function! spacevim#bootstrap() abort
     \ ]
 
     " vim-plug automatic installation {{{
-    if empty(glob('~/.vim/autoload/plug.vim'))
-      silent !curl -sSfLo ~/.vim/autoload/plug.vim --create-dirs
-            \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+    if has('nvim')
+      let vim_config_dir = $HOME . '/.config/nvim'
+    else
+      let vim_config_dir = $HOME . '/.vim'
+    endif
+    let vim_plugged = expand(resolve(vim_config_dir . '/autoload/plug.vim'))
+
+    if empty(vim_plugged)
+      exectue "!curl -fLo" . vim_plugged . "--create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
       augroup spacevim_bootstrap
         autocmd!
         autocmd VimEnter * PlugInstall | source $MYVIMRC
@@ -105,4 +111,3 @@ function! spacevim#bootstrap() abort
     " }}}
   endif
 endfunction
-"

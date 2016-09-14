@@ -4,9 +4,17 @@
 " dotspacevim/auto-install {{{
 " Automatic installation of spacevim.
 
-if empty(glob('~/.vim/autoload/spacevim.vim'))
-    silent !curl -sSfLo ~/.vim/autoload/spacevim.vim --create-dirs
-          \ https://raw.githubusercontent.com/ctjhoa/spacevim/master/autoload/spacevim.vim
+if has('nvim')
+  let vim_config_dir = '~/.config/nvim'
+else
+  let vim_config_dir = '~/.vim'
+endif
+let vim_autoload_spacevim = expand(resolve(vim_config_dir . '/autoload/spacevim.vim'))
+let spacevim_user_init = expand(resolve(vim_config_dir . '/user-init.vim'))
+let spacevim_user_config = expand(resolve(vim_config_dir . '/user-config.vim'))
+
+if empty(glob(vim_autoload_spacevim))
+    execute "!curl -sSfLo" . vim_autoload_spacevim . "--create-dirs https://raw.githubusercontent.com/tehnix/spacevim/master/autoload/spacevim.vim"
 endif
 
 " }}}
@@ -44,7 +52,12 @@ endif
 " them in `dotspacevim/user-config' first."
 
   let mapleader = ' '
-  let g:leaderGuide_vertical = 1
+  let g:leaderGuide_vertical = 0
+
+  " Load external user-init if found
+  if filereadable(spacevim_user_init)
+    execute 'source '. spacevim_user_init
+  endif
 
 " }}}
 
@@ -61,5 +74,10 @@ call spacevim#bootstrap()
 
   set background=dark
   colorscheme gruvbox
+
+  " Load external user-config if found
+  if filereadable(spacevim_user_config)
+    execute 'source '. spacevim_user_config
+  endif
 
 " }}}
