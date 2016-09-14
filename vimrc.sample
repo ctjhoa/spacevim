@@ -5,9 +5,9 @@
 " Automatic installation of spacevim.
 
 if has('nvim')
-  let vim_config_dir = '~/.config/nvim'
+  let vim_config_dir = $HOME . '/.config/nvim'
 else
-  let vim_config_dir = '~/.vim'
+  let vim_config_dir = $HOME . '/.vim'
 endif
 let vim_autoload_spacevim = expand(resolve(vim_config_dir . '/autoload/spacevim.vim'))
 let spacevim_user_init = expand(resolve(vim_config_dir . '/user-init.vim'))
