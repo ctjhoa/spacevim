@@ -14,7 +14,7 @@ let spacevim_user_init = expand(resolve(vim_config_dir . '/user-init.vim'))
 let spacevim_user_config = expand(resolve(vim_config_dir . '/user-config.vim'))
 
 if empty(glob(vim_autoload_spacevim))
-    execute "!curl -sSfLo" . vim_autoload_spacevim . " --create-dirs https://raw.githubusercontent.com/tehnix/spacevim/master/autoload/spacevim.vim"
+    silent "!curl -sSfLo " . vim_autoload_spacevim . " --create-dirs https://raw.githubusercontent.com/tehnix/spacevim/master/autoload/spacevim.vim"
 endif
 
 " }}}
