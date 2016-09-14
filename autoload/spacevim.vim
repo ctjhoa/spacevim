@@ -97,8 +97,8 @@ function! spacevim#bootstrap() abort
       endfor
     endfor
     if exists('g:dotspacevim_additional_plugins')
-      for plugin in g:dotspacevim_additional_plugins
-        Plug plugin
+      for additional_plugin in g:dotspacevim_additional_plugins
+        Plug additional_plugin
       endfor
     endif
     call plug#end()
