@@ -8,7 +8,6 @@ function! spacevim#bootstrap() abort
 
   " Download the layers {{{
   if empty(glob(spacevim_layers_dir))
-    echo "Fetching spaceneovim-layers"
     let install_layers = jobstart([
     \  'git',
     \  'clone',
@@ -23,10 +22,7 @@ function! spacevim#bootstrap() abort
   let g:spacevim_layers = []
 
   if filereadable(spacevim_layers_dir . '/layers.vim')
-    echo 'Trying to load layers'
     execute 'source ' . spacevim_layers_dir . '/layers.vim'
-  else
-    echo 'Layers.vim not found'
   endif
   " }}}
 
@@ -35,11 +31,8 @@ function! spacevim#bootstrap() abort
 
   if exists('g:dotspacevim_configuration_layers')
     for configuration_layer in g:dotspacevim_configuration_layers
-      echo 'Checking config layer ' . configuration_layer
       for layer in g:spacevim_layers
-        echo 'Checking against layer ' . layer
         if layer =~ configuration_layer
-          echo 'Enabling layer ' . layer
           call add(g:spacevim_enabled_layers, layer)
         endif
       endfor
