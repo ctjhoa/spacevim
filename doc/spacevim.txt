@@ -1,47 +1,36 @@
-*spacevim.txt*  Spacemacs for vim
+*spaceneovim.txt*  Spacemacs for Neovim
 
+SpaceNeovim
 
-  /$$$$$$                                          /$$    /$$ /$$              
- /$$__  $$                                        | $$   | $$|__/              
-| $$  \__/  /$$$$$$   /$$$$$$   /$$$$$$$  /$$$$$$ | $$   | $$ /$$ /$$$$$$/$$$$ 
-|  $$$$$$  /$$__  $$ |____  $$ /$$_____/ /$$__  $$|  $$ / $$/| $$| $$_  $$_  $$
- \____  $$| $$  \ $$  /$$$$$$$| $$      | $$$$$$$$ \  $$ $$/ | $$| $$ \ $$ \ $$
- /$$  \ $$| $$  | $$ /$$__  $$| $$      | $$_____/  \  $$$/  | $$| $$ | $$ | $$
-|  $$$$$$/| $$$$$$$/|  $$$$$$$|  $$$$$$$|  $$$$$$$   \  $/   | $$| $$ | $$ | $$
- \______/ | $$____/  \_______/ \_______/ \_______/    \_/    |__/|__/ |__/ |__/
-          | $$                                                                 
-          | $$                                                                 
-          |__/                                                                 
-
-
-Author:  Camille Tjhoa <http://github.com/ctjhoa/>
+Author: Christian Kjaer <https://github.com/Tehnix>
+Forked From Spacevim:  Camille Tjhoa <https://github.com/ctjhoa/>
 License: MIT
 
 
+==============================================================================
+CONTENTS                                                  *spaceneovim-contents*
+
+  1. Usage ................................... |SpaceneovimUsage|
+  2. Layers .................................. |SpaceneovimLayers|
+    2.1 Core Layer ........................... |SpaceneovimCoreLayer|
+    2.2 Git Layer ............................ |SpaceneovimGitLayer|
+    2.3 Syntax Checking Layer ................ |SpaceneovimSyntaxCheckingLayer|
+  3. Configuration ........................... |SpaceneovimConfiguration|
+    3.1 g:dotSpaceneovim_configuration_layers ... |SpaceneovimConfiguration_configuration_layers|
+    3.2 g:dotSpaceneovim_additional_plugins ..... |SpaceneovimConfiguration_additional_plugins|
+    3.2 g:dotSpaceneovim_excluded_plugins ....... |SpaceneovimConfiguration_excluded_plugins|
+  4. License ................................. |SpaceneovimLicense|
+  5. Original Project ........................ |SpaceneovimOriginalProject|
+  6. Bugs .................................... |SpaceneovimBugs|
+  7. Contributing ............................ |SpaceneovimContributing|
+  8. Changelog ............................... |SpaceneovimChangelog|
 
 ==============================================================================
-CONTENTS                                                     *spacevim-contents*
+1. Usage                                                      *SpaceneovimUsage*
 
-  1. Usage ................................... |SpacevimUsage|
-  2. Layers .................................. |SpacevimLayers|
-    2.1 Core Layer ........................... |SpacevimCoreLayer|
-    2.2 Git Layer ............................ |SpacevimGitLayer|
-    2.3 Syntax Checking Layer ................ |SpacevimSyntaxCheckingLayer|
-  3. Configuration ........................... |SpacevimConfiguration|
-    3.1 g:dotspacevim_configuration_layers ... |SpacevimConfiguration_configuration_layers|
-    3.2 g:dotspacevim_additional_plugins ..... |SpacevimConfiguration_additional_plugins|
-    3.2 g:dotspacevim_excluded_plugins ....... |SpacevimConfiguration_excluded_plugins|
-  4. License ................................. |SpacevimLicense|
-  5. Bugs .................................... |SpacevimBugs|
-  6. Contributing ............................ |SpacevimContributing|
-  7. Changelog ............................... |SpacevimChangelog|
+Spaceneovim is available in two modes.
 
-==============================================================================
-1. Usage                                                         *SpacevimUsage*
-
-Spacevim is available in two modes.
-
-The first one is distribution mode. In this mode, Spacevim will manage plugins
+The first one is distribution mode. In this mode, Spaceneovim will manage plugins
 installation for you. This mode has been created to mirror the Spacemacs
 distrubtion. It's more advisable for vim's beginners.
 
@@ -51,14 +40,14 @@ advisable for vim's expert who already get a vim confguration and only want
 Spacemacs key bindings.
 
 ==============================================================================
-2. Layers                                                       *SpacevimLayers*
+2. Layers                                                       *SpaceneovimLayers*
 
-Spacevim, like Spacemacs, is organized around layer system. A layer define
-plugin which will be installed and associatied key bindings. 
-convenience. 
+Spaceneovim, like Spacemacs, is organized around layer system. A layer define
+plugin which will be installed and associatied key bindings.
+convenience.
 
 ------------------------------------------------------------------------------
-2.1 Core Layer                                               *SpacevimCoreLayer*
+2.1 Core Layer                                            *SpaceneovimCoreLayer*
 
 Main layer which provides core Spacemacs functionalities and behaviour.
 
@@ -82,7 +71,7 @@ Plugin list:
 - https://github.com/Raimondi/delimitMate
 
 ------------------------------------------------------------------------------
-2.2 Git Layer                                                 *SpacevimGitLayer*
+2.2 Git Layer                                              *SpaceneovimGitLayer*
 
 Manage your git repository directly in vim.
 
@@ -92,7 +81,7 @@ Plugin list:
 - https://github.com/tpope/vim-fugitive
 
 ------------------------------------------------------------------------------
-2.2 Syntax Checking Layer                          *SpacevimSyntaxCheckingLayer*
+2.2 Syntax Checking Layer                       *SpaceneovimSyntaxCheckingLayer*
 
 Enable syntax checking in vim and display any resulting errors to the user.
 
@@ -100,60 +89,70 @@ Plugin list:
 - https://github.com/scrooloose/syntastic
 
 ==============================================================================
-3. Configuration                                         *SpacevimConfiguration*
+3. Configuration                                      *SpaceneovimConfiguration*
 
-You can configure the following settings to change how Spacevim works.
+You can configure the following settings to change how SpaceNeovim works.
 
 ------------------------------------------------------------------------------
-3.1 g:dotspacevim_configuration_layers  *SpacevimConfiguration_configuration_layers*
+3.1 g:dotSpacevim_configuration_layers *SpaceneovimConfiguration_configuration_layers*
 
 Define the list of layers you want to enabled. List support regex, in this
 example all core layers are enabled: >
 
-    let g:dotspacevim_configuration_layers = ['core/.*']
+    let g:dotSpacevim_configuration_layers = ['+checkers/syntax-checking']
 
-Default: ['core/.*', 'git', 'syntax-checking']
+Default: ['+checkers/syntax-checking']
 
 ------------------------------------------------------------------------------
-3.2 g:dotspacevim_additional_plugins  *SpacevimConfiguration_additional_plugins*
+3.2 g:dotSpacevim_additional_plugins *SpaceneovimConfiguration_additional_plugins*
 
 This option is for adding additional plugins which are not present in layer : >
 
-    let g:dotspacevim_additional_plugins = ['ctjhoa/miro8']
+    let g:dotSpacevim_additional_plugins = ['ctjhoa/miro8']
 
 Default: None | []
 
 ------------------------------------------------------------------------------
-3.3 g:dotspacevim_excluded_plugins      *SpacevimConfiguration_excluded_plugins*
+3.3 g:dotSpacevim_excluded_plugins *SpaceneovimConfiguration_excluded_plugins*
 
 This option is for exclude plugins which are not preset in layer : >
 
-    let g:dotspacevim_excluded_plugins = ['haya14busa/incsearch.vim']
+    let g:dotSpacevim_excluded_plugins = ['haya14busa/incsearch.vim']
 
 Default: None | []
 
 ==============================================================================
-4. License                                                     *SpacevimLicense*
+4. License                                                  *SpaceneovimLicense*
 
-Spacevim is MIT licensed.
+Spaceneovim is MIT licensed.
 
 ==============================================================================
-5. Bugs                                                           *SpacevimBugs*
+5. Original Project                                 *SpaceneovimOriginalProject*
+
+SpaceNeovim is a fork from https://github.com/ctjhoa/spacevim. The difference is
+that SpaceNeovim only focuses on Neovim, and it also features a radically
+differnet layer architecture, to closer mimic Spacemacs.
+
+==============================================================================
+6. Bugs                                                        *SpaceneovimBugs*
 
 If you find a bug please post it on the issue tracker:
-http://github.com/ctjhoa/spacevim/issues/
+http://github.com/Tehnix/Spaceneovim/issues/
 
 ==============================================================================
-6. Contributing                                           *SpacevimContributing*
+7. Contributing                                        *SpaceneovimContributing*
 
-Think you can make this plugin better?  Awesome!  Fork it on GitHub and
+Think you can make this plugin better? Awesome! Fork it on GitHub and
 send a pull request.
 
-GitHub: http://github.com/ctjhoa/spacevim/
+GitHub: http://github.com/Tehnix/Spaceneovim/
 
 ==============================================================================
-7. Changelog                                                 *SpacevimChangelog*
+8. Changelog                                              *SpaceneovimChangelog*
 
+v3.0.0
+    * Fork project from spacevim, change focus to Neovim
+    * Rewrite layer architecture
 v2.0.0
     * Add distribution mode with layer system.
     * Add more configuration

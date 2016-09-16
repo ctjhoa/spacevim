@@ -1,113 +1,137 @@
 function! spacevim#bootstrap() abort
+  " Set up path variables {{{
+  let config_dir = $HOME . '/.config/nvim'
+  let vim_plug = expand(resolve(config_dir . '/autoload/plug.vim'))
+  let vim_plugged = expand(resolve(config_dir . '/plugged'))
+  let spacevim_layers_dir = expand(resolve(config_dir . '/spaceneovim-layers'))
+  " }}}
 
-  let g:spacevim_layers = [
-  \ 'core/root',
-  \ 'core/applications',
-  \ 'core/behavior',
-  \ 'core/buffers',
-  \ 'core/buffers/move',
-  \ 'core/compile-comments',
-  \ 'core/capture-colors',
-  \ 'core/files',
-  \ 'core/files/convert',
-  \ 'core/files/vim',
-  \ 'core/help-highlight',
-  \ 'core/insertion',
-  \ 'core/join-split',
-  \ 'core/lisp',
-  \ 'core/narrow-numbers',
-  \ 'core/projects',
-  \ 'core/quit',
-  \ 'core/registers-rings',
-  \ 'core/search-symbol',
-  \ 'core/toggles',
-  \ 'core/toggles/highlight',
-  \ 'core/toggles/colors',
-  \ 'core/ui-toggles-themes',
-  \ 'core/windows',
-  \ 'core/text',
-  \ 'core/zoom',
-  \ 'git',
-  \ 'git/vcs-micro-state',
-  \ 'syntax-checking',
-  \ ]
+  " Download the layers {{{
+  if empty(glob(spacevim_layers_dir))
+    echo "Fetching spaceneovim-layers"
+    let install_layers = jobstart([
+    \  'git',
+    \  'clone',
+    \  'git@github.com:Tehnix/spaceneovim-layers.git',
+    \  spacevim_layers_dir
+    \])
+    let waiting_for_layers = jobwait([install_layers])
+  endif
+  " }}}
 
+  " Add the layers to g:spacevim_layers {{{
+  let g:spacevim_layers = []
+
+  if filereadable(spacevim_layers_dir . '/layers.vim')
+    echo 'Trying to load layers'
+    execute 'source ' . spacevim_layers_dir . '/layers.vim'
+  else
+    echo 'Layers.vim not found'
+  endif
+  " }}}
+
+  " Add all valid layers to enabled layers {{{
   let g:spacevim_enabled_layers = []
 
   if exists('g:dotspacevim_configuration_layers')
     for configuration_layer in g:dotspacevim_configuration_layers
+      echo 'Checking config layer ' . configuration_layer
       for layer in g:spacevim_layers
+        echo 'Checking against layer ' . layer
         if layer =~ configuration_layer
+          echo 'Enabling layer ' . layer
           call add(g:spacevim_enabled_layers, layer)
         endif
       endfor
     endfor
+  endif
+  " }}}
+
+  " vim-plug automatic installation {{{
+  if empty(glob(vim_plug))
+    let install_plug = jobstart([
+    \  'curl',
+    \  '-fLo',
+    \  vim_plug,
+    \  '--create-dirs',
+    \  'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    \])
+    let waiting_for_plug = jobwait([install_plug])
+    let install_plug_packages = jobstart(['nvim', '+PlugInstall', '+qall'])
+    let waiting_for_packages = jobwait([install_plug_packages])
+    source $MYVIMRC
+  endif
+  " }}}
+
+  " Plugin installation {{{
+  call plug#begin(vim_plugged)
+  Plug 'hecal3/vim-leader-guide'
+  let g:spacevim_plugins = []
+  for layer in g:spacevim_enabled_layers
+    execute 'source ' . spacevim_layers_dir . '/layers/' . layer . '/packages.vim'
+    execute 'source ' . spacevim_layers_dir . '/layers/' . layer . '/config.vim'
+  endfor
+
+  for plugin in g:spacevim_plugins
+    Plug plugin
+  endfor
+
+  if exists('g:dotspacevim_additional_plugins')
+    for additional_plugin in g:dotspacevim_additional_plugins
+      Plug additional_plugin
+    endfor
+  endif
+  call plug#end()
+  " }}}
+
+endfunction
+
+" Helper functions {{{
+
+function! spacevim#is_layer_enabled(name)
+  if !exists('g:spacevim_enabled_layers')
+    return 1
+  endif
+  return index(g:spacevim_enabled_layers, a:name) != -1
+endfunction
+
+function! spacevim#bind(map, binding, name, value, isCmd)
+  if a:isCmd
+    let l:value = ':' . a:value . '<cr>'
   else
-    let g:spacevim_enabled_layers = g:spacevim_layers
+    let l:value = a:value
+  endif
+  if a:map ==# 'map' && maparg('<Leader>' . a:binding, '') ==# ''
+    let l:noremap = 'noremap'
+  elseif a:map ==# 'nmap' && maparg('<Leader>' . a:binding, 'n') ==# ''
+    let l:noremap = 'nnoremap'
+  elseif a:map ==# 'vmap' && maparg('<Leader>' . a:binding, 'v') ==# ''
+    let l:noremap = 'vnoremap'
+  else
+    let l:noremap = ''
   endif
 
-  if exists('g:dotspacevim_distribution_mode') && g:dotspacevim_distribution_mode
-
-    let g:spacevim_plugins = [
-    \ { 'name': 'airblade/vim-gitgutter',         'layers': ['git'] },
-    \ { 'name': 'dbakker/vim-projectroot',        'layers': ['core/projects'] },
-    \ { 'name': 'easymotion/vim-easymotion',      'layers': ['core/root'] },
-    \ { 'name': 'editorconfig/editorconfig-vim',  'layers': ['core/behavior'] },
-    \ { 'name': 'haya14busa/incsearch.vim',       'layers': ['core/behavior'] },
-    \ { 'name': 'hecal3/vim-leader-guide',        'layers': ['core/behavior'] },
-    \ { 'name': 'junegunn/fzf',                   'layers': ['core/buffers', 'core/files', 'core/projects', 'core/root'] },
-    \ { 'name': 'junegunn/fzf.vim',               'layers': ['core/buffers', 'core/files', 'core/projects', 'core/root'] },
-    \ { 'name': 'junegunn/gv.vim',                'layers': ['git'] },
-    \ { 'name': 'kana/vim-arpeggio',              'layers': ['core/behavior'] },
-    \ { 'name': 'mbbill/undotree',                'layers': ['core/applications'] },
-    \ { 'name': 'mhinz/vim-startify',             'layers': ['core/behavior'] },
-    \ { 'name': 'osyo-manga/vim-over',            'layers': ['core/behavior'] },
-    \ { 'name': 'pelodelfuego/vim-swoop',         'layers': ['core/search-symbol'] },
-    \ { 'name': 'Raimondi/delimitMate',           'layers': ['core/behavior'] },
-    \ { 'name': 'scrooloose/syntastic',           'layers': ['syntax-checking'] },
-    \ { 'name': 'sheerun/vim-polyglot',           'layers': ['core/behavior'] },
-    \ { 'name': 'tpope/vim-commentary',           'layers': ['core/root'] },
-    \ { 'name': 'tpope/vim-eunuch',               'layers': ['core/files'] },
-    \ { 'name': 'tpope/vim-fugitive',             'layers': ['git'] },
-    \ { 'name': 'tpope/vim-surround',             'layers': ['core/behavior'] },
-    \ { 'name': 'tpope/vim-sensible',             'layers': ['core/behavior'] },
-    \ { 'name': 'tpope/vim-vinegar',              'layers': ['core/files', 'core/projects'] }
-    \ ]
-
-    " vim-plug automatic installation {{{
-    if has('nvim')
-      let vim_config_dir = $HOME . '/.config/nvim'
-    else
-      let vim_config_dir = $HOME . '/.vim'
-    endif
-    let vim_plugged = expand(resolve(vim_config_dir . '/autoload/plug.vim'))
-
-    if empty(glob(vim_plugged))
-      silent "!curl -sSfLo " . vim_plugged . " --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim"
-      augroup spacevim_bootstrap
-        autocmd!
-        autocmd VimEnter * PlugInstall | source $MYVIMRC
-      augroup END
-    endif
-    " }}}
-
-    " plugins installation {{{
-    call plug#begin('~/.vim/plugged')
-    Plug 'ctjhoa/spacevim'
-    for layer in g:spacevim_enabled_layers
-      for plugin in g:spacevim_plugins
-        if index(plugin.layers, layer) != -1 &&
-        \ (!exists('g:dotspacevim_excluded_plugins') || index(g:dotspacevim_excluded_plugins, plugin) == -1)
-          Plug plugin.name
-        endif
-      endfor
-    endfor
-    if exists('g:dotspacevim_additional_plugins')
-      for additional_plugin in g:dotspacevim_additional_plugins
-        Plug additional_plugin
-      endfor
-    endif
-    call plug#end()
-    " }}}
+  if l:noremap !=# ''
+    execute l:noremap . ' <silent> <SID>' . a:name . '# ' . l:value
+    execute a:map . ' <Leader>' . a:binding . ' <SID>' . a:name . '#'
   endif
 endfunction
+
+function! spacevim#bind_plug(map, binding, name, value)
+  if a:map ==# 'map' && maparg('<Leader>' . a:binding, '') ==# ''
+    let l:map = 'map'
+  elseif a:map ==# 'nmap' && maparg('<Leader>' . a:binding, 'n') ==# ''
+    let l:map = 'nmap'
+  elseif a:map ==# 'vmap' && maparg('<Leader>' . a:binding, 'v') ==# ''
+    let l:map = 'vmap'
+  else
+    let l:map = ''
+  endif
+
+  if l:map !=# ''
+    execute l:map . ' <silent> <SID>' . a:name . '# <Plug>' . a:value
+    execute a:map . ' <Leader>' . a:binding . ' <SID>' . a:name . '#'
+  endif
+endfunction
+
+" }}}

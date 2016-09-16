@@ -1,62 +1,51 @@
-# Spacevim - Spacemacs for vim [![Build Status](https://travis-ci.org/ctjhoa/spacevim.svg?branch=master)](https://travis-ci.org/ctjhoa/spacevim)
+# SpaceNeovim - Spacemacs for Neovim [![Build Status](https://travis-ci.org/ctjhoa/SpaceNeovim.svg?branch=master)](https://travis-ci.org/tehnix/spaceneovim)
 
-Spacevim is [Spacemacs](https://github.com/syl20bnr/spacemacs) for vim.
-It can be used as a full distribution or you can get only the Spacemacs key bindings
+SpaceNeovim is [Spacemacs](https://github.com/syl20bnr/spacemacs) for vim.
 
-![screenshot1](assets/screeshot-startify-2.0.0.png)
-![screenshot2](assets/screeshot-leader-2.0.0.png)
-[colorscheme](https://github.com/joshdick/onedark.vim)
+Startup screen | Vim-leader-guide in action
+:-------------:|:--------------------------:
+![screenshot1](assets/screeshot-startify-2.0.0.png) | ![screenshot2](assets/screeshot-leader-2.0.0.png)
+
 
 ## Installation
 
-Spacevim provides 2 ways of using it. First you can use it as a vim distribution like Spacemacs.
-Or you can only install it as a set of key bindings and Spacevim will bring out the best of your currently installed plugin.
+__Prerequisites:__
+* `git` on your path
+* `nvim` on your path
 
-### Distribution mode
+SpaceNeovim is a configurable distribution like Spacemacs.
 
-You want a full vim distribution like Spacemacs provides for emacs.
-Execute this line of shell, it will download a default `.vimrc` and install
-plugins through vim.
+To start using SpaceNeovim you can use the following oneliner,
 
 ```shell
-curl -sSfL https://raw.githubusercontent.com/ctjhoa/spacevim/master/vimrc.sample -o ~/.vimrc | vim
+mkdir -p ~/.config/nvim/ && curl -sSfL https://raw.githubusercontent.com/tehnix/spaceneovim/master/vimrc.sample -o ~/.config/nvim/init.vim | nvim
 ```
 
-After plugins installation restart vim.
+It will download a default `init.vim` which in turn takes care of setting up the
+rest by:
 
-### Key bindings only mode
+* Downloading `autoload/spacevim.vim`
+* Setting up [vim-plug](https://github.com/junegunn/vim-plug)
+* Cloning down the [layers repository](https://github.com/Tehnix/spaceneovim-layers)
+* Installing default plugins
 
-You already have a vim config and/or want to manage your plugins yourself.
-This mode will provide only Spacemacs key bindings and adapt Spacevim with currently installed plugins.
-Install Spacevim as usual:
 
-* [Pathogen](https://github.com/tpope/vim-pathogen)
-  * `git clone https://github.com/ctjhoa/spacevim ~/.vim/bundle/spacevim`
-  * Remember to run `:Helptags` to generate help tags
-* [NeoBundle](https://github.com/Shougo/neobundle.vim)
-  * `NeoBundle 'ctjhoa/spacevim'`
-* [Vundle](https://github.com/gmarik/vundle)
-  * `Plugin 'ctjhoa/spacevim'`
-* [Plug](https://github.com/junegunn/vim-plug)
-  * `Plug 'ctjhoa/spacevim'`
-* manual
-  * copy all of the files into your `~/.vim` directory
+## Layers
 
-## Plugins
+Go to the [layers repository](https://github.com/Tehnix/spaceneovim-layers) for
+more information on the different layers.
 
-[see details](PLUGINS.md)
+To enable a layer, include it in `g:dotspacevim_configuration_layers` inside the `dotspacevim/init` block. For example, the following enables the `+checkers/syntax-checking` layer,
 
-## TODO
+```viml
+let g:dotspacevim_configuration_layers = [
+\  '+checkers/syntax-checking'
+\]
+```
 
-* Load plugin in async
-* ~~Improve performance~~
-* Fix OSX
-* Better documentation
-* OO programming (as suggested [here](https://www.reddit.com/r/vim/comments/4y8w38/spacevim_20_the_war_is_not_over/d6m1i02))
+You can also add custom layers to `g:dotspacevim_additional_plugins`, which will be installed with `vim-plug`.
+
 
 ## License
 
-MIT License
-
-
-
+See [LICENSE](LICENSE).
