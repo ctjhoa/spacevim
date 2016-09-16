@@ -12,7 +12,7 @@ if empty(glob(autoload_spacevim))
   \  '-fLo',
   \  autoload_spacevim,
   \  '--create-dirs',
-  \  'https://raw.githubusercontent.com/tehnix/spacevim/master/autoload/spacevim.vi'
+  \  'https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spacevim.vi'
   \])
   let waiting_for_plug = jobwait([install_spacevim])
 endif
