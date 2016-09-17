@@ -16,7 +16,6 @@ if empty(glob(autoload_spacevim))
   \])
   let waiting_for_plug = jobwait([install_spacevim])
 endif
-
 " }}}
 
 " dotspacevim/init {{{
@@ -27,7 +26,12 @@ endif
 " IMPORTANT: For the moment, any changes in plugins or layers needs
 " a vim restart and :PlugInstall
   let g:dotspacevim_configuration_layers = [
-  \  '+checkers/syntax-checking'
+  \  '+nav/quit'
+  \, '+nav/buffers'
+  \, '+nav/windows'
+  \, '+nav/text'
+  \, '+nav/start-screen'
+  \, '+checkers/syntax-checking'
   \]
 
   let g:dotspacevim_additional_plugins = [
@@ -35,7 +39,6 @@ endif
   \]
 
   " let g:dotspacevim_escape_key_sequence = 'fd'
-
 " }}}
 
 " dotspacevim/user-init {{{
@@ -52,7 +55,6 @@ endif
   if filereadable(config_dir . '/user-init.vim')
     execute 'source ' . config_dir . '/user-init.vim'
   endif
-
 " }}}
 
 call spacevim#bootstrap()
@@ -72,5 +74,4 @@ call spacevim#bootstrap()
   if filereadable(config_dir . '/user-init.vim')
     execute 'source ' . config_dir . '/user-config.vim'
   endif
-
 " }}}

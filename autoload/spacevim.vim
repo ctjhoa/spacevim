@@ -9,10 +9,10 @@ function! spacevim#bootstrap() abort
   " Download the layers {{{
   if empty(glob(spacevim_layers_dir))
     let install_layers = jobstart([
-    \  'git',
-    \  'clone',
-    \  'git@github.com:Tehnix/spaceneovim-layers.git',
-    \  spacevim_layers_dir
+    \  'git'
+    \, 'clone'
+    \, 'git@github.com:Tehnix/spaceneovim-layers.git'
+    \, spacevim_layers_dir
     \])
     let waiting_for_layers = jobwait([install_layers])
   endif
@@ -40,14 +40,14 @@ function! spacevim#bootstrap() abort
   endif
   " }}}
 
-  " vim-plug automatic installation {{{
+  " Setup and install vim-plug {{{
   if empty(glob(vim_plug))
     let install_plug = jobstart([
-    \  'curl',
-    \  '-fLo',
-    \  vim_plug,
-    \  '--create-dirs',
-    \  'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+    \  'curl'
+    \, '-fLo'
+    \, vim_plug
+    \, '--create-dirs'
+    \, 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     \])
     let waiting_for_plug = jobwait([install_plug])
     let install_plug_packages = jobstart(['nvim', '+PlugInstall', '+qall'])
@@ -56,7 +56,7 @@ function! spacevim#bootstrap() abort
   endif
   " }}}
 
-  " Plugin installation {{{
+  " Install all plugins from enabled layers {{{
   call plug#begin(vim_plugged)
   Plug 'hecal3/vim-leader-guide'
   let g:spacevim_plugins = []
@@ -66,7 +66,7 @@ function! spacevim#bootstrap() abort
   endfor
 
   for plugin in g:spacevim_plugins
-    Plug plugin
+    Plug plugin.name, plugin.config
   endfor
 
   if exists('g:dotspacevim_additional_plugins')
@@ -80,8 +80,17 @@ function! spacevim#bootstrap() abort
 endfunction
 
 " Helper functions {{{
+function! spacevim#add_plugin(name, config)
+  " Add a plugin to the list of plugins
+  if exists('g:spacevim_plugins')
+    call add(g:spacevim_plugins, {'name': a:name, 'config': a:config})
+    return 1
+  endif
+  return 0
+endfunction
 
 function! spacevim#is_layer_enabled(name)
+  " Check if a layer is enabled
   if !exists('g:spacevim_enabled_layers')
     return 1
   endif
