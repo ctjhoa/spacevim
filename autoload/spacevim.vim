@@ -1,18 +1,18 @@
 " Set up path variables {{{
-let config_dir = $HOME . '/.config/nvim'
-let vim_plug = expand(resolve(config_dir . '/autoload/plug.vim'))
-let vim_plugged = expand(resolve(config_dir . '/plugged'))
-let spacevim_layers_dir = expand(resolve(config_dir . '/spaceneovim-layers'))
+let s:config_dir = $HOME . '/.config/nvim'
+let s:vim_plug = expand(resolve(s:config_dir . '/autoload/plug.vim'))
+let s:vim_plugged = expand(resolve(s:config_dir . '/plugged'))
+let s:spacevim_layers_dir = expand(resolve(s:config_dir . '/spaceneovim-layers'))
 " }}}
 
 function! spacevim#bootstrap() abort
   " Download the layers {{{
-  if empty(glob(spacevim_layers_dir))
+  if empty(glob(s:spacevim_layers_dir))
     let install_layers = jobstart([
     \  'git'
     \, 'clone'
     \, 'git@github.com:Tehnix/spaceneovim-layers.git'
-    \, spacevim_layers_dir
+    \, s:spacevim_layers_dir
     \])
     let waiting_for_layers = jobwait([install_layers])
   endif
@@ -21,8 +21,8 @@ function! spacevim#bootstrap() abort
   " Add the layers to g:spacevim_layers {{{
   let g:spacevim_layers = []
 
-  if filereadable(spacevim_layers_dir . '/layers.vim')
-    execute 'source ' . spacevim_layers_dir . '/layers.vim'
+  if filereadable(s:spacevim_layers_dir . '/layers.vim')
+    execute 'source ' . s:spacevim_layers_dir . '/layers.vim'
   endif
   " }}}
 
@@ -41,11 +41,11 @@ function! spacevim#bootstrap() abort
   " }}}
 
   " Setup and install vim-plug {{{
-  if empty(glob(vim_plug))
+  if empty(glob(s:vim_plug))
     let install_plug = jobstart([
     \  'curl'
     \, '-fLo'
-    \, vim_plug
+    \, s:vim_plug
     \, '--create-dirs'
     \, 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     \])
@@ -57,12 +57,12 @@ function! spacevim#bootstrap() abort
   " }}}
 
   " Install all plugins from enabled layers {{{
-  call plug#begin(vim_plugged)
+  call plug#begin(s:vim_plugged)
   Plug 'hecal3/vim-leader-guide'
   let g:spacevim_plugins = []
   for layer in g:spacevim_enabled_layers
-    execute 'source ' . spacevim_layers_dir . '/layers/' . layer . '/packages.vim'
-    execute 'source ' . spacevim_layers_dir . '/layers/' . layer . '/config.vim'
+    execute 'source ' . s:spacevim_layers_dir . '/layers/' . layer . '/packages.vim'
+    execute 'source ' . s:spacevim_layers_dir . '/layers/' . layer . '/config.vim'
   endfor
 
   for plugin in g:spacevim_plugins
