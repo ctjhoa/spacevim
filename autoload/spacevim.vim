@@ -1,11 +1,11 @@
-function! spacevim#bootstrap() abort
-  " Set up path variables {{{
-  let config_dir = $HOME . '/.config/nvim'
-  let vim_plug = expand(resolve(config_dir . '/autoload/plug.vim'))
-  let vim_plugged = expand(resolve(config_dir . '/plugged'))
-  let spacevim_layers_dir = expand(resolve(config_dir . '/spaceneovim-layers'))
-  " }}}
+" Set up path variables {{{
+let config_dir = $HOME . '/.config/nvim'
+let vim_plug = expand(resolve(config_dir . '/autoload/plug.vim'))
+let vim_plugged = expand(resolve(config_dir . '/plugged'))
+let spacevim_layers_dir = expand(resolve(config_dir . '/spaceneovim-layers'))
+" }}}
 
+function! spacevim#bootstrap() abort
   " Download the layers {{{
   if empty(glob(spacevim_layers_dir))
     let install_layers = jobstart([
