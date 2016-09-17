@@ -109,6 +109,8 @@ function! spacevim#bind(map, binding, name, value, isCmd)
     let l:noremap = 'nnoremap'
   elseif a:map ==# 'vmap' && maparg('<Leader>' . a:binding, 'v') ==# ''
     let l:noremap = 'vnoremap'
+  elseif a:map ==# 'tmap' && maparg('<Leader>' . a:binding, 't') ==# ''
+    let l:noremap = 'tnoremap'
   else
     let l:noremap = ''
   endif
@@ -126,6 +128,8 @@ function! spacevim#bind_plug(map, binding, name, value)
     let l:map = 'nmap'
   elseif a:map ==# 'vmap' && maparg('<Leader>' . a:binding, 'v') ==# ''
     let l:map = 'vmap'
+  elseif a:map ==# 'tmap' && maparg('<Leader>' . a:binding, 't') ==# ''
+    let l:map = 'tmap'
   else
     let l:map = ''
   endif
