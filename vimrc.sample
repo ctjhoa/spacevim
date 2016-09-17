@@ -50,6 +50,8 @@ endif
 " them in `dotspacevim/user-config' first."
   let mapleader = ' '
   let g:leaderGuide_vertical = 0
+  " Shorten the time before the guide buffer appears
+  set timeoutlen=100
 
   " Load external user-init if found
   if filereadable(config_dir . '/user-init.vim')
