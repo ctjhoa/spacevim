@@ -7,11 +7,11 @@ let s:config_dir = $HOME . '/.config/nvim'
 let s:autoload_spacevim = expand(resolve(s:config_dir . '/autoload/spacevim.vim'))
 
 if empty(glob(s:autoload_spacevim))
-  let l:install_spacevim = jobstart([
+  let s:install_spacevim = jobstart([
   \  'curl', '-fLo', s:autoload_spacevim, '--create-dirs',
   \  'https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spacevim.vim'
   \])
-  let l:waiting_for_plug = jobwait([l:install_spacevim])
+  let s:waiting_for_plug = jobwait([s:install_spacevim])
 endif
 " }}}
 
