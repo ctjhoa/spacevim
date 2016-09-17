@@ -1,10 +1,10 @@
-# SpaceNeovim - Spacemacs for Neovim [![Build Status](https://travis-ci.org/ctjhoa/SpaceNeovim.svg?branch=master)](https://travis-ci.org/tehnix/spaceneovim)
+# SpaceNeovim - Spacemacs for Neovim [![Build Status](https://travis-ci.org/Tehnix/spaceneovim.svg?branch=master)](https://travis-ci.org/tehnix/spaceneovim)
 
-SpaceNeovim is [Spacemacs](https://github.com/syl20bnr/spacemacs) for vim.
+SpaceNeovim is [Spacemacs](https://github.com/syl20bnr/spacemacs) for vim. Forked from [ctjhoa/spacevim](https://github.com/ctjhoa/spacevim) and rewritten/restructured almost entirely (but still majorly inspired by the original fork).
 
-Startup screen | Vim-leader-guide in action
-:-------------:|:--------------------------:
-![screenshot1](assets/screeshot-startify-2.0.0.png) | ![screenshot2](assets/screeshot-leader-2.0.0.png)
+Unlike Spacevim, SpaceNeovim specifically does not focus on support vim, and takes advantage of Neovim specific functions.
+
+![screenshot](assets/Screenshot 2016-09-18 00.43.37.png)
 
 
 ## Installation
