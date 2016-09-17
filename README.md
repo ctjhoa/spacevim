@@ -6,10 +6,10 @@ Unlike Spacevim, SpaceNeovim specifically does not focus on support vim, and tak
 
 ![screenshot](assets/Screenshot 2016-09-18 00.43.37.png)
 
-
 ## Installation
 
-__Prerequisites:__
+Prerequisites:
+
 * `git` on your path
 * `nvim` on your path
 
@@ -29,7 +29,6 @@ rest by:
 * Cloning down the [layers repository](https://github.com/Tehnix/spaceneovim-layers)
 * Installing default plugins
 
-
 ## Layers
 
 Go to the [layers repository](https://github.com/Tehnix/spaceneovim-layers) for
@@ -44,7 +43,6 @@ let g:dotspacevim_configuration_layers = [
 ```
 
 You can also add custom layers to `g:dotspacevim_additional_plugins`, which will be installed with `vim-plug`.
-
 
 ## License
 
