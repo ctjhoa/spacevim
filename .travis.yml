@@ -5,4 +5,4 @@ before_install:
 - pip install --user vim-vint
 script:
 - mdl -c ./.mdlrc *.md
-- vint vimrc.sample autoload/*.vim plugin/*.vim
+- vint vimrc.sample autoload/*.vim

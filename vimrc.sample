@@ -3,18 +3,15 @@
 
 " dotspacevim/auto-install {{{
 " Automatic installation of spacevim.
-let config_dir = $HOME . '/.config/nvim'
-let autoload_spacevim = expand(resolve(config_dir . '/autoload/spacevim.vim'))
+let s:config_dir = $HOME . '/.config/nvim'
+let s:autoload_spacevim = expand(resolve(s:config_dir . '/autoload/spacevim.vim'))
 
-if empty(glob(autoload_spacevim))
-  let install_spacevim = jobstart([
-  \  'curl',
-  \  '-fLo',
-  \  autoload_spacevim,
-  \  '--create-dirs',
+if empty(glob(s:autoload_spacevim))
+  let l:install_spacevim = jobstart([
+  \  'curl', '-fLo', s:autoload_spacevim, '--create-dirs',
   \  'https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spacevim.vim'
   \])
-  let waiting_for_plug = jobwait([install_spacevim])
+  let l:waiting_for_plug = jobwait([l:install_spacevim])
 endif
 " }}}
 
@@ -26,18 +23,18 @@ endif
 " IMPORTANT: For the moment, any changes in plugins or layers needs
 " a vim restart and :PlugInstall
   let g:dotspacevim_configuration_layers = [
-  \  '+nav/files'
+  \  '+nav/buffers'
+  \, '+nav/files'
   \, '+nav/quit'
-  \, '+nav/buffers'
   \, '+nav/windows'
-  \, '+nav/text'
   \, '+nav/start-screen'
-  \, '+tools/terminal'
+  \, '+nav/text'
   \, '+checkers/syntax-checking'
+  \, '+tools/terminal'
   \]
 
   let g:dotspacevim_additional_plugins = [
-  \  'flazz/vim-colorschemes'
+  \  {'name': 'flazz/vim-colorschemes', 'config': {}}
   \]
 
   " let g:dotspacevim_escape_key_sequence = 'fd'
@@ -50,14 +47,14 @@ endif
 " This function is mostly useful for variables that need to be set
 " before plugins are loaded. If you are unsure, you should try in setting
 " them in `dotspacevim/user-config' first."
-  let mapleader = ' '
+  let g:mapleader = ' '
   let g:leaderGuide_vertical = 0
   " Shorten the time before the guide buffer appears
   set timeoutlen=100
 
   " Load external user-init if found
-  if filereadable(config_dir . '/user-init.vim')
-    execute 'source ' . config_dir . '/user-init.vim'
+  if filereadable(s:config_dir . '/user-init.vim')
+    execute 'source ' . s:config_dir . '/user-init.vim'
   endif
 " }}}
 
@@ -75,7 +72,7 @@ call spacevim#bootstrap()
   colorscheme wombat256mod
 
   " Load external user-config if found
-  if filereadable(config_dir . '/user-init.vim')
-    execute 'source ' . config_dir . '/user-config.vim'
+  if filereadable(s:config_dir . '/user-init.vim')
+    execute 'source ' . s:config_dir . '/user-config.vim'
   endif
 " }}}

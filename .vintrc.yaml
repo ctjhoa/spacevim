@@ -1,6 +1,13 @@
 cmdargs:
-# Checking more strictly
-severity: style_problem
+  # Checking more strictly
+  severity: style_problem
+  # Enable coloring
+  color: true
+  # Enable Neovim syntax
+  env:
+    neovim: true
 
-# Enable coloring
-color: true
+policies:
+  # Disable a violation
+  ProhibitNoAbortFunction:
+    enabled: false
