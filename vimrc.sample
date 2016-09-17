@@ -26,7 +26,8 @@ endif
 " IMPORTANT: For the moment, any changes in plugins or layers needs
 " a vim restart and :PlugInstall
   let g:dotspacevim_configuration_layers = [
-  \  '+nav/quit'
+  \  '+applications/spaceneovim'
+  \, '+nav/quit'
   \, '+nav/buffers'
   \, '+nav/windows'
   \, '+nav/text'
