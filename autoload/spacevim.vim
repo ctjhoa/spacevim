@@ -78,3 +78,62 @@ function! spacevim#bootstrap() abort
   " }}}
 
 endfunction
+
+" Helper functions {{{
+function! spacevim#add_plugin(name, config)
+  " Add a plugin to the list of plugins
+  if exists('g:spacevim_plugins')
+    call add(g:spacevim_plugins, {'name': a:name, 'config': a:config})
+    return 1
+  endif
+  return 0
+endfunction
+
+function! spacevim#is_layer_enabled(name)
+  " Check if a layer is enabled
+  if !exists('g:spacevim_enabled_layers')
+    return 1
+  endif
+  return index(g:spacevim_enabled_layers, a:name) != -1
+endfunction
+
+function! spacevim#bind(map, binding, name, value, isCmd)
+  if a:isCmd
+    let l:value = ':' . a:value . '<cr>'
+  else
+    let l:value = a:value
+  endif
+  if a:map ==# 'map' && maparg('<Leader>' . a:binding, '') ==# ''
+    let l:noremap = 'noremap'
+  elseif a:map ==# 'nmap' && maparg('<Leader>' . a:binding, 'n') ==# ''
+    let l:noremap = 'nnoremap'
+  elseif a:map ==# 'vmap' && maparg('<Leader>' . a:binding, 'v') ==# ''
+    let l:noremap = 'vnoremap'
+  else
+    let l:noremap = ''
+  endif
+
+  if l:noremap !=# ''
+    execute l:noremap . ' <silent> <SID>' . a:name . '# ' . l:value
+    execute a:map . ' <Leader>' . a:binding . ' <SID>' . a:name . '#'
+  endif
+endfunction
+
+function! spacevim#bind_plug(map, binding, name, value)
+  if a:map ==# 'map' && maparg('<Leader>' . a:binding, '') ==# ''
+    let l:map = 'map'
+  elseif a:map ==# 'nmap' && maparg('<Leader>' . a:binding, 'n') ==# ''
+    let l:map = 'nmap'
+  elseif a:map ==# 'vmap' && maparg('<Leader>' . a:binding, 'v') ==# ''
+    let l:map = 'vmap'
+  else
+    let l:map = ''
+  endif
+
+  if l:map !=# ''
+    execute l:map . ' <silent> <SID>' . a:name . '# <Plug>' . a:value
+    execute a:map . ' <Leader>' . a:binding . ' <SID>' . a:name . '#'
+  endif
+endfunction
+
+" }}}
