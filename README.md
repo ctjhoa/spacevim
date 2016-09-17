@@ -1,4 +1,4 @@
-# SpaceNeovim - Spacemacs for Neovim [![Build Status](https://travis-ci.org/Tehnix/spaceneovim.svg?branch=master)](https://travis-ci.org/tehnix/spaceneovim)
+# SpaceNeovim - Spacemacs for Neovim [![Build Status](https://travis-ci.org/Tehnix/spaceneovim.svg?branch=master)](https://travis-ci.org/Tehnix/spaceneovim)
 
 SpaceNeovim is [Spacemacs](https://github.com/syl20bnr/spacemacs) for vim. Forked from [ctjhoa/spacevim](https://github.com/ctjhoa/spacevim) and rewritten/restructured almost entirely (but still majorly inspired by the original fork).
 
