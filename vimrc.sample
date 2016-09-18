@@ -30,7 +30,6 @@
   \, '+tools/terminal'
   \, '+ui/airline'
   \, '+ui/toggles'
-  \, '+lang/haskell'
   \]
 
   let g:dotspaceneovim_additional_packages = [
