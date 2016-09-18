@@ -51,7 +51,7 @@
   set timeoutlen=100
   " Enable line numbers
   " Set 7 lines to the cursor - when moving vertically using j/k
-  set so=7
+  set scrolloff=7
   " Use relative line numbers. Options are:
   " - relativenumber/norelativenumber
   " - number/nonumber
