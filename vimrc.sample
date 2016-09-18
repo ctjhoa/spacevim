@@ -1,6 +1,7 @@
 " -*- mode: vimrc -*-
 "vim: ft=vim
 
+let g:spaceneovim_layers_repository = 'git@github.com:Tehnix/spaceneovim-layers.git'
 " dotspaceneovim/auto-install {{{
   "Automatic installation of spaceneovim.
   let s:config_dir = $HOME . '/.config/nvim'
@@ -28,6 +29,8 @@
   \, '+checkers/neomake'
   \, '+completion/deoplete'
   \, '+tools/terminal'
+  \, '+ui/airline'
+  \, '+ui/toggles'
   \, '+lang/haskell'
   \]
 

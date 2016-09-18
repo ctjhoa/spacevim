@@ -8,10 +8,14 @@ let s:spaceneovim_layers_dir = expand(resolve(s:config_dir . '/spaceneovim-layer
 function! spaceneovim#bootstrap() abort
   " Download the layers {{{
   if empty(glob(s:spaceneovim_layers_dir))
+    let l:layers_repo = 'git@github.com:Tehnix/spaceneovim-layers.git'
+    if exists('g:spaceneovim_layers_repository')
+      let l:layers_repo = g:spaceneovim_layers_repository
+    endif
     let l:install_layers = jobstart([
     \  'git'
     \, 'clone'
-    \, 'git@github.com:Tehnix/spaceneovim-layers.git'
+    \, l:layers_repo
     \, s:spaceneovim_layers_dir
     \])
     let l:waiting_for_layers = jobwait([l:install_layers])
