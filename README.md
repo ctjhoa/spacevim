@@ -24,7 +24,7 @@ mkdir -p ~/.config/nvim/ && curl -sSfL https://raw.githubusercontent.com/tehnix/
 It will download a default `init.vim` which in turn takes care of setting up the
 rest by:
 
-* Downloading `autoload/spacevim.vim`
+* Downloading `autoload/spaceneovim.vim`
 * Setting up [vim-plug](https://github.com/junegunn/vim-plug)
 * Cloning down the [layers repository](https://github.com/Tehnix/spaceneovim-layers)
 * Installing default plugins
@@ -34,15 +34,15 @@ rest by:
 Go to the [layers repository](https://github.com/Tehnix/spaceneovim-layers) for
 more information on the different layers.
 
-To enable a layer, include it in `g:dotspacevim_configuration_layers` inside the `dotspacevim/init` block. For example, the following enables the `+checkers/syntax-checking` layer,
+To enable a layer, include it in `g:dotspaceneovim_configuration_layers` inside the `dotspaceneovim/init` block. For example, the following enables the `+checkers/syntax-checking` layer,
 
 ```viml
-let g:dotspacevim_configuration_layers = [
+let g:dotspaceneovim_configuration_layers = [
 \  '+checkers/syntax-checking'
 \]
 ```
 
-You can also add custom layers to `g:dotspacevim_additional_plugins`, which will be installed with `vim-plug`.
+You can also add custom layers to `g:dotspaceneovim_additional_plugins`, which will be installed with `vim-plug`.
 
 ## License
 

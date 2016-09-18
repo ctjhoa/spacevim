@@ -2,38 +2,38 @@
 let s:config_dir = $HOME . '/.config/nvim'
 let s:vim_plug = expand(resolve(s:config_dir . '/autoload/plug.vim'))
 let s:vim_plugged = expand(resolve(s:config_dir . '/plugged'))
-let s:spacevim_layers_dir = expand(resolve(s:config_dir . '/spaceneovim-layers'))
+let s:spaceneovim_layers_dir = expand(resolve(s:config_dir . '/spaceneovim-layers'))
 " }}}
 
-function! spacevim#bootstrap() abort
+function! spaceneovim#bootstrap() abort
   " Download the layers {{{
-  if empty(glob(s:spacevim_layers_dir))
+  if empty(glob(s:spaceneovim_layers_dir))
     let l:install_layers = jobstart([
     \  'git'
     \, 'clone'
     \, 'git@github.com:Tehnix/spaceneovim-layers.git'
-    \, s:spacevim_layers_dir
+    \, s:spaceneovim_layers_dir
     \])
     let l:waiting_for_layers = jobwait([l:install_layers])
   endif
   " }}}
 
-  " Add the layers to g:spacevim_layers {{{
-  let g:spacevim_layers = []
+  " Add the layers to g:spaceneovim_layers {{{
+  let g:spaceneovim_layers = []
 
-  if filereadable(s:spacevim_layers_dir . '/layers.vim')
-    execute 'source ' . s:spacevim_layers_dir . '/layers.vim'
+  if filereadable(s:spaceneovim_layers_dir . '/auto-layers.vim')
+    execute 'source ' . s:spaceneovim_layers_dir . '/auto-layers.vim'
   endif
   " }}}
 
   " Add all valid layers to enabled layers {{{
-  let g:spacevim_enabled_layers = []
+  let g:spaceneovim_enabled_layers = []
 
-  if exists('g:dotspacevim_configuration_layers')
-    for l:configuration_layer in g:dotspacevim_configuration_layers
-      for l:layer in g:spacevim_layers
+  if exists('g:dotspaceneovim_configuration_layers')
+    for l:configuration_layer in g:dotspaceneovim_configuration_layers
+      for l:layer in g:spaceneovim_layers
         if l:layer =~ l:configuration_layer
-          call add(g:spacevim_enabled_layers, l:layer)
+          call add(g:spaceneovim_enabled_layers, l:layer)
         endif
       endfor
     endfor
@@ -59,18 +59,18 @@ function! spacevim#bootstrap() abort
   " Install all plugins from enabled layers {{{
   call plug#begin(s:vim_plugged)
   Plug 'hecal3/vim-leader-guide'
-  let g:spacevim_plugins = []
-  for l:layer in g:spacevim_enabled_layers
-    execute 'source ' . s:spacevim_layers_dir . '/layers/' . l:layer . '/packages.vim'
-    execute 'source ' . s:spacevim_layers_dir . '/layers/' . l:layer . '/config.vim'
+  let g:spaceneovim_plugins = []
+  for l:layer in g:spaceneovim_enabled_layers
+    execute 'source ' . s:spaceneovim_layers_dir . '/layers/' . l:layer . '/packages.vim'
+    execute 'source ' . s:spaceneovim_layers_dir . '/layers/' . l:layer . '/config.vim'
   endfor
 
-  for l:plugin in g:spacevim_plugins
+  for l:plugin in g:spaceneovim_plugins
     Plug l:plugin.name, l:plugin.config
   endfor
 
-  if exists('g:dotspacevim_additional_plugins')
-    for l:additional_plugin in g:dotspacevim_additional_plugins
+  if exists('g:dotspaceneovim_additional_packages')
+    for l:additional_plugin in g:dotspaceneovim_additional_packages
       Plug l:additional_plugin.name, l:additional_plugin.config
     endfor
   endif

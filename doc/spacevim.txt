@@ -3,7 +3,7 @@
 SpaceNeovim
 
 Author: Christian Kjaer <https://github.com/Tehnix>
-Forked From Spacevim:  Camille Tjhoa <https://github.com/ctjhoa/>
+Forked From Spacevim: Camille Tjhoa <https://github.com/ctjhoa/>
 License: MIT
 
 
@@ -12,9 +12,6 @@ CONTENTS                                                  *spaceneovim-contents*
 
   1. Usage ................................... |SpaceneovimUsage|
   2. Layers .................................. |SpaceneovimLayers|
-    2.1 Core Layer ........................... |SpaceneovimCoreLayer|
-    2.2 Git Layer ............................ |SpaceneovimGitLayer|
-    2.3 Syntax Checking Layer ................ |SpaceneovimSyntaxCheckingLayer|
   3. Configuration ........................... |SpaceneovimConfiguration|
     3.1 g:dotSpaceneovim_configuration_layers ... |SpaceneovimConfiguration_configuration_layers|
     3.2 g:dotSpaceneovim_additional_plugins ..... |SpaceneovimConfiguration_additional_plugins|
@@ -46,48 +43,6 @@ Spaceneovim, like Spacemacs, is organized around layer system. A layer define
 plugin which will be installed and associatied key bindings.
 convenience.
 
-------------------------------------------------------------------------------
-2.1 Core Layer                                            *SpaceneovimCoreLayer*
-
-Main layer which provides core Spacemacs functionalities and behaviour.
-
-Plugin list:
-- https://github.com/dbakker/vim-projectroot
-- https://github.com/easymotion/vim-easymotion
-- https://github.com/editorconfig/editorconfig-vim
-- https://github.com/haya14busa/incsearch.vim
-- https://github.com/hecal3/vim-leader-guide
-- https://github.com/junegunn/fzf
-- https://github.com/junegunn/fzf.vim
-- https://github.com/kana/vim-arpeggio
-- https://github.com/mbbill/undotree
-- https://github.com/osyo-manga/vim-over
-- https://github.com/pelodelfuego/vim-swoop
-- https://github.com/sheerun/vim-polyglot
-- https://github.com/tpope/vim-commentary
-- https://github.com/tpope/vim-eunuch
-- https://github.com/tpope/vim-surround
-- https://github.com/tpope/vim-vinegar
-- https://github.com/Raimondi/delimitMate
-
-------------------------------------------------------------------------------
-2.2 Git Layer                                              *SpaceneovimGitLayer*
-
-Manage your git repository directly in vim.
-
-Plugin list:
-- https://github.com/airblade/vim-gitgutter
-- https://github.com/junegunn/gv.vim
-- https://github.com/tpope/vim-fugitive
-
-------------------------------------------------------------------------------
-2.2 Syntax Checking Layer                       *SpaceneovimSyntaxCheckingLayer*
-
-Enable syntax checking in vim and display any resulting errors to the user.
-
-Plugin list:
-- https://github.com/scrooloose/syntastic
-
 ==============================================================================
 3. Configuration                                      *SpaceneovimConfiguration*
 
@@ -99,16 +54,16 @@ You can configure the following settings to change how SpaceNeovim works.
 Define the list of layers you want to enabled. List support regex, in this
 example all core layers are enabled: >
 
-    let g:dotSpacevim_configuration_layers = ['+checkers/syntax-checking']
+  let g:dotSpacevim_configuration_layers = ['+checkers/neomake']
 
-Default: ['+checkers/syntax-checking']
+Default: []
 
 ------------------------------------------------------------------------------
 3.2 g:dotSpacevim_additional_plugins *SpaceneovimConfiguration_additional_plugins*
 
 This option is for adding additional plugins which are not present in layer : >
 
-    let g:dotSpacevim_additional_plugins = ['ctjhoa/miro8']
+  let g:dotSpacevim_additional_plugins = [{'name': 'ctjhoa/miro8', 'config': {}]
 
 Default: None | []
 
@@ -117,7 +72,7 @@ Default: None | []
 
 This option is for exclude plugins which are not preset in layer : >
 
-    let g:dotSpacevim_excluded_plugins = ['haya14busa/incsearch.vim']
+  let g:dotSpacevim_excluded_plugins = ['haya14busa/incsearch.vim']
 
 Default: None | []
 
@@ -131,7 +86,7 @@ Spaceneovim is MIT licensed.
 
 SpaceNeovim is a fork from https://github.com/ctjhoa/spacevim. The difference is
 that SpaceNeovim only focuses on Neovim, and it also features a radically
-differnet layer architecture, to closer mimic Spacemacs.
+different layer architecture to closer mimic Spacemacs.
 
 ==============================================================================
 6. Bugs                                                        *SpaceneovimBugs*
@@ -145,12 +100,13 @@ http://github.com/Tehnix/Spaceneovim/issues/
 Think you can make this plugin better? Awesome! Fork it on GitHub and
 send a pull request.
 
-GitHub: http://github.com/Tehnix/Spaceneovim/
+GitHub: http://github.com/Tehnix/spaceneovim/
 
 ==============================================================================
 8. Changelog                                              *SpaceneovimChangelog*
 
 v3.0.0
+    * Change naming to SpaceNeovim
     * Fork project from spacevim, change focus to Neovim
     * Rewrite layer architecture
 v2.0.0

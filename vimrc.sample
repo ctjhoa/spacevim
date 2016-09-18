@@ -1,56 +1,72 @@
 " -*- mode: vimrc -*-
 "vim: ft=vim
 
-" dotspacevim/auto-install {{{
-" Automatic installation of spacevim.
-let s:config_dir = $HOME . '/.config/nvim'
-let s:autoload_spacevim = expand(resolve(s:config_dir . '/autoload/spacevim.vim'))
-
-if empty(glob(s:autoload_spacevim))
-  let s:install_spacevim = jobstart([
-  \  'curl', '-fLo', s:autoload_spacevim, '--create-dirs',
-  \  'https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spacevim.vim'
-  \])
-  let s:waiting_for_plug = jobwait([s:install_spacevim])
-endif
+" dotspaceneovim/auto-install {{{
+  "Automatic installation of spaceneovim.
+  let s:config_dir = $HOME . '/.config/nvim'
+  let s:autoload_spaceneovim = expand(resolve(s:config_dir . '/autoload/spaceneovim.vim'))
+  if empty(glob(s:autoload_spaceneovim))
+    let s:install_spaceneovim = jobstart([
+    \  'curl', '-fLo', s:autoload_spaceneovim, '--create-dirs',
+    \  'https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spaceneovim.vim'
+    \])
+    let s:waiting_for_install = jobwait([s:install_spaceneovim])
+  endif
 " }}}
 
-" dotspacevim/init {{{
-" This code is called at the very startup of Spacevim initialization
-" before layers configuration.
-" You should not put any user code in there besides modifying the variable
-" values."
-" IMPORTANT: For the moment, any changes in plugins or layers needs
-" a vim restart and :PlugInstall
-  let g:dotspacevim_configuration_layers = [
+" dotspaceneovim/layers {{{
+  "Configuration Layers declaration.
+  "You should not put any user code in this block.
+
+  let g:dotspaceneovim_configuration_layers = [
   \  '+nav/buffers'
   \, '+nav/files'
   \, '+nav/quit'
   \, '+nav/windows'
   \, '+nav/start-screen'
   \, '+nav/text'
-  \, '+checkers/syntax-checking'
+  \, '+checkers/neomake'
+  \, '+completion/deoplete'
   \, '+tools/terminal'
+  \, '+lang/haskell'
   \]
 
-  let g:dotspacevim_additional_plugins = [
+  let g:dotspaceneovim_additional_packages = [
   \  {'name': 'flazz/vim-colorschemes', 'config': {}}
   \]
 
-  " let g:dotspacevim_escape_key_sequence = 'fd'
+  let g:dotspaceneovim_excluded_packages = []
+  " let g:dotspaceneovim_escape_key_sequence = 'fd'
 " }}}
 
-" dotspacevim/user-init {{{
-" Initialization for user code.
-" It is compute immediately after `dotspacemacs/init', before layer
-" configuration executes.
-" This function is mostly useful for variables that need to be set
-" before plugins are loaded. If you are unsure, you should try in setting
-" them in `dotspacevim/user-config' first."
+" dotspaceneovim/init {{{
+  "Initialization block.
+  "This block is called at the very startup of Spacemacs initialization
+  "before layers configuration.
+  "You should not put any user code in there besides modifying the variable
+  "values.
+  " Map the leader key to <Space>
   let g:mapleader = ' '
-  let g:leaderGuide_vertical = 0
-  " Shorten the time before the guide buffer appears
+  " Shorten the time before the vim-leader-guide buffer appears
   set timeoutlen=100
+  " Enable line numbers
+  " Set 7 lines to the cursor - when moving vertically using j/k
+  set so=7
+  " Use relative line numbers. Options are:
+  " - relativenumber/norelativenumber
+  " - number/nonumber
+  set relativenumber
+  " Always show the status line
+  set laststatus=2
+" }}}
+
+" dotspaceneovim/user-init {{{
+  "Initialization block for user code.
+  "It is run immediately after `dotspaceneovim/init', before layer
+  "configuration executes.
+  "This block is mostly useful for variables that need to be set
+  "before packages are loaded. If you are unsure, you should try in setting
+  "them in`dotspaceneovim/user-config' first."
 
   " Load external user-init if found
   if filereadable(s:config_dir . '/user-init.vim')
@@ -58,21 +74,21 @@ endif
   endif
 " }}}
 
-call spacevim#bootstrap()
+call spaceneovim#bootstrap()
 
-" dotspacevim/user-config {{{
-" Configuration for user code.
-" This is computed at the very end of Spacevim initialization after
-" layers configuration.
-" This is the place where most of your configurations should be done.
-" Unless it is explicitly specified that
-" a variable should be set before a plugin is loaded,
-" you should place your code here."
+" dotspaceneovim/user-config {{{
+  "Configuration block for user code.
+  "This function is called at the very end of SpaceNeovim initialization after
+  "layers configuration.
+  "This is the place where most of your configurations should be done. Unless
+  "it is explicitly specified that a variable should be set before a package is
+  "loaded, you should place your code here."
+  " Set default colorscheme to wombat256mod and the background to dark
   set background=dark
-  colorscheme wombat256mod
+  try | colorscheme wombat256mod | catch | endtry
 
   " Load external user-config if found
-  if filereadable(s:config_dir . '/user-init.vim')
+  if filereadable(s:config_dir . '/user-config.vim')
     execute 'source ' . s:config_dir . '/user-config.vim'
   endif
 " }}}
