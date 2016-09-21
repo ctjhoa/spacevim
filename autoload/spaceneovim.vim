@@ -149,9 +149,10 @@ endfunction
 function! spaceneovim#bootstrap() abort
   let l:python_support = spaceneovim#check_for_python()
   if !l:python_support
-    echo "IMPORTANT! Neovim could not find support for python, which means"
-    echo "some layers may not work. To fix this, install the neovim python"
-    echo "package. Doing `pip install neovim` should work.\n"
+    echo 'IMPORTANT! Neovim could not find support for python, which means'
+    echo 'some layers may not work. To fix this, install the neovim python'
+    echo 'package. Doing `pip install neovim` should work.'
+    echo ''
   endif
   call s:debug('>>> Starting SpaceNeovim bootstrap')
   call spaceneovim#download_layers(
