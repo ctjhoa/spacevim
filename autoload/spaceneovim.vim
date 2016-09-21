@@ -28,6 +28,16 @@ function! s:debug(msg)
   endif
 endfunction
 
+function! spaceneovim#check_for_python()
+  return has('python') || has('python3')
+  " Alternative longwinded way of checking for support
+  "let s:check = system('python -c "import neovim" 2> /dev/null && echo $? || echo $?')
+  "if s:check ==? "1\n"
+  ""  return 0
+  "endif
+  "return 1
+endfunction
+
 ""
 " Download the SpaceNeovim Layers using git
 "
@@ -137,6 +147,12 @@ endfunction
 " Bootstrap the SpaceNeovim installation
 "
 function! spaceneovim#bootstrap() abort
+  let l:python_support = spaceneovim#check_for_python()
+  if !l:python_support
+    echo "IMPORTANT! Neovim could not find support for python, which means"
+    echo "some layers may not work. To fix this, install the neovim python"
+    echo "package. Doing `pip install neovim` should work.\n"
+  endif
   call s:debug('>>> Starting SpaceNeovim bootstrap')
   call spaceneovim#download_layers(
     \g:dotspaceneovim_layers_repository,
@@ -154,11 +170,13 @@ function! spaceneovim#bootstrap() abort
     execute 'source ' . s:spaceneovim_layers_dir . '/auto-layers.vim'
   endif
 
-  call spaceneovim#setup_vim_plug()
-  call spaceneovim#install_enabled_plugins(
-    \g:spaceneovim_enabled_layers,
-    \g:spaceneovim_plugins,
-    \g:dotspaceneovim_additional_plugins
-  \)
+  if l:python_support
+    call spaceneovim#setup_vim_plug()
+    call spaceneovim#install_enabled_plugins(
+      \g:spaceneovim_enabled_layers,
+      \g:spaceneovim_plugins,
+      \g:dotspaceneovim_additional_plugins
+    \)
+  endif
   call s:debug('>>> Finished SpaceNeovim bootstrap')
 endfunction
