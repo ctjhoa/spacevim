@@ -85,7 +85,10 @@ call spaceneovim#bootstrap()
   "loaded, you should place your code here."
   " Set default colorscheme to wombat256mod and the background to dark
   set background=dark
-  try | colorscheme "deep-space" | catch | endtry
+  try
+    colorscheme "deep-space"
+  catch
+  endtry
 
   " Load external user-config if found
   if filereadable(s:config_dir . '/user-config.vim')
