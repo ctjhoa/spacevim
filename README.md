@@ -1,8 +1,8 @@
 # SpaceNeovim - Spacemacs for Neovim [![Build Status](https://travis-ci.org/Tehnix/spaceneovim.svg?branch=master)](https://travis-ci.org/Tehnix/spaceneovim)
 
-SpaceNeovim is [Spacemacs](https://github.com/syl20bnr/spacemacs) for Neovim. Forked from [ctjhoa/spacevim](https://github.com/ctjhoa/spacevim) and rewritten/restructured almost entirely (but still majorly inspired by the original fork).
-
-Unlike Spacevim, SpaceNeovim specifically does not focus on support vim, and takes advantage of Neovim specific functions.
+SpaceNeovim is [Spacemacs](https://github.com/syl20bnr/spacemacs) for Neovim. If
+you are unfamiliar with Spacemacs, you can read more about the motivation behind
+that on their website.
 
 ![screenshot](assets/Screenshot 2016-09-18 00.43.37.png)
 
@@ -10,8 +10,9 @@ Unlike Spacevim, SpaceNeovim specifically does not focus on support vim, and tak
 
 Prerequisites:
 
-* `git` on your path
-* `nvim` on your path
+* `git` on your path (`brew install git`)
+* `nvim` on your path (`brew install neovim/neovim --head`)
+* Neovim python bindings (`pip install neovim` or `pip3`)
 
 SpaceNeovim is a configurable distribution like Spacemacs.
 
@@ -58,6 +59,10 @@ If you want to develop/test out your own layers, there are two ways to do it:
 
 1. Point to your own git repository with `g:spaceneovim_layers_repository`, e.g. `let g:spaceneovim_layers_repository = 'git@github.com:Tehnix/spaceneovim-layers.git'`. This needs to be set before `dotspaceneovim/auto-install`.
 1. Manage the `spaceneovim-layers` directory yourself - the bootstrap process basically just checks if the directory exists, and if not it clones it down. Symlinking or putting in your own directory here will also work.
+
+### Enable Debugging
+
+You can enable debugging output by setting `let g:dotspaceneovim_debug = 1` in your `init.vim` file.
 
 ## License
 

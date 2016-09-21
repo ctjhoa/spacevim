@@ -17,7 +17,6 @@
 " dotspaceneovim/layers {{{
   "Configuration Layers declaration.
   "You should not put any user code in this block.
-
   let g:dotspaceneovim_configuration_layers = [
   \  '+nav/buffers'
   \, '+nav/files'
@@ -32,11 +31,11 @@
   \, '+ui/toggles'
   \]
 
-  let g:dotspaceneovim_additional_packages = [
+  let g:dotspaceneovim_additional_plugins = [
   \  {'name': 'flazz/vim-colorschemes', 'config': {}}
   \]
 
-  let g:dotspaceneovim_excluded_packages = []
+  let g:dotspaceneovim_excluded_plugins = []
   " let g:dotspaceneovim_escape_key_sequence = 'fd'
 " }}}
 
@@ -86,7 +85,7 @@ call spaceneovim#bootstrap()
   "loaded, you should place your code here."
   " Set default colorscheme to wombat256mod and the background to dark
   set background=dark
-  try | colorscheme wombat256mod | catch | endtry
+  try | colorscheme "deep-space" | catch | endtry
 
   " Load external user-config if found
   if filereadable(s:config_dir . '/user-config.vim')
