@@ -120,11 +120,17 @@ function! spaceneovim#setup_vim_plug() abort
   endif
   if empty(glob(s:vim_plugged))
     call s:debug('>>> Installing all plugins...')
-    let l:create_plugged_dir = jobstart(['mkdir', '-p', s:vim_plugged])
-    let l:waiting_for_plugged_dir = jobwait([l:create_plugged_dir])
-    source $MYVIMRC
-    let l:install_plug_packages = jobstart(['nvim', '+PlugInstall', '+qall'])
-    let l:waiting_for_packages = jobwait([l:install_plug_packages])
+    if has('nvim')
+      let l:create_plugged_dir = jobstart(['mkdir', '-p', s:vim_plugged])
+      let l:waiting_for_plugged_dir = jobwait([l:create_plugged_dir])
+      source $MYVIMRC
+      let l:install_plug_packages = jobstart(['nvim', '+PlugInstall', '+qall'])
+      let l:waiting_for_packages = jobwait([l:install_plug_packages])
+    else
+      silent execute '!mkdir -p ' . s:vim_plugged
+      source $MYVIMRC
+      silent execute '!nvim +PlugInstall +qall'
+    endif
     source $MYVIMRC
     call s:debug('>>> All plugins installed')
   endif
