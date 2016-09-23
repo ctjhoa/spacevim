@@ -114,7 +114,7 @@ function! spaceneovim#setup_vim_plug() abort
       \])
       let l:waiting_for_plug = jobwait([l:install_plug])
     else
-      silent execute '!curl -fLo ' . s:autoload_spaceneovim . ' --create-dirs https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spaceneovim.vim'
+      silent execute '!curl -fLo ' . s:vim_plug . ' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
     endif
     call s:debug('>>> Sourcing ' . $MYVIMRC . ' again')
   endif
