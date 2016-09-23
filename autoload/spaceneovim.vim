@@ -129,7 +129,7 @@ function! spaceneovim#setup_vim_plug() abort
     else
       silent execute '!mkdir -p ' . s:vim_plugged
       source $MYVIMRC
-      silent execute '!nvim +PlugInstall +qall'
+      silent execute '!vim +PlugInstall +qall'
     endif
     source $MYVIMRC
     call s:debug('>>> All plugins installed')
@@ -166,7 +166,7 @@ endfunction
 "
 function! spaceneovim#bootstrap() abort
   let l:python_support = spaceneovim#check_for_python()
-  if !l:python_support
+  if l:python_support ==? 0
     echo 'IMPORTANT! Neovim could not find support for python, which means'
     echo 'some layers may not work. To fix this, install the neovim python'
     echo 'package. Doing `pip install neovim` should work.'
@@ -189,7 +189,7 @@ function! spaceneovim#bootstrap() abort
     execute 'source ' . s:spaceneovim_layers_dir . '/auto-layers.vim'
   endif
 
-  if l:python_support
+  if l:python_support ==? 1
     call spaceneovim#setup_vim_plug()
     call spaceneovim#install_enabled_plugins(
       \g:spaceneovim_enabled_layers,
