@@ -1,5 +1,9 @@
 " Set up path variables {{{
-let s:config_dir = $HOME . '/.config/nvim'
+if has('nvim')
+  let s:config_dir = $HOME . '/.config/nvim'
+else
+  let s:config_dir = $HOME . '/.vim'
+endif
 let s:vim_plug = expand(resolve(s:config_dir . '/autoload/plug.vim'))
 let s:vim_plugged = expand(resolve(s:config_dir . '/plugged'))
 let s:spaceneovim_layers_dir = expand(resolve(s:config_dir . '/spaceneovim-layers'))
@@ -12,7 +16,7 @@ let g:spaceneovim_plugins = []
 " }}}
 
 " Set up configurable variables {{{
-let s:default_repository = 'git@github.com:Tehnix/spaceneovim-layers.git'
+let s:default_repository = 'https://github.com/Tehnix/spaceneovim-layers.git'
 let g:dotspaceneovim_layers_repository = get(g:, 'dotspaceneovim_layers_repository', s:default_repository)
 let g:dotspaceneovim_additional_plugins = get(g:, 'dotspaceneovim_additional_plugins', [])
 let g:dotspaceneovim_configuration_layers = get(g:, 'dotspaceneovim_configuration_layers', [])

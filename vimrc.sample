@@ -3,7 +3,11 @@
 
 " dotspaceneovim/auto-install {{{
   "Automatic installation of spaceneovim.
-  let s:config_dir = $HOME . '/.config/nvim'
+  if has('nvim')
+    let s:config_dir = $HOME . '/.config/nvim'
+  else
+    let s:config_dir = $HOME . '/.vim'
+  endif
   let s:autoload_spaceneovim = expand(resolve(s:config_dir . '/autoload/spaceneovim.vim'))
   if empty(glob(s:autoload_spaceneovim))
     let s:install_spaceneovim = jobstart([
