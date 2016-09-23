@@ -48,13 +48,17 @@ endfunction
 function! spaceneovim#download_layers(repo, location) abort
   if empty(glob(a:location))
     call s:debug('>>> Cloning down ' . a:repo)
-    let l:install_layers = jobstart([
-    \  'git'
-    \, 'clone'
-    \, a:repo
-    \, a:location
-    \])
-    let l:waiting_for_layers = jobwait([l:install_layers])
+    if has('nvim')
+      let l:install_layers = jobstart([
+      \  'git'
+      \, 'clone'
+      \, a:repo
+      \, a:location
+      \])
+      let l:waiting_for_layers = jobwait([l:install_layers])
+    else
+      silent execute '!git clone ' . a:repo . ' ' . a:location
+    endif
   endif
 endfunction
 
@@ -100,14 +104,18 @@ endfunction
 function! spaceneovim#setup_vim_plug() abort
   if empty(glob(s:vim_plug))
     call s:debug('>>> Downloading plug.vim')
-    let l:install_plug = jobstart([
-    \  'curl'
-    \, '-fLo'
-    \, s:vim_plug
-    \, '--create-dirs'
-    \, 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-    \])
-    let l:waiting_for_plug = jobwait([l:install_plug])
+    if has('nvim')
+      let l:install_plug = jobstart([
+      \  'curl'
+      \, '-fLo'
+      \, s:vim_plug
+      \, '--create-dirs'
+      \, 'https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+      \])
+      let l:waiting_for_plug = jobwait([l:install_plug])
+    else
+      silent execute '!curl -fLo ' . s:autoload_spaceneovim . ' --create-dirs https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spaceneovim.vim'
+    endif
     call s:debug('>>> Sourcing ' . $MYVIMRC . ' again')
   endif
   if empty(glob(s:vim_plugged))

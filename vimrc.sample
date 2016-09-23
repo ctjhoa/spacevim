@@ -10,11 +10,7 @@
   endif
   let s:autoload_spaceneovim = expand(resolve(s:config_dir . '/autoload/spaceneovim.vim'))
   if empty(glob(s:autoload_spaceneovim))
-    let s:install_spaceneovim = jobstart([
-    \  'curl', '-fLo', s:autoload_spaceneovim, '--create-dirs',
-    \  'https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spaceneovim.vim'
-    \])
-    let s:waiting_for_install = jobwait([s:install_spaceneovim])
+      silent execute '!curl -fLo ' . s:autoload_spaceneovim . ' --create-dirs https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spaceneovim.vim'
   endif
 " }}}
 
