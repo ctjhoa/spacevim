@@ -86,7 +86,7 @@ call spaceneovim#bootstrap()
   " Set default colorscheme to wombat256mod and the background to dark
   set background=dark
   try
-    colorscheme "deep-space"
+    colorscheme wombat256mod
   catch
   endtry
 
