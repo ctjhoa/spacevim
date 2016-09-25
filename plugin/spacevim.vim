@@ -437,6 +437,8 @@ endif
 " text {{{
 if s:spacevim_is_layer_enabled('core/text')
   let g:lmap.x = { 'name': '+text' }
+  call s:spacevim_bind('vmap', 'xu', 'downcase-region', 'u', 0)
+  call s:spacevim_bind('vmap', 'xU', 'upcase-region', 'U', 0)
 endif
 " }}}
 
