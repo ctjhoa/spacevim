@@ -297,6 +297,7 @@ endif
 " help/highlight {{{
 if s:spacevim_is_layer_enabled('core/help-highlight')
   let g:lmap.h = { 'name': '+help/highlight' }
+  call s:spacevim_bind('map', 'hT', 'vimtutor', '!vimtutor', 1)
 endif
 " }}}
 
