@@ -188,6 +188,7 @@ if s:spacevim_is_layer_enabled('core/buffers')
   let g:lmap.b = { 'name': '+buffers' }
   call s:spacevim_bind('map', 'bb', 'buffers', 'call SpacevimBuffers()', 1)
   call s:spacevim_bind('map', 'bd', 'kill-this-buffer', 'call SpacevimKillBuffer()', 1)
+  call s:spacevim_bind('map', 'bD', 'force-kill-this-buffer', ':bd!', 1)
   call s:spacevim_bind('map', 'bK', 'kill-other-buffers', 'call SpacevimKillOtherBuffers()', 1)
   call s:spacevim_bind('map', 'bn', 'next-useful-buffer', 'bnext', 1)
   call s:spacevim_bind('map', 'bp', 'previous-useful-buffer', 'bprevious', 1)
@@ -246,6 +247,7 @@ if s:spacevim_is_layer_enabled('core/files')
   call s:spacevim_bind('map', 'fs', 'save-buffer', 'write', 1)
   call s:spacevim_bind('map', 'fS', 'write-all', 'wall', 1)
   call s:spacevim_bind('map', 'ft', 'explorer-toggle', 'call SpacevimExplorerToggle()', 1)
+  call s:spacevim_bind('map', 'fx', 'save-quit-buffer', ':w<CR>:bd', 1)
 
   " files/vim {{{
   if s:spacevim_is_layer_enabled('core/files/vim')
