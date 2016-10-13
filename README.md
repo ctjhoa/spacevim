@@ -16,6 +16,8 @@ Prerequisites:
 
 SpaceNeovim is a configurable distribution like Spacemacs.
 
+__N.B.: Please backup your `init.vim` first! Curl will overwrite the contents in the file (meaning it will also follow symlinks)!__
+
 To start using SpaceNeovim you can use the following oneliner,
 
 ```shell
