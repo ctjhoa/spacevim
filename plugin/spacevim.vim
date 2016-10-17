@@ -54,6 +54,14 @@ function! s:spacevim_preinstall()
 endfunction
 
 function! s:spacevim_postinstall()
+  " incsearch.vim {{{
+  if exists('g:loaded_incsearch')
+    map /  <Plug>(incsearch-forward)
+    map ?  <Plug>(incsearch-backward)
+    map g/ <Plug>(incsearch-stay)
+  endif
+  " }}}
+
   " vim-arpeggio {{{
   if exists('g:loaded_arpeggio')
     if exists('g:dotspacevim_escape_key_sequence')
