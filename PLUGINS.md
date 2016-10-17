@@ -8,7 +8,7 @@ All plugins are optional and are needed only when the associated shorcut is pres
 | ------ | ------------------------------------------- |
 | core | <ul><li>[easymotion/vim-easymotion][]</li><li>([junegunn/fzf.vim][] + [junegunn/fzf][]) OR [Shougo/unite.vim][] OR [ctrlpvim/ctrlp.vim][]</li><li>[scrooloose/nerdcommenter][] OR [tpope/vim-commentary][]</li></ul> |
 | core/applications | <ul><li>[mbbill/undotree][]</li></ul> |
-| core/behavior | <ul><li>[haya14busa/incsearch.vim][]</li><li>[hecal3/vim-leader-guide][]</li><li>[kana/vim-arpeggio][]</li><li>[mhinz/vim-startify][]</li><li>[osyo-manga/vim-over][]</li><li>[Raimondi/delimitMate][]</li><li>[sheerun/vim-polyglot][]</li><li>[tpope/vim-sensible][]</li><li>[tpope/vim-surround][]</li></ul> |
+| core/behavior | <ul><li>[haya14busa/incsearch.vim][]</li><li>[hecal3/vim-leader-guide][]</li><li>[kana/vim-arpeggio][]</li><li>[Konfekt/vim-alias][]</li><li>[mhinz/vim-startify][]</li><li>[osyo-manga/vim-over][]</li><li>[Raimondi/delimitMate][]</li><li>[sheerun/vim-polyglot][]</li><li>[tpope/vim-sensible][]</li><li>[tpope/vim-surround][]</li></ul> |
 | core/buffers | <ul><li>([junegunn/fzf.vim][] + [junegunn/fzf][]) OR [Shougo/unite.vim][] OR [ctrlpvim/ctrlp.vim][]</li><li>[moll/vim-bbye][]</li></ul> |
 | core/buffers/move | None required |
 | core/compile-comments | None required |
@@ -51,6 +51,7 @@ All plugins are optional and are needed only when the associated shorcut is pres
 [junegunn/gv.vim]: https://github.com/junegunn/gv.vim
 [justinmk/vim-dirvish]: https://github.com/justinmk/vim-dirvish
 [kana/vim-arpeggio]: https://github.com/kana/vim-arpeggio
+[Konfekt/vim-alias]: https://github.com/Konfekt/vim-alias
 [mbbill/undotree]: https://github.com/mbbill/undotree
 [mhinz/vim-startify]: https://github.com/mhinz/vim-startify
 [moll/vim-bbye]: https://github.com/moll/vim-bbye

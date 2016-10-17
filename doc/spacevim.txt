@@ -70,6 +70,7 @@ Plugin list:
 - https://github.com/junegunn/fzf
 - https://github.com/junegunn/fzf.vim
 - https://github.com/kana/vim-arpeggio
+- https://github.com/Konfekt/vim-alias
 - https://github.com/mbbill/undotree
 - https://github.com/osyo-manga/vim-over
 - https://github.com/pelodelfuego/vim-swoop

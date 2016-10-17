@@ -81,6 +81,13 @@ function! s:spacevim_postinstall()
     vnoremap <silent> <leader> :<c-u>LeaderGuideVisual '<Space>'<CR>
   endif
   " }}}
+
+  " vim-over {{{
+  if exists('g:loaded_cmdalias')
+    call CmdAlias('%s', 'OverCommandLine<cr>%s')
+    call CmdAlias('s', 'OverCommandLine<cr>s')
+  endif
+  " }}}
 endfunction
 
 call s:spacevim_preinstall()
