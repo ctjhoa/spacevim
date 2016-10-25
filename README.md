@@ -49,8 +49,7 @@ Install Spacevim as usual:
 ## TODO
 
 * Load plugin in async
-* ~~Improve performance~~
-* ~~Fix OSX~~
+* Support spacemacs 0.200.X
 * Better documentation
 * OO programming (as suggested [here](https://www.reddit.com/r/vim/comments/4y8w38/spacevim_20_the_war_is_not_over/d6m1i02))
 
