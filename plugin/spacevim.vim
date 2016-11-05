@@ -332,6 +332,8 @@ if s:spacevim_is_layer_enabled('core/join-split')
   call s:spacevim_bind('map', 'jn', 'sp-newline', 'i<CR><Esc>', 0)
   call s:spacevim_bind('map', 'js', 'split-and-newline', 'i<CR><Esc>', 0) " same as j.j ?
   call s:spacevim_bind('map', 'jo', 'open-line', 'i<CR><Esc>k$', 0)
+  call s:spacevim_bind_plug('nmap', 'jl', 'easymotion-line', '(easymotion-bd-jk)')
+  call s:spacevim_bind_plug('vmap', 'jl', 'easymotion-line', '(easymotion-bd-jk)')
 endif
 " }}}
 
@@ -457,11 +459,6 @@ if s:spacevim_is_layer_enabled('core/text')
   call s:spacevim_bind('vmap', 'xU', 'upcase-region', 'U', 0)
 endif
 " }}}
-
-if s:spacevim_is_layer_enabled('core')
-  call s:spacevim_bind_plug('nmap', 'y', 'easymotion-line', '(easymotion-bd-jk)')
-  call s:spacevim_bind_plug('vmap', 'y', 'easymotion-line', '(easymotion-bd-jk)')
-endif
 
 " zoom {{{
 if s:spacevim_is_layer_enabled('core/zoom')
