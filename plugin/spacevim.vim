@@ -329,8 +329,8 @@ if s:spacevim_is_layer_enabled('core/join-split')
   let g:lmap.j = { 'name': '+join/split' }
   call s:spacevim_bind('nmap', 'j=', 'indent-region-or-buffer', 'mzgg=G`z', 0)
   call s:spacevim_bind('vmap', 'j=', 'indent-region-or-buffer', '==', 0)
-  call s:spacevim_bind('map', 'jJ', 'split-and-newline', 'i<CR><Esc>', 0) " same as j.j ?
   call s:spacevim_bind('map', 'jn', 'sp-newline', 'i<CR><Esc>', 0)
+  call s:spacevim_bind('map', 'js', 'split-and-newline', 'i<CR><Esc>', 0) " same as j.j ?
   call s:spacevim_bind('map', 'jo', 'open-line', 'i<CR><Esc>k$', 0)
 endif
 " }}}
