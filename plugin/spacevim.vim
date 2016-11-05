@@ -201,7 +201,8 @@ endif
 " buffers {{{
 if s:spacevim_is_layer_enabled('core/buffers')
   let g:lmap.b = { 'name': '+buffers' }
-  call s:spacevim_bind('map', 'bb', 'buffers', 'call SpacevimBuffers()', 1)
+  call s:spacevim_bind('map', 'bb', 'buffers', 'call SpacevimBuffers()', 1) " TODO: lists the buffers of the current layout
+  call s:spacevim_bind('map', 'bB', 'buffers', 'call SpacevimBuffers()', 1)
   call s:spacevim_bind('map', 'bd', 'kill-this-buffer', 'call SpacevimKillBuffer()', 1)
   call s:spacevim_bind('map', 'bK', 'kill-other-buffers', 'call SpacevimKillOtherBuffers()', 1)
   call s:spacevim_bind('map', 'bn', 'next-useful-buffer', 'bnext', 1)
