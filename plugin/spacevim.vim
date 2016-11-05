@@ -431,7 +431,8 @@ if s:spacevim_is_layer_enabled('core/windows')
   call s:spacevim_bind('map', 'w-', 'split-window-below', 'split', 1)
   call s:spacevim_bind('map', 'w/', 'split-window-right', 'vsplit', 1)
   call s:spacevim_bind('map', 'w=', 'balance-windows', 'wincmd =', 1)
-  call s:spacevim_bind('map', 'wc', 'delete-window', 'q', 1)
+  call s:spacevim_bind('map', 'wd', 'hide-window', 'hide', 1)
+  call s:spacevim_bind('map', 'wD', 'hide-other-windows', 'call SpacevimHideOtherWindows()', 1)
   call s:spacevim_bind('map', 'wh', 'window-left', 'wincmd h', 1)
   call s:spacevim_bind('map', 'wH', 'window-move-far-left', 'wincmd H', 1)
   call s:spacevim_bind('map', 'wj', 'window-down', 'wincmd j', 1)
@@ -576,6 +577,12 @@ function! SpacevimGitLog()
   else
     execute 'silent! Glog<CR>:bot copen'
   endif
+endfunction
+
+function! SpacevimHideOtherWindows()
+  let currBuff=bufnr("%")
+  silent! execute 'windo hide'
+  silent! execute 'buffer ' . currBuff
 endfunction
 
 function! SpacevimKillBuffer()
