@@ -184,7 +184,7 @@ if s:spacevim_is_layer_enabled('core')
   call s:spacevim_bind('map', '9', 'window-9', '9wincmd w', 1)
   call s:spacevim_bind('map', '0', 'window-10', '10wincmd w', 1)
 
-  call s:spacevim_bind('map', ':', 'M-x', 'call SpacevimCommands()', 1)
+  call s:spacevim_bind('map', '<Space>', 'M-x', 'call SpacevimCommands()', 1)
 
   call s:spacevim_bind('nmap', ';', 'comment-operator', 'call SpacevimCommentOperator(0)', 1)
   call s:spacevim_bind_plug('nmap', ';;', 'comment-line', 'call SpacevimCommentLine()')
