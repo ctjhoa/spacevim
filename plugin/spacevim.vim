@@ -578,7 +578,7 @@ function! SpacevimGitLog()
 endfunction
 
 function! SpacevimHideOtherWindows()
-  let currBuff=bufnr("%")
+  let currBuff=bufnr('%')
   silent! execute 'windo hide'
   silent! execute 'buffer ' . currBuff
 endfunction
