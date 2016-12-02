@@ -92,7 +92,11 @@ function! spacevim#bootstrap() abort
       for plugin in g:spacevim_plugins
         if index(plugin.layers, layer) != -1 &&
         \ (!exists('g:dotspacevim_excluded_plugins') || index(g:dotspacevim_excluded_plugins, plugin) == -1)
-          Plug plugin.name
+          if plugin.name == "hecal3/vim-leader-guide"
+            Plug plugin.name, { 'commit': 'bade1b9dfc5e56aaf322791fff11e350fd8681ae' }
+          else
+            Plug plugin.name
+          endif
         endif
       endfor
     endfor
