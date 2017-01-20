@@ -102,7 +102,11 @@ function! spacevim#bootstrap() abort
     endfor
     if exists('g:dotspacevim_additional_plugins')
       for additional_plugin in g:dotspacevim_additional_plugins
-        Plug additional_plugin
+        if type(additional_plugin) == type({})
+          Plug additional_plugin.name, additional_plugin.option
+        else
+          Plug additional_plugin
+        endif
       endfor
     endif
     call plug#end()
