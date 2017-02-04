@@ -16,7 +16,7 @@ let g:spaceneovim_plugins = []
 " }}}
 
 " Set up configurable variables {{{
-let s:default_repository = 'https://github.com/Tehnix/spaceneovim-layers.git'
+let s:default_repository = 'https://github.com/lowski/spaceneovim-layers.git'
 let g:dotspaceneovim_layers_repository = get(g:, 'dotspaceneovim_layers_repository', s:default_repository)
 let g:dotspaceneovim_additional_plugins = get(g:, 'dotspaceneovim_additional_plugins', [])
 let g:dotspaceneovim_configuration_layers = get(g:, 'dotspaceneovim_configuration_layers', [])
