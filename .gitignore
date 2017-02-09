@@ -1,1 +1,5 @@
 .DS_Store
+autoload/plug.vim
+init.vim
+plugged/
+spaceneovim-layers/
