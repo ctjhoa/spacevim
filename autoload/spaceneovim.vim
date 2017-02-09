@@ -197,5 +197,8 @@ function! spaceneovim#bootstrap() abort
       \g:dotspaceneovim_additional_plugins
     \)
   endif
+
+  call g:Spaceneovim_postinstall()
+  
   call s:debug('>>> Finished SpaceNeovim bootstrap')
 endfunction
