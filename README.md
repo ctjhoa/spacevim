@@ -19,7 +19,7 @@ Execute this line of shell, it will download a default `.vimrc` and install
 plugins through vim.
 
 ```shell
-curl -sSfL https://raw.githubusercontent.com/ctjhoa/spacevim/master/vimrc.sample -o ~/.vimrc | vim
+curl -sSfL https://raw.githubusercontent.com/ctjhoa/spacevim/master/vimrc.sample -o ~/.vimrc && vim
 ```
 
 After plugins installation restart vim.
