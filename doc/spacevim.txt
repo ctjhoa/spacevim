@@ -1,17 +1,17 @@
 *spacevim.txt*  Spacemacs for vim
 
 
-  /$$$$$$                                          /$$    /$$ /$$              
- /$$__  $$                                        | $$   | $$|__/              
-| $$  \__/  /$$$$$$   /$$$$$$   /$$$$$$$  /$$$$$$ | $$   | $$ /$$ /$$$$$$/$$$$ 
+  /$$$$$$                                          /$$    /$$ /$$
+ /$$__  $$                                        | $$   | $$|__/
+| $$  \__/  /$$$$$$   /$$$$$$   /$$$$$$$  /$$$$$$ | $$   | $$ /$$ /$$$$$$/$$$$
 |  $$$$$$  /$$__  $$ |____  $$ /$$_____/ /$$__  $$|  $$ / $$/| $$| $$_  $$_  $$
  \____  $$| $$  \ $$  /$$$$$$$| $$      | $$$$$$$$ \  $$ $$/ | $$| $$ \ $$ \ $$
  /$$  \ $$| $$  | $$ /$$__  $$| $$      | $$_____/  \  $$$/  | $$| $$ | $$ | $$
 |  $$$$$$/| $$$$$$$/|  $$$$$$$|  $$$$$$$|  $$$$$$$   \  $/   | $$| $$ | $$ | $$
  \______/ | $$____/  \_______/ \_______/ \_______/    \_/    |__/|__/ |__/ |__/
-          | $$                                                                 
-          | $$                                                                 
-          |__/                                                                 
+          | $$
+          | $$
+          |__/
 
 
 Author:  Camille Tjhoa <http://github.com/ctjhoa/>
@@ -54,8 +54,8 @@ Spacemacs key bindings.
 2. Layers                                                       *SpacevimLayers*
 
 Spacevim, like Spacemacs, is organized around layer system. A layer define
-plugin which will be installed and associatied key bindings. 
-convenience. 
+plugin which will be installed and associatied key bindings.
+convenience.
 
 ------------------------------------------------------------------------------
 2.1 Core Layer                                               *SpacevimCoreLayer*
