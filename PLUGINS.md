@@ -13,7 +13,7 @@ All plugins are optional and are needed only when the associated shorcut is pres
 | core/buffers/move | None required |
 | core/compile-comments | None required |
 | core/capture-colors | None required |
-| core/files | <ul><li>([junegunn/fzf.vim][] + [junegunn/fzf][]) OR [Shougo/unite.vim][] OR [ctrlpvim/ctrlp.vim][]</li><li>(`netrw` + [tpope/vim-vinegar][]) OR [scrooloose/nerdtree][] OR [justinmk/vim-dirvish][]</li><li>[tpope/vim-eunuch][]</li></ul> |
+| core/files | <ul><li>([junegunn/fzf.vim][] + [junegunn/fzf][]) OR [Shougo/unite.vim][] OR [ctrlpvim/ctrlp.vim][]</li><li>(`netrw` + [tpope/vim-vinegar][]) OR [scrooloose/nerdtree][] OR [justinmk/vim-dirvish][]</li><li>[tpope/vim-eunuch][]</li><li>[mtth/locate.vim][]</li></ul> |
 | core/files/convert | None required |
 | core/files/vim | None required |
 | core/help-highlight | None required |
@@ -52,6 +52,7 @@ All plugins are optional and are needed only when the associated shorcut is pres
 [junegunn/gv.vim]: https://github.com/junegunn/gv.vim
 [justinmk/vim-dirvish]: https://github.com/justinmk/vim-dirvish
 [kana/vim-arpeggio]: https://github.com/kana/vim-arpeggio
+[mtth/locate.vim]: https://github.com/mtth/locate.vim
 [mbbill/undotree]: https://github.com/mbbill/undotree
 [mhinz/vim-startify]: https://github.com/mhinz/vim-startify
 [moll/vim-bbye]: https://github.com/moll/vim-bbye
