@@ -4,7 +4,7 @@ SpaceNeovim is [Spacemacs](https://github.com/syl20bnr/spacemacs) for Neovim. If
 you are unfamiliar with Spacemacs, you can read more about the motivation behind
 that on their website.
 
-![screenshot](assets/Screenshot 2016-09-18 00.43.37.png)
+![screenshot](assets/Screenshot%202016-09-18%2000.43.37.png)
 
 ## Installation
 
