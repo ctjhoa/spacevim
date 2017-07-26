@@ -69,3 +69,13 @@ You can enable debugging output by setting `let g:dotspaceneovim_debug = 1` in y
 ## License
 
 See [LICENSE](LICENSE).
+
+## Troubleshooting
+
+__Can’t see colors in tmux:__ This may be a problem with xterm-256 colors, as per issue #16 (thanks zacacollier) add the following your `tmux.conf` and restert your tmux with `tmux kill-server`,
+
+```
+set -g default-terminal "tmux-256color"
+set -ga terminal-overrides ',xterm-256color:Tc'
+```
+
