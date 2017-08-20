@@ -16,5 +16,5 @@ fi
 mkdir -p "$CONFIG_DIR" \
   && curl -sSfL https://raw.githubusercontent.com/tehnix/spaceneovim/master/vimrc.sample.vim -o "$CONFIG_FILE" \
   && mkdir -p "$AUTOLOAD_DIR" \
-  && curl -sSfL https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spaceneovim.vim "$AUTOLOAD_FILE" \
+  && curl -sSfL https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spaceneovim.vim -o "$AUTOLOAD_FILE" \
   && nvim

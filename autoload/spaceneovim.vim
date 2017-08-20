@@ -287,18 +287,20 @@ endfunction
 " provided.
 "
 function! s:set_theme(theme_background, theme_name, ...)
-  if a:theme_background ==? 'light'
-    set background=light
-  else
-    set background=dark
-  endif
-  if (has('termguicolors'))
-    set termguicolors
-  endif
-  execute 'colorscheme ' . a:theme_name
-  hi Comment cterm=italic
-  if a:0 ==? 1
-    let g:airline_theme=a:1
+  if !empty(glob(g:dotspaceneovim_layers_repository))
+    if a:theme_background ==? 'light'
+      set background=light
+    else
+      set background=dark
+    endif
+    if (has('termguicolors'))
+      set termguicolors
+    endif
+    execute 'colorscheme ' . a:theme_name
+    hi Comment cterm=italic
+    if a:0 ==? 1
+      let g:airline_theme=a:1
+    endif
   endif
 endfunction
 
