@@ -3,4 +3,4 @@ dist: trusty
 before_install:
 - pip install --user vim-vint
 script:
-- vint vimrc.sample autoload/*.vim
+- vint vimrc.sample.vim autoload/*.vim
