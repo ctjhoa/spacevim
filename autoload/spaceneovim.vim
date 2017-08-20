@@ -287,7 +287,7 @@ endfunction
 " provided.
 "
 function! s:set_theme(theme_background, theme_name, ...)
-  if !empty(glob(g:dotspaceneovim_layers_repository))
+  try
     if a:theme_background ==? 'light'
       set background=light
     else
@@ -301,7 +301,8 @@ function! s:set_theme(theme_background, theme_name, ...)
     if a:0 ==? 1
       let g:airline_theme=a:1
     endif
-  endif
+  catch
+  endtry
 endfunction
 
 ""
