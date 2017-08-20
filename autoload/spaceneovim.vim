@@ -24,6 +24,7 @@ let g:dotspaceneovim_additional_plugins = get(g:, 'dotspaceneovim_additional_plu
 let g:dotspaceneovim_configuration_layers = get(g:, 'dotspaceneovim_configuration_layers', [])
 let g:dotspaceneovim_configuration_private_layers = get(g:, 'dotspaceneovim_configuration_private_layers', [])
 let g:dotspaceneovim_debug = get(g:, 'dotspaceneovim_debug', 0)
+let g:dotspaceneovim_leader_key = get(g:, 'dotspaceneovim_leader_key', '<Space>')
 " }}}
 
 ""
@@ -231,6 +232,8 @@ function! spaceneovim#init()
   command! -nargs=+ -bar SetTheme     call s:set_theme(<args>)
   command! -nargs=0 -bar EnableDebug  call s:enable_debugging()
   command! -nargs=1 -bar SetLayerRepo call s:set_layer_repo(<args>)
+  command! -nargs=0 -bar GetLeader    call spaceneovim#get_leader_key()
+  command! -nargs=1 -bar SetLeader    call spaceneovim#set_leader_key(<args>)
   call s:debug('>>> Initializing Spaceneovim')
 endfunction
 
@@ -239,7 +242,7 @@ endfunction
 "
 function! s:layer(layer_name)
   call s:debug('--> User added layer ' . a:layer_name)
-  if index(g:dotspaceneovim_configuration_layers, a:layer_name) == -1
+  if index(g:dotspaceneovim_configuration_layers, a:layer_name) ==? -1
     call add(g:dotspaceneovim_configuration_layers, a:layer_name)
   endif
 endfunction
@@ -249,7 +252,7 @@ endfunction
 "
 function! s:private_layer(layer_name)
   call s:debug('--> User added private layer ' . a:layer_name)
-  if index(g:dotspaceneovim_configuration_private_layers, a:layer_name) == -1
+  if index(g:dotspaceneovim_configuration_private_layers, a:layer_name) ==? -1
     call add(g:dotspaceneovim_configuration_private_layers, a:layer_name)
   endif
 endfunction
@@ -258,11 +261,25 @@ endfunction
 " Add a plugin to the plugins dictionary.
 "
 function! s:extra_plugin(plugin_name, ...)
-  let l:plugin_config = get(a:, "1", {})
+  let l:plugin_config = get(a:, '1', {})
   call s:debug('--> User added extra plugin ' . a:plugin_name)
-  if index(g:dotspaceneovim_additional_plugins, a:plugin_name) == -1
+  if index(g:dotspaceneovim_additional_plugins, a:plugin_name) ==? -1
     call add(g:dotspaceneovim_additional_plugins, {'name': a:plugin_name, 'config': l:plugin_config})
   endif
+endfunction
+
+""
+" Get the leader key.
+"
+function! spaceneovim#get_leader_key()
+  return g:dotspaceneovim_leader_key
+endfunction
+
+""
+" Overwrite the default leader key.
+"
+function! spaceneovim#set_leader_key(new_leader)
+  let g:dotspaceneovim_leader_key = new_leader
 endfunction
 
 ""
@@ -270,17 +287,17 @@ endfunction
 " provided.
 "
 function! s:set_theme(theme_background, theme_name, ...)
-  if a:theme_background == 'light'
+  if a:theme_background ==? 'light'
     set background=light
   else
     set background=dark
   endif
-  if (has("termguicolors"))
+  if (has('termguicolors'))
     set termguicolors
   endif
   execute 'colorscheme ' . a:theme_name
   hi Comment cterm=italic
-  if a:0 == 1
+  if a:0 ==? 1
     let g:airline_theme=a:1
   endif
 endfunction

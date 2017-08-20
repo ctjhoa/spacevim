@@ -67,6 +67,7 @@ function! UserInit()
   " This block is called at the very startup of Spaceneovim initialization
   " before layers configuration.
 
+  SetLeader '<Space>'
   SetLayerRepo 'git@github.com:Tehnix/spaceneovim-layers.git'
 endfunction
 ```
@@ -81,7 +82,7 @@ function! UserConfig()
 endfunction
 ```
 
-The above `SetTheme <background color> <theme name> <airline theme>` is simply a convenience function.
+The above `SetTheme <background color> <theme name> <airline theme>` is simply a convenience function. Similarly `SetLeader` allows you to set the key that activates `vim-leader`.
 
 ## Developing
 
