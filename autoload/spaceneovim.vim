@@ -140,7 +140,7 @@ endfunction
 " Install plugins from all enabled layers
 "
 function! spaceneovim#install_enabled_plugins(enabled_layers, plugins, additional_plugins) abort
-  call s:debug('>>> Sourcing all layers:')
+  call s:debug('>>> Sourcing all layers')
   call plug#begin(s:vim_plugged)
   " Load all the plugins from the layers
   for l:layer in a:enabled_layers
@@ -198,6 +198,73 @@ function! spaceneovim#bootstrap() abort
   endif
 
   call g:Spaceneovim_postinstall()
-  
+
   call s:debug('>>> Finished SpaceNeovim bootstrap')
+endfunction
+
+""
+" Set up the commands to use in the configuration file.
+"
+function! spaceneovim#init()
+  command! -nargs=1 -bar Layer        call s:layer(<args>)
+  command! -nargs=+ -bar ExtraPlugin  call s:extra_plugin(<args>)
+  command! -nargs=+ -bar SetTheme     call s:set_theme(<args>)
+  command! -nargs=0 -bar EnableDebug  call s:enable_debugging()
+  command! -nargs=1 -bar SetLayerRepo call s:set_layer_repo(<args>)
+  call s:debug('>>> Initializing Spaceneovim')
+endfunction
+
+""
+" Add a layer to the layers dictionary.
+"
+function! s:layer(layer_name)
+  call s:debug('--> User added layer ' . a:layer_name)
+  if index(g:dotspaceneovim_configuration_layers, a:layer_name) == -1
+    call add(g:dotspaceneovim_configuration_layers, a:layer_name)
+  endif
+endfunction
+
+""
+" Add a plugin to the plugins dictionary.
+"
+function! s:extra_plugin(plugin_name, ...)
+  let l:plugin_config = get(a:, "1", {})
+  call s:debug('--> User added extra plugin ' . a:plugin_name)
+  if index(g:dotspaceneovim_additional_plugins, a:plugin_name) == -1
+    call add(g:dotspaceneovim_additional_plugins, {'name': a:plugin_name, 'config': l:plugin_config})
+  endif
+endfunction
+
+""
+" Set up the theme, and additionally set an airline theme if 3rd argument is
+" provided.
+"
+function! s:set_theme(theme_background, theme_name, ...)
+  if a:theme_background == 'light'
+    set background=light
+  else
+    set background=dark
+  endif
+  if (has("termguicolors"))
+    set termguicolors
+  endif
+  execute 'colorscheme ' . a:theme_name
+  hi Comment cterm=italic
+  if a:0 == 1
+    let g:airline_theme=a:1
+  endif
+endfunction
+
+""
+" Enable debugging output.
+"
+function! s:enable_debugging()
+  let g:dotspaceneovim_debug = 1
+endfunction
+
+""
+" Set the layers repository URL.
+"
+function! s:set_layer_repo(layer_repo)
+  let g:spaceneovim_layers_repository = a:layer_repo
 endfunction
