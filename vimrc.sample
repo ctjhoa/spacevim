@@ -18,7 +18,8 @@
   "Configuration Layers declaration.
   "You should not put any user code in this block.
   let g:dotspaceneovim_configuration_layers = [
-  \  '+nav/buffers'
+  \  '+core/behavior'
+  \, '+nav/buffers'
   \, '+nav/files'
   \, '+nav/quit'
   \, '+nav/windows'

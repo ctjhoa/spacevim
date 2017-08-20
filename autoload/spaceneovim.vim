@@ -142,7 +142,6 @@ endfunction
 function! spaceneovim#install_enabled_plugins(enabled_layers, plugins, additional_plugins) abort
   call s:debug('>>> Sourcing all layers:')
   call plug#begin(s:vim_plugged)
-  Plug 'hecal3/vim-leader-guide'
   " Load all the plugins from the layers
   for l:layer in a:enabled_layers
     execute 'source ' . s:spaceneovim_layers_dir . '/layers/' . l:layer . '/packages.vim'
