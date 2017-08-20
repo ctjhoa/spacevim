@@ -279,7 +279,7 @@ endfunction
 " Overwrite the default leader key.
 "
 function! spaceneovim#set_leader_key(new_leader)
-  let g:dotspaceneovim_leader_key = new_leader
+  let g:dotspaceneovim_leader_key = a:new_leader
 endfunction
 
 ""
