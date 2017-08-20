@@ -8,9 +8,9 @@ SpaceNeovim is [Spacemacs](https://github.com/syl20bnr/spacemacs) for Neovim. If
 
 Prerequisites:
 
-- `git` on your path (`brew install git`)
-- `nvim` on your path (`brew install neovim/neovim --head`)
-- Neovim python bindings (`pip install neovim` or `pip3`)
+-   `git` on your path (`brew install git`)
+-   `nvim` on your path (`brew install neovim/neovim --head`)
+-   Neovim python bindings (`pip install neovim` or `pip3`)
 
 SpaceNeovim is a configurable distribution like Spacemacs.
 
@@ -22,12 +22,12 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/tehnix/spaceneovim/master/
 
 It will,
 
-- Backup existing Neovim configuration to `.config/nvim.<date>.backup`
-- Download a default `init.vim`
-- Download `autoload/spaceneovim.vim`
-- Set up [vim-plug](https://github.com/junegunn/vim-plug)
-- Clone down the [layers repository](https://github.com/Tehnix/spaceneovim-layers)
-- Install default plugins
+-   Backup existing Neovim configuration to `.config/nvim.<date>.backup`
+-   Download a default `init.vim`
+-   Download `autoload/spaceneovim.vim`
+-   Set up [vim-plug](https://github.com/junegunn/vim-plug)
+-   Clone down the [layers repository](https://github.com/Tehnix/spaceneovim-layers)
+-   Install default plugins
 
 ## Layers
 
@@ -45,12 +45,18 @@ function! Layers()
   Layer '+nav/buffers'
   Layer ...
 
+  PrivateLayer '+lang/elm'
+
   ExtraPlugin 'liuchengxu/space-vim-dark'
   ExtraPlugin 'neovimhaskell/haskell-vim', { 'for': 'haskell' }
 endfunction
 ```
 
 The above also demonstrates `ExtraPlugin`, which will install plugins with `vim-plug`.
+
+## Private Layers
+
+If you want to manage your own layers, you can put them into `.config/nvim/spaceneovim-layers/private/` and load them like normal layers, except using `PrivateLayer` instead. E.g. `PrivateLayer '+lang/elm'`.
 
 ## Configuration
 
@@ -81,16 +87,17 @@ The above `SetTheme <background color> <theme name> <airline theme>` is simply a
 
 To easily test your changes it is recommended to symlink the various files into your `.config/nvim` folder. The ones you want to replace are
 
-- `.config/nvim/spaceneovim-layers` to test layer changes
-- `.config/nvim/autoload/spaceneovim.vim` to test core changes
-- `.config/nvim/init.vim` to test changes to `vimrc.sample.vim`
+-   `.config/nvim/spaceneovim-layers` to test layer changes
+-   `.config/nvim/autoload/spaceneovim.vim` to test core changes
+-   `.config/nvim/init.vim` to test changes to `vimrc.sample.vim`
 
 ### Using your own layer repository
 
-If you want to develop/test out your own layers, there are two ways to do it:
+If you want to develop/test out your own layers, there are three ways to do it:
 
-1. Point to your own git repository with `SetLayerRepo`, e.g. `SetLayerRepo 'git@github.com:Tehnix/spaceneovim-layers.git'`. This should be set in `UserInit()`.
-2. Manage the `spaceneovim-layers` directory yourself - the bootstrap process basically just checks if the directory exists, and if not it clones it down. Symlinking or putting in your own directory here will also work.
+1.  Add your layer in `.config/nvim/spaceneovim-layers/private/` and load them via `PrivateLayer`.
+2.  Point to your own git repository with `SetLayerRepo`, e.g. `SetLayerRepo 'git@github.com:Tehnix/spaceneovim-layers.git'`. This should be set in `UserInit()`.
+3.  Manage the `spaceneovim-layers` directory yourself - the bootstrap process basically just checks if the directory exists, and if not it clones it down. Symlinking or putting in your own directory here will also work.
 
 ### Enable Debugging
 
@@ -98,15 +105,11 @@ You can enable debugging output by calling `EnableDebug` in your `init.vim` file
 
 ## License
 
-See
-
-<license>.</license>
+See [License](License).
 
 ## Troubleshooting
 
 **Can't see colors in tmux:** This may be a problem with xterm-256 colors, as per issue #16 (thanks zacacollier) add the following your `tmux.conf` and restert your tmux with `tmux kill-server`,
 
-```
-set -g default-terminal "tmux-256color"
-set -ga terminal-overrides ',xterm-256color:Tc'
-```
+    set -g default-terminal "tmux-256color"
+    set -ga terminal-overrides ',xterm-256color:Tc'

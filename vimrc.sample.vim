@@ -7,18 +7,31 @@ function! Layers()
   " with `ExtraPlugin 'githubUser/Repo'`.
 
   Layer '+core/behavior'
+  Layer '+core/sensible'
+  Layer '+completion/deoplete'
+  Layer '+completion/snippets'
+  Layer '+checkers/neomake'
   Layer '+nav/buffers'
   Layer '+nav/files'
+  Layer '+nav/fuzzy'
   Layer '+nav/quit'
-  Layer '+nav/windows'
   Layer '+nav/start-screen'
   Layer '+nav/text'
-  Layer '+checkers/neomake'
-  Layer '+completion/deoplete'
+  Layer '+nav/tmux'
+  Layer '+nav/windows'
+  Layer '+specs/testing'
   Layer '+tools/terminal'
   Layer '+ui/airline'
   Layer '+ui/toggles'
+  " Language layers.
+  Layer '+lang/elm'
+  Layer '+lang/haskell'
+  Layer '+lang/javascript'
+  Layer '+lang/python'
+  Layer '+lang/ruby'
+  Layer '+lang/vim'
 
+  " Additional plugins.
   ExtraPlugin 'liuchengxu/space-vim-dark'
 endfunction
 
