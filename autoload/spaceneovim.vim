@@ -208,7 +208,7 @@ function! spaceneovim#bootstrap() abort
   endif
 
   " Only proceed if we have python support.
-  if l:python_support ==? 1 || exists("g:gui_oni")
+  if l:python_support ==? 1 || exists('g:gui_oni')
     call spaceneovim#setup_vim_plug()
     call spaceneovim#install_enabled_plugins(
       \g:spaceneovim_enabled_layers,
