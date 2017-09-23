@@ -14,7 +14,12 @@ fi
 # Create the neccessary directories, download the configuration files and launch
 # Neovim.
 mkdir -p "$CONFIG_DIR" \
+  && echo ">>> Downloading configuration file" \
   && curl -sSfL https://raw.githubusercontent.com/tehnix/spaceneovim/master/vimrc.sample.vim -o "$CONFIG_FILE" \
+  && echo ">>> Creating autoload directory for spaceneovim" \
   && mkdir -p "$AUTOLOAD_DIR" \
+  && echo ">>> Downloading spaceneovim core" \
   && curl -sSfL https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spaceneovim.vim -o "$AUTOLOAD_FILE" \
-  && nvim
+  && echo ">>> Launching nvim" \
+  && nvim \
+  && echo >>> DONE!"
