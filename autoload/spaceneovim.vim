@@ -9,22 +9,20 @@ let s:vim_plugged = expand(resolve(s:config_dir . '/plugged'))
 let s:spaceneovim_layers_dir = expand(resolve(s:config_dir . '/spaceneovim-layers'))
 " }}}
 
-" Set up layer variables {{{
-let g:spaceneovim_layers = []
-let g:spaceneovim__private_layers = []
-let g:spaceneovim_enabled_layers = []
-let g:spaceneovim_enabled_private_layers = []
-let g:spaceneovim_plugins = []
+" Internal state {{{
+" All layers added in the init.vim configuration.
+let s:dotspaceneovim_configuration_layers = get(g:, 'dotspaceneovim_configuration_layers', {})
+" Extra plugins added in init.vim configuration.
+let s:dotspaceneovim_additional_plugins = get(g:, 'dotspaceneovim_additional_plugins', [])
 " }}}
 
 " Set up configurable variables {{{
 let s:default_repository = 'https://github.com/Tehnix/spaceneovim-layers.git'
 let g:dotspaceneovim_layers_repository = get(g:, 'dotspaceneovim_layers_repository', s:default_repository)
-let g:dotspaceneovim_additional_plugins = get(g:, 'dotspaceneovim_additional_plugins', [])
-let g:dotspaceneovim_configuration_layers = get(g:, 'dotspaceneovim_configuration_layers', [])
-let g:dotspaceneovim_configuration_private_layers = get(g:, 'dotspaceneovim_configuration_private_layers', [])
 let g:dotspaceneovim_debug = get(g:, 'dotspaceneovim_debug', 0)
 let g:dotspaceneovim_leader_key = get(g:, 'dotspaceneovim_leader_key', '<Space>')
+let g:dotspaceneovim_core_layer = get(g:, 'dotspaceneovim_core_layer', '+core/behavior')
+let g:dotspaceneovim_layer_sources = get(g:, 'dotspaceneovim_layer_sources', [s:spaceneovim_layers_dir . '/layers/', s:spaceneovim_layers_dir . '/private/'])
 " }}}
 
 ""
@@ -34,6 +32,23 @@ function! s:debug(msg)
   if g:dotspaceneovim_debug
     echo a:msg
   endif
+endfunction
+
+""
+" Set up the commands to use in the configuration file.
+"
+function! spaceneovim#init()
+  command! -nargs=1 -bar Layer          call s:layer(<args>)
+  command! -nargs=1 -bar PrivateLayer   call s:private_layer(<args>)
+  command! -nargs=+ -bar SourcedLayer   call s:layer_with_source(<args>)
+  command! -nargs=+ -bar ExtraPlugin    call s:extra_plugin(<args>)
+  command! -nargs=+ -bar SetThemeWithBg call s:set_theme_with_background(<args>)
+  command! -nargs=+ -bar SetTheme       call s:set_theme(<args>)
+  command! -nargs=0 -bar EnableDebug    call s:enable_debugging()
+  command! -nargs=1 -bar SetLayerRepo   call s:set_layer_repo(<args>)
+  command! -nargs=0 -bar GetLeader      call spaceneovim#get_leader_key()
+  command! -nargs=1 -bar SetLeader      call spaceneovim#set_leader_key(<args>)
+  call s:debug('>>> Initializing Spaceneovim')
 endfunction
 
 ""
@@ -66,14 +81,13 @@ endfunction
 ""
 " Find all existing layers.
 "
-function! spaceneovim#find_all_layers(layers_dir) abort
-  call s:debug('>>> Locating all layers in ' . a:layers_dir . ':')
+function! spaceneovim#find_all_layers(layer_source) abort
   let l:located_layers = []
-  for l:group in split(glob(a:layers_dir . '*'), '\n')
+  for l:group in split(glob(a:layer_source . '*'), '\n')
     for l:layer in split(glob(l:group . '/*'), '\n')
       " Make sure the layer is not empty/invalid
-      if filereadable(l:layer . '/config.vim') && filereadable(l:layer . '/packages.vim')
-        let l:layer_name = substitute(l:layer, a:layers_dir, '', '')
+      if filereadable(l:layer . '/config.vim') || filereadable(l:layer . '/packages.vim')
+        let l:layer_name = substitute(l:layer, a:layer_source, '', '')
         call add(l:located_layers, l:layer_name)
         call s:debug('    Found ' . l:layer_name)
       endif
@@ -86,15 +100,12 @@ endfunction
 " Find all enabled layers.
 "
 function! spaceneovim#filter_enabled_layers(located_layers, configured_layers) abort
-  call s:debug('>>> Filtering all enabled layers')
   let l:enabled_layers = []
   for l:configuration_layer in a:configured_layers
-    for l:layer in a:located_layers
-      if l:layer =~ l:configuration_layer
-        call add(l:enabled_layers, l:layer)
-        call s:debug('    Enabled ' . l:layer)
-      endif
-    endfor
+    if index(a:located_layers, l:configuration_layer) != -1
+      call add(l:enabled_layers, l:configuration_layer)
+      call s:debug('    Enabled ' . l:configuration_layer)
+    endif
   endfor
   return l:enabled_layers
 endfunction
@@ -138,29 +149,55 @@ function! spaceneovim#setup_vim_plug() abort
 endfunction
 
 ""
+" Load plugin files.
+"
+function! spaceneovim#load_layer(layer_dir, layer_name)
+  if filereadable(a:layer_dir . a:layer_name . '/func.vim')
+    execute 'source ' . a:layer_dir . a:layer_name . '/func.vim'
+  endif
+  if filereadable(a:layer_dir . a:layer_name . '/packages.vim')
+    execute 'source ' . a:layer_dir . a:layer_name . '/packages.vim'
+  endif
+  if filereadable(a:layer_dir . a:layer_name . '/config.vim')
+    execute 'source ' . a:layer_dir . a:layer_name . '/config.vim'
+  endif
+endfunction
+
+""
 " Install plugins from all enabled layers.
 "
-function! spaceneovim#install_enabled_plugins(enabled_layers, enabled_private_layers, plugins, additional_plugins) abort
+function! spaceneovim#install_enabled_plugins(layer_sources, enabled_layers, additional_plugins) abort
   call s:debug('>>> Sourcing all layers')
   call plug#begin(s:vim_plugged)
-  " Load all the plugins from the layers.
-  for l:layer in a:enabled_layers
-    execute 'source ' . s:spaceneovim_layers_dir . '/layers/' . l:layer . '/packages.vim'
-    execute 'source ' . s:spaceneovim_layers_dir . '/layers/' . l:layer . '/config.vim'
+
+  " Explicitly load the core layer(s) first. The reason to explicitly
+  " load them first is because they might be defined in other sources
+  " than the primary one.
+  call s:debug('>>> Loading core layers')
+  for l:layer_source in a:layer_sources
+    " NOTE: This check is case-sensitive!
+    if index(a:enabled_layers[l:layer_source], g:dotspaceneovim_core_layer) != -1
+      call spaceneovim#load_layer(l:layer_source, g:dotspaceneovim_core_layer)
+    endif
   endfor
-  " Do the same for the private layers.
-  for l:layer in a:enabled_private_layers
-    execute 'source ' . s:spaceneovim_layers_dir . '/private/' . l:layer . '/packages.vim'
-    execute 'source ' . s:spaceneovim_layers_dir . '/private/' . l:layer . '/config.vim'
+
+  " Load all the plugins from the layer sources (except the core layer).
+  " NOTE: Layers internally call ExtraPlugin.
+  call s:debug('>>> Loading remaining layers')
+  for l:layer_source in a:layer_sources
+    for l:layer_name in a:enabled_layers[l:layer_source]
+      " NOTE: Because the earlier check is case sensitive, we also make
+      " this case-sensitive, to at least hit *exactly* the same layers.
+      if l:layer_name !=# g:dotspaceneovim_core_layer
+        call spaceneovim#load_layer(l:layer_source, l:layer_name)
+      endif
+    endfor
   endfor
-  " Add them to plug along with their configuration.
-  call s:debug('>>> Adding them to plug with their configuration')
-  for l:plugin in a:plugins
-    Plug l:plugin.name, l:plugin.config
-  endfor
-  " Install any additionally specified plugins.
-  call s:debug('>>> Installing additional plugins')
+
+  " Install any specified plugins (from layers and init.vim config).
+  call s:debug('>>> Installing plugins')
   for l:plugin in a:additional_plugins
+    call s:debug('     ' . l:plugin.name)
     Plug l:plugin.name, l:plugin.config
   endfor
   call plug#end()
@@ -185,36 +222,43 @@ function! spaceneovim#bootstrap() abort
     \s:spaceneovim_layers_dir
   \)
 
-  " Locate all enabled layers.
-  let g:spaceneovim_layers = spaceneovim#find_all_layers(
-    \s:spaceneovim_layers_dir . '/layers/'
-  \)
-  let g:spaceneovim_enabled_layers = spaceneovim#filter_enabled_layers(
-    \g:spaceneovim_layers,
-    \g:dotspaceneovim_configuration_layers
-  \)
-  " Locate all enabled private layers.
-  let g:spaceneovim_private_layers = spaceneovim#find_all_layers(
-    \s:spaceneovim_layers_dir . '/private/'
-  \)
-  let g:spaceneovim_enabled_private_layers = spaceneovim#filter_enabled_layers(
-    \g:spaceneovim_private_layers,
-    \g:dotspaceneovim_configuration_private_layers
-  \)
+  " Set up layer variables {{{
+  let l:spaceneovim_layers = {}
+  let l:spaceneovim_enabled_layers = {}
+  let l:spaceneovim_plugins = []
+  " }}}
+
+  " Go through each layer source.
+  for l:layer_source in g:dotspaceneovim_layer_sources
+    call s:debug('>>> Locating all layers in ' . l:layer_source . ':')
+    " Find what layers exist in the sources.
+    let l:spaceneovim_layers[l:layer_source] = spaceneovim#find_all_layers(
+      \l:layer_source
+    \)
+    call s:debug('>>> Filtering all enabled layers')
+    " Filter out any layers that hasn't been enabled in the source.
+    if has_key(s:dotspaceneovim_configuration_layers, l:layer_source)
+      let l:spaceneovim_enabled_layers[l:layer_source] = spaceneovim#filter_enabled_layers(
+        \l:spaceneovim_layers[l:layer_source],
+        \s:dotspaceneovim_configuration_layers[l:layer_source]
+      \)
+    else
+      let l:spaceneovim_enabled_layers[l:layer_source] = []
+    endif
+  endfor
 
   " Load in functionality from the layers repository.
   if filereadable(s:spaceneovim_layers_dir . '/auto-layers.vim')
     execute 'source ' . s:spaceneovim_layers_dir . '/auto-layers.vim'
   endif
 
-  " Only proceed if we have python support.
+  " Only proceed if we have python support (or we are using the Oni GUI).
   if l:python_support ==? 1 || exists('g:gui_oni')
     call spaceneovim#setup_vim_plug()
     call spaceneovim#install_enabled_plugins(
-      \g:spaceneovim_enabled_layers,
-      \g:spaceneovim_enabled_private_layers,
-      \g:spaceneovim_plugins,
-      \g:dotspaceneovim_additional_plugins,
+      \g:dotspaceneovim_layer_sources,
+      \l:spaceneovim_enabled_layers,
+      \s:dotspaceneovim_additional_plugins,
     \)
   endif
 
@@ -223,28 +267,11 @@ function! spaceneovim#bootstrap() abort
 endfunction
 
 ""
-" Set up the commands to use in the configuration file.
-"
-function! spaceneovim#init()
-  command! -nargs=1 -bar Layer        call s:layer(<args>)
-  command! -nargs=1 -bar PrivateLayer call s:private_layer(<args>)
-  command! -nargs=+ -bar ExtraPlugin  call s:extra_plugin(<args>)
-  command! -nargs=+ -bar SetTheme     call s:set_theme(<args>)
-  command! -nargs=0 -bar EnableDebug  call s:enable_debugging()
-  command! -nargs=1 -bar SetLayerRepo call s:set_layer_repo(<args>)
-  command! -nargs=0 -bar GetLeader    call spaceneovim#get_leader_key()
-  command! -nargs=1 -bar SetLeader    call spaceneovim#set_leader_key(<args>)
-  call s:debug('>>> Initializing Spaceneovim')
-endfunction
-
-""
 " Add a layer to the layers dictionary.
 "
 function! s:layer(layer_name)
   call s:debug('--> User added layer ' . a:layer_name)
-  if index(g:dotspaceneovim_configuration_layers, a:layer_name) ==? -1
-    call add(g:dotspaceneovim_configuration_layers, a:layer_name)
-  endif
+  call s:_layer_with_source(a:layer_name, s:spaceneovim_layers_dir . '/layers/')
 endfunction
 
 ""
@@ -252,20 +279,52 @@ endfunction
 "
 function! s:private_layer(layer_name)
   call s:debug('--> User added private layer ' . a:layer_name)
-  if index(g:dotspaceneovim_configuration_private_layers, a:layer_name) ==? -1
-    call add(g:dotspaceneovim_configuration_private_layers, a:layer_name)
+  call s:_layer_with_source(a:layer_name, s:spaceneovim_layers_dir . '/private/')
+endfunction
+
+""
+" Add a layer to a specified source.
+"
+function! s:layer_with_source(layer_name, layer_source)
+  " Check if the layer source has been registered.
+  call s:debug('--> User added sourced layer ' . a:layer_source . a:layer_name)
+  call s:_layer_with_source(a:layer_name, a:layer_source)
+endfunction
+
+""
+" Internal function for adding a layer to an explicit source.
+"
+function! s:_layer_with_source(layer_name, layer_source)
+  " Check if the layer source has been registered.
+  if !has_key(s:dotspaceneovim_configuration_layers, a:layer_source)
+    call s:debug('Creating new container for ' . a:layer_source)
+    let s:dotspaceneovim_configuration_layers[a:layer_source] = []
+  endif
+  " Add the new layer if it doesn't already exist.
+  if index(s:dotspaceneovim_configuration_layers[a:layer_source], a:layer_name) ==? -1
+    call add(s:dotspaceneovim_configuration_layers[a:layer_source], a:layer_name)
   endif
 endfunction
 
 ""
 " Add a plugin to the plugins dictionary.
 "
-function! s:extra_plugin(plugin_name, ...)
-  let l:plugin_config = get(a:, '1', {})
-  call s:debug('--> User added extra plugin ' . a:plugin_name)
-  if index(g:dotspaceneovim_additional_plugins, a:plugin_name) ==? -1
-    call add(g:dotspaceneovim_additional_plugins, {'name': a:plugin_name, 'config': l:plugin_config})
+function! s:_add_plugin(plugin_name, plugin_config)
+  if index(s:dotspaceneovim_additional_plugins, a:plugin_name) ==? -1
+    call add(s:dotspaceneovim_additional_plugins, {'name': a:plugin_name, 'config': a:plugin_config})
   endif
+endfunction
+
+function! s:extra_plugin(plugin_name, ...)
+  call s:debug('--> User added extra plugin ' . a:plugin_name)
+  let l:plugin_config = get(a:, '1', {})
+  call s:_add_plugin(a:plugin_name, l:plugin_config)
+endfunction
+
+function! spaceneovim#layer_plugin(plugin_name, ...)
+  call s:debug('    Layer added plugin ' . a:plugin_name)
+  let l:plugin_config = get(a:, '1', {})
+  call s:_add_plugin(a:plugin_name, l:plugin_config)
 endfunction
 
 ""
@@ -286,13 +345,8 @@ endfunction
 " Set up the theme, and additionally set an airline theme if 3rd argument is
 " provided.
 "
-function! s:set_theme(theme_background, theme_name, ...)
+function! s:set_theme(theme_name, ...)
   try
-    if a:theme_background ==? 'light'
-      set background=light
-    else
-      set background=dark
-    endif
     if (has('termguicolors'))
       set termguicolors
     endif
@@ -303,6 +357,19 @@ function! s:set_theme(theme_background, theme_name, ...)
     endif
   catch
   endtry
+endfunction
+
+function! s:set_theme_with_background(theme_background, theme_name, ...)
+  if a:theme_background ==? 'light'
+    set background=light
+  else
+    set background=dark
+  endif
+  if a:0 ==? 1
+    call s:set_theme(a:theme_name, a:1)
+  else
+    call s:set_theme(a:theme_name)
+  endif
 endfunction
 
 ""

@@ -52,7 +52,7 @@ function! Layers()
 endfunction
 ```
 
-The above also demonstrates `ExtraPlugin`, which will install plugins with `vim-plug`.
+The above also demonstrates `ExtraPlugin`, which will install plugins with `vim-plug`. The configuration is optional.
 
 ## Private Layers
 
@@ -67,7 +67,9 @@ function! UserInit()
   " This block is called at the very startup of Spaceneovim initialization
   " before layers configuration.
 
+  " Overwrite the leader key,
   SetLeader '<Space>'
+  " Overwrite the layers repository,
   SetLayerRepo 'git@github.com:Tehnix/spaceneovim-layers.git'
 endfunction
 ```
@@ -78,7 +80,10 @@ To set configuration values **after** layers and plugins load, set them in your 
 function! UserConfig()
   " This block is called after Spaceneovim layers are configured.
 
-  SetTheme 'dark', 'space-vim-dark', 'violet'
+  " This will set the background to 'dark', the theme to 'space-vim-dark' and the airline theme to 'violet' (airline argument is optional).
+  SetThemeWithBg 'dark', 'space-vim-dark', 'violet'
+  " Alternatively, if you don't want to set the background, use,
+  SetTheme 'space-vim-dark', 'violet'
 endfunction
 ```
 
@@ -94,15 +99,32 @@ To easily test your changes it is recommended to symlink the various files into 
 
 ### Using your own layer repository
 
-If you want to develop/test out your own layers, there are three ways to do it:
+If you want to develop/test out your own layers, there are four ways to do it:
 
 1.  Add your layer in `.config/nvim/spaceneovim-layers/private/` and load them via `PrivateLayer`.
 2.  Point to your own git repository with `SetLayerRepo`, e.g. `SetLayerRepo 'git@github.com:Tehnix/spaceneovim-layers.git'`. This should be set in `UserInit()`.
 3.  Manage the `spaceneovim-layers` directory yourself - the bootstrap process basically just checks if the directory exists, and if not it clones it down. Symlinking or putting in your own directory here will also work.
+4.  Add a layer from a specific folder on your computer with `SourcedLayer`, for example `SourcedLayer '/Users/myuser/.config/mylayers' '+cool/layer'`.
 
 ### Enable Debugging
 
 You can enable debugging output by calling `EnableDebug` in your `init.vim` file. This should be set in `UserInit()`.
+
+### Pre commit linting
+
+It is recommended to add the following to `.git/hooks/pre-commit`,
+
+```bash
+# Get the current dir
+startDir=$(pwd)
+# Get the project root
+rootDir=$(git rev-parse --show-toplevel)
+
+cd $rootDir
+
+# Run vint
+vint vimrc.sample.vim autoload/*.vim
+```
 
 ## License
 
@@ -114,3 +136,4 @@ See [License](License).
 
     set -g default-terminal "tmux-256color"
     set -ga terminal-overrides ',xterm-256color:Tc'
+

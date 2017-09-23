@@ -44,7 +44,7 @@ endfunction
 function! UserConfig()
   " This block is called after Spaceneovim layers are configured.
 
-  SetTheme 'dark', 'space-vim-dark', 'violet'
+  SetThemeWithBg 'dark', 'space-vim-dark', 'violet'
 endfunction
 
 " Do NOT remove these calls!
