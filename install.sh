@@ -22,4 +22,4 @@ mkdir -p "$CONFIG_DIR" \
   && curl -sSfL https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spaceneovim.vim -o "$AUTOLOAD_FILE" \
   && echo ">>> Launching nvim" \
   && nvim \
-  && echo >>> DONE!"
+  && echo ">>> DONE!"
