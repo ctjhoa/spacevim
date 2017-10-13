@@ -31,7 +31,7 @@ let g:dotspaceneovim_layer_sources = get(g:, 'dotspaceneovim_layer_sources', [s:
 " }}}
 
 " Configure vim-plugs window location.
-let g:plug_window = "botright new"
+let g:plug_window = 'botright new'
 
 ""
 " Debug messages to the console.
