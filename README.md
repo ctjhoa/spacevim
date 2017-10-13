@@ -8,9 +8,9 @@ SpaceNeovim is [Spacemacs](https://github.com/syl20bnr/spacemacs) for Neovim. If
 
 Prerequisites:
 
--   `git` on your path (`brew install git`)
--   `nvim` on your path (`brew install neovim/neovim --head`)
--   Neovim python bindings (`pip install neovim` or `pip3`)
+- `git` on your path (`brew install git`)
+- `nvim` on your path (`brew install neovim/neovim --head`)
+- Neovim python bindings (`pip install neovim` or `pip3`)
 
 SpaceNeovim is a configurable distribution like Spacemacs.
 
@@ -22,12 +22,12 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/tehnix/spaceneovim/master/
 
 It will,
 
--   Backup existing Neovim configuration to `.config/nvim.<date>.backup`
--   Download a default `init.vim`
--   Download `autoload/spaceneovim.vim`
--   Set up [vim-plug](https://github.com/junegunn/vim-plug)
--   Clone down the [layers repository](https://github.com/Tehnix/spaceneovim-layers)
--   Install default plugins
+- Backup existing Neovim configuration to `.config/nvim.<date>.backup`
+- Download a default `init.vim`
+- Download `autoload/spaceneovim.vim`
+- Set up [vim-plug](https://github.com/junegunn/vim-plug)
+- Clone down the [layers repository](https://github.com/Tehnix/spaceneovim-layers)
+- Install default plugins
 
 ## Layers
 
@@ -93,18 +93,18 @@ The above `SetTheme <background color> <theme name> <airline theme>` is simply a
 
 To easily test your changes it is recommended to symlink the various files into your `.config/nvim` folder. The ones you want to replace are
 
--   `.config/nvim/spaceneovim-layers` to test layer changes
--   `.config/nvim/autoload/spaceneovim.vim` to test core changes
--   `.config/nvim/init.vim` to test changes to `vimrc.sample.vim`
+- `.config/nvim/spaceneovim-layers` to test layer changes
+- `.config/nvim/autoload/spaceneovim.vim` to test core changes
+- `.config/nvim/init.vim` to test changes to `vimrc.sample.vim`
 
 ### Using your own layer repository
 
 If you want to develop/test out your own layers, there are four ways to do it:
 
-1.  Add your layer in `.config/nvim/spaceneovim-layers/private/` and load them via `PrivateLayer`.
-2.  Point to your own git repository with `SetLayerRepo`, e.g. `SetLayerRepo 'git@github.com:Tehnix/spaceneovim-layers.git'`. This should be set in `UserInit()`.
-3.  Manage the `spaceneovim-layers` directory yourself - the bootstrap process basically just checks if the directory exists, and if not it clones it down. Symlinking or putting in your own directory here will also work.
-4.  Add a layer from a specific folder on your computer with `SourcedLayer`, for example `SourcedLayer '/Users/myuser/.config/mylayers' '+cool/layer'`.
+1. Add your layer in `.config/nvim/spaceneovim-layers/private/` and load them via `PrivateLayer`.
+2. Point to your own git repository with `SetLayerRepo`, e.g. `SetLayerRepo 'git@github.com:Tehnix/spaceneovim-layers.git'`. This should be set in `UserInit()`.
+3. Manage the `spaceneovim-layers` directory yourself - the bootstrap process basically just checks if the directory exists, and if not it clones it down. Symlinking or putting in your own directory here will also work.
+4. Add a layer from a specific folder on your computer with `SourcedLayer`, for example `SourcedLayer '/Users/myuser/.config/mylayers' '+cool/layer'`.
 
 ### Enable Debugging
 
@@ -128,12 +128,13 @@ vint vimrc.sample.vim autoload/*.vim
 
 ## License
 
-See [License](License).
+See <License>.
 
 ## Troubleshooting
 
 **Can't see colors in tmux:** This may be a problem with xterm-256 colors, as per issue #16 (thanks zacacollier) add the following your `tmux.conf` and restert your tmux with `tmux kill-server`,
 
-    set -g default-terminal "tmux-256color"
-    set -ga terminal-overrides ',xterm-256color:Tc'
-
+```
+set -g default-terminal "tmux-256color"
+set -ga terminal-overrides ',xterm-256color:Tc'
+```

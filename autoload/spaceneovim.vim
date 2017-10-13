@@ -7,6 +7,9 @@ endif
 let s:vim_plug = expand(resolve(s:config_dir . '/autoload/plug.vim'))
 let s:vim_plugged = expand(resolve(s:config_dir . '/plugged'))
 let s:spaceneovim_layers_dir = expand(resolve(s:config_dir . '/spaceneovim-layers'))
+
+let s:cache_dir = $HOME . '/.cache/nvim'
+let s:cache_loaded_plugins = expand(resolve(s:cache_dir . '/loaded-plugins.vim'))
 " }}}
 
 " Internal state {{{
@@ -14,6 +17,8 @@ let s:spaceneovim_layers_dir = expand(resolve(s:config_dir . '/spaceneovim-layer
 let s:dotspaceneovim_configuration_layers = get(g:, 'dotspaceneovim_configuration_layers', {})
 " Extra plugins added in init.vim configuration.
 let s:dotspaceneovim_additional_plugins = get(g:, 'dotspaceneovim_additional_plugins', [])
+" All enabled VIM plug packages.
+let s:dotspaceneovim_enabled_plug_plugins = get(g:, 'dotspaceneovim_enabled_plug_plugins', [])
 " }}}
 
 " Set up configurable variables {{{
@@ -24,6 +29,9 @@ let g:dotspaceneovim_leader_key = get(g:, 'dotspaceneovim_leader_key', '<Space>'
 let g:dotspaceneovim_core_layer = get(g:, 'dotspaceneovim_core_layer', '+core/behavior')
 let g:dotspaceneovim_layer_sources = get(g:, 'dotspaceneovim_layer_sources', [s:spaceneovim_layers_dir . '/layers/', s:spaceneovim_layers_dir . '/private/'])
 " }}}
+
+" Configure vim-plugs window location.
+let g:plug_window = "botright new"
 
 ""
 " Debug messages to the console.
@@ -130,22 +138,28 @@ function! spaceneovim#setup_vim_plug() abort
     endif
     call s:debug('>>> Sourcing ' . $MYVIMRC . ' again')
   endif
-  if empty(glob(s:vim_plugged))
-    call s:debug('>>> Installing all plugins...')
-    if has('nvim')
-      let l:create_plugged_dir = jobstart(['mkdir', '-p', s:vim_plugged])
-      let l:waiting_for_plugged_dir = jobwait([l:create_plugged_dir])
-      source $MYVIMRC
-      let l:install_plug_packages = jobstart(['nvim', '+PlugInstall', '+qall'])
-      let l:waiting_for_packages = jobwait([l:install_plug_packages])
-    else
-      silent execute '!mkdir -p ' . s:vim_plugged
-      source $MYVIMRC
-      silent execute '!vim +PlugInstall +qall'
+  if !isdirectory(s:vim_plugged)
+    if writefile([], s:cache_loaded_plugins)
+      call s:debug('>>> Overwriting cache file, since no plugins were installed!')
     endif
-    source $MYVIMRC
-    call s:debug('>>> All plugins installed')
+    call spaceneovim#install_vim_plug_plugins()
   endif
+endfunction
+
+""
+" Install vim-plug plugins.
+"
+function! spaceneovim#install_vim_plug_plugins()
+  call mkdir(s:vim_plugged, 'p')
+  call spaceneovim#write_plugins_to_cache()
+  call s:debug('>>> Installing all plugins...')
+  if has('nvim')
+    let l:install_plug_packages = jobstart(['nvim', '+PlugInstall', '+qall'])
+    let l:waiting_for_packages = jobwait([l:install_plug_packages])
+  else
+    silent execute '!vim +PlugInstall +qall'
+  endif
+  call s:debug('>>> All plugins installed')
 endfunction
 
 ""
@@ -199,8 +213,48 @@ function! spaceneovim#install_enabled_plugins(layer_sources, enabled_layers, add
   for l:plugin in a:additional_plugins
     call s:debug('     ' . l:plugin.name)
     Plug l:plugin.name, l:plugin.config
+    " Add the plugin name so we later on can detect changes from the cache.
+    call add(s:dotspaceneovim_enabled_plug_plugins, l:plugin.name)
   endfor
   call plug#end()
+endfunction
+
+""
+" Detect if new plugins have been added/removed because of layer changes, then
+" initialize the vim-plug install process for the user.
+"
+function! spaceneovim#detect_plugin_changes()
+  " Make sure the cache dir exists.
+  if !isdirectory(s:cache_dir)
+    call mkdir(s:cache_dir, 'p')
+  endif
+  " Load the list of previously loaded plugins.
+  if filereadable(s:cache_loaded_plugins)
+    let l:previously_loaded_plugins = readfile(s:cache_loaded_plugins)
+  else
+    let l:previously_loaded_plugins = []
+  endif
+  " Check if the plugins have changed. Note that this is ordering sensitive!
+  if l:previously_loaded_plugins == s:dotspaceneovim_enabled_plug_plugins
+    call s:debug('>>> No changes in plugins')
+  else
+    call s:debug('>>> Plugins changed, installing new ones')
+    call spaceneovim#install_vim_plug_plugins()
+  endif
+endfunction
+
+""
+" Write the enabled plugins to the cache file.
+"
+function! spaceneovim#write_plugins_to_cache()
+  " Make sure the cache dir exists.
+  if !isdirectory(s:cache_dir)
+    call mkdir(s:cache_dir, 'p')
+  endif
+  " Update the cache file.
+  if writefile(s:dotspaceneovim_enabled_plug_plugins, s:cache_loaded_plugins)
+    call s:debug('>>> Could not write loaded plugins to cache file!')
+  endif
 endfunction
 
 ""
@@ -261,6 +315,7 @@ function! spaceneovim#bootstrap() abort
       \s:dotspaceneovim_additional_plugins,
     \)
   endif
+  call spaceneovim#detect_plugin_changes()
 
   call g:Spaceneovim_postinstall()
   call s:debug('>>> Finished SpaceNeovim bootstrap')
