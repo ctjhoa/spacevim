@@ -8,9 +8,9 @@ function! Layers()
 
   Layer '+core/behavior'
   Layer '+core/sensible'
-  Layer '+completion/deoplete'
+  Layer '+completion/deoplete' " Or '+checkers/nvim-completion-manager'
   Layer '+completion/snippets'
-  Layer '+checkers/ale'
+  Layer '+checkers/ale' " Or '+checkers/neomake'
   Layer '+checkers/quickfix'
   Layer '+nav/buffers'
   Layer '+nav/files'
@@ -21,12 +21,13 @@ function! Layers()
   Layer '+nav/tmux'
   Layer '+nav/windows'
   Layer '+specs/testing'
+  Layer '+tools/language-server'
   Layer '+tools/terminal'
   Layer '+ui/airline'
   Layer '+ui/toggles'
   " Language layers.
   Layer '+lang/elm'
-  Layer '+lang/haskell'
+  Layer '+lang/haskell' " Set backend with e.g. let g:spHaskellBackend = 'lsp', in UserInit
   Layer '+lang/javascript'
   Layer '+lang/python'
   Layer '+lang/ruby'
