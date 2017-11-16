@@ -128,7 +128,7 @@ vint vimrc.sample.vim autoload/*.vim
 
 ## License
 
-See <License>.
+See [LICENSE](LICENSE).
 
 ## Troubleshooting
 
