@@ -278,7 +278,7 @@ function! spaceneovim#bootstrap() abort
 
   " Set up layer variables {{{
   let l:spaceneovim_layers = {}
-  let l:spaceneovim_enabled_layers = {}
+  let g:spaceneovim_enabled_layers = {}
   let l:spaceneovim_plugins = []
   " }}}
 
@@ -292,12 +292,12 @@ function! spaceneovim#bootstrap() abort
     call s:debug('>>> Filtering all enabled layers')
     " Filter out any layers that hasn't been enabled in the source.
     if has_key(s:dotspaceneovim_configuration_layers, l:layer_source)
-      let l:spaceneovim_enabled_layers[l:layer_source] = spaceneovim#filter_enabled_layers(
+      let g:spaceneovim_enabled_layers[l:layer_source] = spaceneovim#filter_enabled_layers(
         \l:spaceneovim_layers[l:layer_source],
         \s:dotspaceneovim_configuration_layers[l:layer_source]
       \)
     else
-      let l:spaceneovim_enabled_layers[l:layer_source] = []
+      let g:spaceneovim_enabled_layers[l:layer_source] = []
     endif
   endfor
 
@@ -311,7 +311,7 @@ function! spaceneovim#bootstrap() abort
     call spaceneovim#setup_vim_plug()
     call spaceneovim#install_enabled_plugins(
       \g:dotspaceneovim_layer_sources,
-      \l:spaceneovim_enabled_layers,
+      \g:spaceneovim_enabled_layers,
       \s:dotspaceneovim_additional_plugins,
     \)
   endif
