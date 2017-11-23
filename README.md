@@ -91,6 +91,8 @@ The above `SetTheme <background color> <theme name> <airline theme>` is simply a
 
 ## Developing
 
+If you want to know what happens in [`autoload/spaceneovim.vim`](https://github.com/Tehnix/spaceneovim/blob/master/autoload/spaceneovim.vim#L1), check out the beginning of the file for a brief introduction into what is going on in the script.
+
 To easily test your changes it is recommended to symlink the various files into your `.config/nvim` folder. The ones you want to replace are
 
 - `.config/nvim/spaceneovim-layers` to test layer changes
@@ -108,7 +110,7 @@ If you want to develop/test out your own layers, there are four ways to do it:
 
 ### Enable Debugging
 
-You can enable debugging output by calling `EnableDebug` in your `init.vim` file. This should be set in `UserInit()`.
+You can enable debugging output by calling `EnableDebug` (or `EnableVerboseDebug`) in your `init.vim` file. This should be set in `UserInit()`.
 
 ### Pre commit linting
 

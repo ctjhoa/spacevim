@@ -12,6 +12,8 @@ if [ -d "$CONFIG_DIR" ]; then
   mv "$CONFIG_DIR" "$CONFIG_DIR.$backup_time.backup"
 fi
 
+#curl -sSfL https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spaceneovim.vim -o "$AUTOLOAD_FILE" \
+
 # Create the neccessary directories, download the configuration files and launch
 # Neovim.
 mkdir -p "$CONFIG_DIR" \
@@ -21,7 +23,7 @@ mkdir -p "$CONFIG_DIR" \
   && echo ">>> Creating autoload directory for spaceneovim" \
   && mkdir -p "$AUTOLOAD_DIR" \
   && echo ">>> Downloading spaceneovim core" \
-  && curl -sSfL https://raw.githubusercontent.com/tehnix/spaceneovim/master/autoload/spaceneovim.vim -o "$AUTOLOAD_FILE" \
+  && cp autoload/spaceneovim.vim "$AUTOLOAD_FILE" \
   && echo ">>> Launching nvim" \
   && nvim \
   && echo ">>> DONE!"
