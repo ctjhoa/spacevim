@@ -2,8 +2,8 @@
 
 This project is not actively maintained anymore. There are other projects doing similar things.
 
-- https://github.com/liuchengxu/space-vim
-- https://github.com/SpaceVim/SpaceVim
+* [liuchengxu/space-vim](https://github.com/liuchengxu/space-vim)
+* [SpaceVim/SpaceVim](https://github.com/SpaceVim/SpaceVim)
 
 ---
 
