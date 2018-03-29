@@ -1,5 +1,12 @@
 # Spacevim - Spacemacs for vim [![Build Status](https://travis-ci.org/ctjhoa/spacevim.svg?branch=master)](https://travis-ci.org/ctjhoa/spacevim)
 
+This project is not actively maintained anymore. There are other projects doing similar things.
+
+- https://github.com/liuchengxu/space-vim
+- https://github.com/SpaceVim/SpaceVim
+
+---
+
 Spacevim is [Spacemacs](https://github.com/syl20bnr/spacemacs) for vim.
 It can be used as a full distribution or you can get only the Spacemacs key bindings
 
